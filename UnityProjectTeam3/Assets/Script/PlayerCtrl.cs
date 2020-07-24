@@ -84,7 +84,7 @@ public class PlayerCtrl : MonoBehaviour
             // 이동 멈춤
             mAnim.SetBool(AnimHash.RUN, false);
             mRB.velocity = new Vector2(0, mRB.velocity.y);
-            
+
             if (parents.lefttime < 1)
             {
                 // 테스트용. 맵이 바뀌면 회전값 바꿀 예정입니다. 
@@ -107,11 +107,11 @@ public class PlayerCtrl : MonoBehaviour
     public void Jump()
     {
         //점프가 아닐 때만 위로 힘을 준다!
-        if (mAnim.GetFloat(AnimHash.JUMP) ==0)
+        if (mAnim.GetFloat(AnimHash.JUMP) == 0)
         {
             mRB.AddForce(mJumpVector, ForceMode2D.Impulse);
         }
-        
+
 
     }
 

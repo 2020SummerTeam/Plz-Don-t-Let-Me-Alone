@@ -20,6 +20,9 @@ public class PlayerCtrl : MonoBehaviour
 
     ParentsCtrl parents;
 
+    //if you are colliding with obstacles
+    bool mCollidingObstacles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,32 @@ public class PlayerCtrl : MonoBehaviour
 
         // stage clear
         parents = GameObject.Find("Parents").GetComponent<ParentsCtrl>();
+    }
+
+
+    const string obstacleTag = "Obstacle";
+    //if you collisioned on obstacle.
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(obstacleTag))
+        {
+            //if obstacle is left of transform
+            if(collision.transform.position.x < transform.position.x)
+            {
+                if(Input.GetAxis("Horizontal") < 0)
+                {
+                    mRB.velocity = new Vector2(0, mRB.velocity.y);
+                }
+                
+            }
+            else
+            {
+                if (Input.GetAxis("Horizontal") > 0)
+                {
+                    mRB.velocity = new Vector2(0, mRB.velocity.y);
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -76,6 +105,14 @@ public class PlayerCtrl : MonoBehaviour
             //점프모션 및 점프 입력받기.
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                Debug.Log("doing jumo");
+                Jump();
+            }
+            
+            //added because i cant use spacebar
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                Debug.Log("doing jumo");
                 Jump();
             }
         }
@@ -88,6 +125,7 @@ public class PlayerCtrl : MonoBehaviour
             if (parents.lefttime < 1)
             {
                 // 테스트용. 맵이 바뀌면 회전값 바꿀 예정입니다. 
+                //2020 07 30 sanghun making stage 1. i find rotation problem. bu tak hae yo~~
                 transform.rotation = Quaternion.Euler(0, 180, 0);
                 mAnim.SetBool(AnimHash.RUN, true);
                 mRB.velocity = new Vector2((-1) * mSpeed, mRB.velocity.y);

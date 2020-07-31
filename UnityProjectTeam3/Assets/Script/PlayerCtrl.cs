@@ -20,8 +20,6 @@ public class PlayerCtrl : MonoBehaviour
 
     ParentsCtrl parents;
 
-    //if you are colliding with obstacles
-    bool mCollidingObstacles;
 
     // Start is called before the first frame update
     void Start()
@@ -36,31 +34,6 @@ public class PlayerCtrl : MonoBehaviour
         parents = GameObject.Find("Parents").GetComponent<ParentsCtrl>();
     }
 
-
-    const string obstacleTag = "Obstacle";
-    //if you collisioned on obstacle.
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag(obstacleTag))
-        {
-            //if obstacle is left of transform
-            if(collision.transform.position.x < transform.position.x)
-            {
-                if(Input.GetAxis("Horizontal") < 0)
-                {
-                    mRB.velocity = new Vector2(0, mRB.velocity.y);
-                }
-                
-            }
-            else
-            {
-                if (Input.GetAxis("Horizontal") > 0)
-                {
-                    mRB.velocity = new Vector2(0, mRB.velocity.y);
-                }
-            }
-        }
-    }
 
     // Update is called once per frame
     void Update()
@@ -92,7 +65,7 @@ public class PlayerCtrl : MonoBehaviour
             //기어코 하기싫었던 update에 SetFloat넣기를 했습니다..
             //저는 업데이트에 입력 이외에걸 넣는걸 싫어하지만, 저희게임에서는 그닥 문제는 없을것 같습니다
             mAnim.SetFloat(AnimHash.JUMP, mRB.velocity.y);
-            if (mRB.velocity.y == 0)
+            if (mRB.velocity.y <= 0.3f && mRB.velocity.y >= -0.3f)
             {
                 mAnim.SetBool(AnimHash.IDLE, true);
             }

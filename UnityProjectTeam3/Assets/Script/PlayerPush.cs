@@ -1,50 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+
+//question 1, where is this script's gameObject
+//question 2, what's this scritps doing;
 public class PlayerPush : MonoBehaviour
 {
-    public float distance = 1f;
-    public LayerMask boxMask;
-    GameObject InteractObj;
+    Rigidbody2D mRB_InteractObj;
+    FixedJoint2D mFixed_InteractObj;
+    PlayerCtrl mPlayerCtrl;
 
-    // Start is called before the first frame update
+    bool ISButtonDown;
+    bool IsPush;
     void Start()
     {
-        
+        mRB_InteractObj = GetComponent<Rigidbody2D>();
+        mFixed_InteractObj = GetComponent<FixedJoint2D>();
+        mPlayerCtrl = GetComponent<PlayerCtrl>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance, boxMask);
-
-        if (hit.collider != null && hit.collider.gameObject.tag=="InteractObj" &&Input.GetKeyDown(KeyCode.Z))
-        {
-            InteractObj = hit.collider.gameObject;
-
-            InteractObj.GetComponent<FixedJoint2D>().enabled = true;
-            InteractObj.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();
-        }
-        else if (Input.GetKeyDown(KeyCode.Z))
-        {
-            InteractObj.GetComponent<FixedJoint2D>().enabled = false;
-        }
+        if (ISButtonDown)
+            IsPush = true;
+        else
+            IsPush = false;
 
     }
-    private void OnDrawGizmos()
+
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        Gizmos.color = Color.yellow;
-     
-        if (horizontal <= 0)
+
+        if (collision.gameObject.CompareTag("Player") && IsPush)
         {
-            Gizmos.DrawLine(transform.position, (Vector2)transform.position + -Vector2.right * transform.localScale.x * distance);
+            mFixed_InteractObj.enabled = false;
+            Rigidbody2D collisionRB = collision.gameObject.GetComponent<Rigidbody2D>();
+            mRB_InteractObj.velocity += collisionRB.velocity;
         }
-        else if (horizontal > 0)
+        else
         {
-            Gizmos.DrawLine(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * distance);
+            mFixed_InteractObj.enabled = true;
         }
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            mFixed_InteractObj.enabled = true;
+        }
+    }
+
+    public void AButtonDown(bool IsDown)
+    {
+        ISButtonDown = IsDown;
+    }
+
 }

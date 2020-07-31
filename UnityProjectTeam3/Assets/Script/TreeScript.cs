@@ -20,7 +20,7 @@ public class TreeScript : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.gravityScale = 0;
         rigidBody.freezeRotation = true;
-        rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
+       
         //we use coroutine when we check position
         //you can question me if you want to know more about coroutine
         StartCoroutine(CheckCoroutine());

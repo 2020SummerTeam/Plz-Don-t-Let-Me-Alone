@@ -8,7 +8,7 @@ public class InteractButton : MonoBehaviour
     [SerializeField]
     GameObject mPlayer;
     PlayerPush script;
-    
+
     void Start()
     {
         mPlayer = GameObject.FindWithTag("Player");
@@ -21,13 +21,13 @@ public class InteractButton : MonoBehaviour
             return;
         }
         script = mPlayer.GetComponent<PlayerPush>();
-        
-      
+
+
     }
 
     void Update()
     {
-      
+
     }
 
     public void PointerDown()

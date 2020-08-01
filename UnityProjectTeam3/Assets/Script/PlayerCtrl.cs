@@ -18,6 +18,10 @@ public class PlayerCtrl : MonoBehaviour
     private Vector2 mJumpVector;
     //player의 speed와 jumpVector인데, private이지만 serializeField가 붙어서 Unity의 Inspector에서 정해준다.
 
+    private Vector2 preTouchPos; //used for drag movement
+    private Vector2 deltaTouchPos; //used for drag movement
+    private float centerOfScreen; //used for drag movement
+
     ParentsCtrl parents;
 
 
@@ -28,9 +32,12 @@ public class PlayerCtrl : MonoBehaviour
         mRB = GetComponent<Rigidbody2D>();
         mAnim = GetComponent<Animator>();
         mCollider = GetComponent<BoxCollider2D>();
+        preTouchPos = Vector2.zero;
+        deltaTouchPos = Vector2.zero;
+        centerOfScreen = Screen.currentResolution.width / 2f;
+        //find center x on scren
 
-
-        // stage clear check
+        // stage clear
         parents = GameObject.Find("Parents").GetComponent<ParentsCtrl>();
     }
 
@@ -39,12 +46,71 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         if (parents.stageClear == false)    // stage 진행중
+
         {
             float horizontal = Input.GetAxis("Horizontal");
             //입력받는부분
 
+            //drag coding
+            // 1. you got touch overthan 1
+            // 2. check touchPosition at beginning of touch
+            // 3. if you move your finger, then touchphase == moved
+            // 4. check deltaposition with preTouchPos. and it goes on horizontal
+            if (Input.touchCount != 0)
+            {
+
+                //i want to use touch = null; but i cant....
+                //so you start with getTouch(0) not to make nullError
+                Touch touch = Input.GetTouch(0);
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    touch = Input.GetTouch(i);
+                    //check if it's in left half of the screen
+                    if (touch.position.x < centerOfScreen)
+                    {
+                        break;
+                    }
+                }
+                //check if it's in left half of the screen
+                //we do it twice because it could be only one touch
+                //if there is only one touch in right half screen,
+                //for loop will not do the work effectively
+                if (touch.position.x < centerOfScreen)
+                {
+                    //if the touch is left half screen
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        //save beginning position of the touch
+                        preTouchPos = touch.position;
+                    }
+                    else if (touch.phase == TouchPhase.Stationary
+                        || touch.phase == TouchPhase.Moved)
+                    {
+                        //if touch moves, then character moves
+                        deltaTouchPos = touch.position - preTouchPos;
+                        horizontal = deltaTouchPos.x;
+
+                        if (horizontal < -1)
+                        {
+                            horizontal = -1;
+                        }
+                        else if (horizontal > 1)
+                        {
+                            horizontal = 1;
+                        }
+                    }
+                    else if (touch.phase == TouchPhase.Ended)
+                    {
+                        horizontal = 0;
+                    }
+                }
+
+            }
+
+
             mRB.velocity = new Vector2(horizontal * mSpeed, mRB.velocity.y);
             //rigidbody의 Velocity를 정하면 그방향으로 움직인다.
+
 
             //걷는 애니메이션 및 걷는 방향으로 보는 것 구현
             if (horizontal < 0)
@@ -65,7 +131,7 @@ public class PlayerCtrl : MonoBehaviour
             //기어코 하기싫었던 update에 SetFloat넣기를 했습니다..
             //저는 업데이트에 입력 이외에걸 넣는걸 싫어하지만, 저희게임에서는 그닥 문제는 없을것 같습니다
             mAnim.SetFloat(AnimHash.JUMP, mRB.velocity.y);
-            if (mRB.velocity.y <= 0.3f && mRB.velocity.y >= -0.3f)
+            if (mRB.velocity.y <= 1f && mRB.velocity.y >= -1f)
             {
                 mAnim.SetBool(AnimHash.IDLE, true);
             }
@@ -81,7 +147,7 @@ public class PlayerCtrl : MonoBehaviour
                 Debug.Log("doing jumo");
                 Jump();
             }
-            
+
             //added because i cant use spacebar
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -109,7 +175,7 @@ public class PlayerCtrl : MonoBehaviour
                     mRB.velocity = new Vector2(0, mRB.velocity.y);
                 }
             }
-            
+
         }
     }
 
@@ -123,6 +189,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             mRB.AddForce(mJumpVector, ForceMode2D.Impulse);
         }
+
 
     }
 

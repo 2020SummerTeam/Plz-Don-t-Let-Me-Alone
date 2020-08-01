@@ -456,6 +456,16 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6083361843235296948, guid: 5051f15da43c3354d9de93a44edaf1bf,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6083361843235296951, guid: 5051f15da43c3354d9de93a44edaf1bf,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6084315383770241955, guid: 5051f15da43c3354d9de93a44edaf1bf,
         type: 3}
       propertyPath: m_Name

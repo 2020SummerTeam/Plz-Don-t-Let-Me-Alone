@@ -6,23 +6,21 @@ using UnityEngine;
 public class InteractButton : MonoBehaviour
 {
     [SerializeField]
-    GameObject mInteractObj;
+    GameObject mPlayer;
     PlayerPush script;
     
-    
-
     void Start()
     {
-        mInteractObj = GameObject.FindWithTag("InteractObj");
+        mPlayer = GameObject.FindWithTag("Player");
 
         //change false if there is no interactable thing
-        if (mInteractObj == null)
+        if (mPlayer == null)
         {
             //false button
             gameObject.SetActive(false);
             return;
         }
-        script = mInteractObj.GetComponent<PlayerPush>();
+        script = mPlayer.GetComponent<PlayerPush>();
         
       
     }

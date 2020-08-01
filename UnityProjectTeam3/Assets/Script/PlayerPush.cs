@@ -14,6 +14,10 @@ public class PlayerPush : MonoBehaviour
     FixedJoint2D mFixed_InteractObj;
     PlayerCtrl mPlayerCtrl;
     BoxPull mBoxPull;
+    public float distance = 1f;
+    public LayerMask boxMask;
+    float horizontal;
+    GameObject box;
 
     bool ISButtonDown;
     bool IsPush;
@@ -26,43 +30,73 @@ public class PlayerPush : MonoBehaviour
     }
     void Update()
     {
+        horizontal = Input.GetAxis("Horizontal");
+        Physics2D.queriesStartInColliders = false;
+        RaycastHit2D hit;
+
+        if (horizontal > 0)
+        {
+            hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance, boxMask);
+        }
+        else
+        {
+            hit = Physics2D.Raycast(transform.position, Vector2.left * transform.localScale.x, distance, boxMask);
+        }
+
+        if (hit.collider != null && hit.collider.CompareTag("InteractObj") && IsPush)
+        {
+            box = hit.collider.gameObject;
+            box.GetComponent<FixedJoint2D>().enabled = true;
+            box.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();
+            box.GetComponent<BoxPull>().beingPushed = true;
+
+        }
+        else if (!IsPush && hit.collider != null && hit.collider.CompareTag("InteractObj"))
+        {
+            hit.collider.GetComponent<FixedJoint2D>().enabled = false;
+            hit.collider.GetComponent<BoxPull>().beingPushed = false;
+        }
+
         //A Button이 눌렸으면 박스가 움직일 수 있게 하고, 마우스가 버튼에서 떼지면 못움직이게 
         if (ISButtonDown)
         {
             IsPush = true;
-            mBoxPull.beingPushed = true;
         }
         else if (!ISButtonDown)
         {
             IsPush = false;
-            mBoxPull.beingPushed = false;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //충돌한 물체가 player 고, 마우스가 눌렸다면 fixed joint = true, 박스가 플레이어를 따라가게
-        if (collision.gameObject.CompareTag("Player") && ISButtonDown)
-        {
-            Rigidbody2D collisionRB = collision.gameObject.GetComponent<Rigidbody2D>();
-            mFixed_InteractObj.connectedBody = collisionRB;
-            mFixed_InteractObj.enabled = true;
-
-        }
-        else if (!ISButtonDown)
-        {
-            mFixed_InteractObj.enabled = false;
-            //마우스가 버튼에서 떼졌다면 fixed joint를 false 로
-        }
-    }
-
-    //private void OnCollisionExit2D(Collision2D collision)
+    //private void OnCollisionEnter2D(Collision2D collision)
     //{
-    //    if (collision.gameObject.CompareTag("Player"))
+    //    //충돌한 물체가 player 고, 마우스가 눌렸다면 fixed joint = true, 박스가 플레이어를 따라가게
+    //    if (collision.gameObject.CompareTag("Player") && ISButtonDown)
+    //    {
+    //        Rigidbody2D collisionRB = collision.gameObject.GetComponent<Rigidbody2D>();
+    //        mFixed_InteractObj.connectedBody = collisionRB;
+    //        mFixed_InteractObj.enabled = true;
+
+    //    }
+    //    else if (!ISButtonDown)
     //    {
     //        mFixed_InteractObj.enabled = false;
+    //        //마우스가 버튼에서 떼졌다면 fixed joint를 false 로
     //    }
     //}
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        if (horizontal > 0)
+        {
+            Gizmos.DrawLine(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * distance);
+        }
+        else
+        {
+            Gizmos.DrawLine(transform.position, (Vector2)transform.position + Vector2.left * transform.localScale.x * distance);
+        }
+    }
 
     //A Button이 눌렸는지 체크해주는 함수
     public void AButtonDown(bool IsDown)

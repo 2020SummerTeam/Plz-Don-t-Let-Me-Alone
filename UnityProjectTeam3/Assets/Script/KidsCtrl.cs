@@ -8,9 +8,8 @@ public class KidsCtrl : MonoBehaviour
     private Transform mTr;
 
     private float coolTime = 4.0f;  // 좌 우 번갈아보는 시간
-    public bool throwStone; // player와 마주칠 떄 돌을 던짐 // bool 값 바꿔 Projectile에서 참조
+    StoneZone StoneZone; // player가 StoneZone에 있는지
 
-    // Start is called before the first frame update
     void Start()
     {
         //GetComponent로 초기화.
@@ -18,10 +17,9 @@ public class KidsCtrl : MonoBehaviour
         mTr = GetComponent<Transform>();
 
         coolTime = 4.0f;
-        throwStone = false;
+        StoneZone = GameObject.Find("StoneZone").GetComponent<StoneZone>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         // 4초마다 오브젝트 회전
@@ -31,10 +29,19 @@ public class KidsCtrl : MonoBehaviour
         }
         else
         {
-            // 회전
-            if (mTr.rotation.y == 180)
+            // 회전 (좌<->우)
+            if (mTr.rotation.y == 180)   // Kids와 Player가 마주보게 됨
             {
-                mTr.rotation = Quaternion.Euler(0, 0, 0);
+                if (StoneZone.isStoneZone)  //  + 돌을 던질 위치에 player 있는지 확인
+                {
+                    GameObject.Find("Stone").GetComponent<ThrowStone>().Throw();
+                    Debug.Log("throw Stone!!");
+                    // Game Over
+                }
+                else
+                {
+                    mTr.rotation = Quaternion.Euler(0, 180, 0);
+                } 
             }
             else
             {

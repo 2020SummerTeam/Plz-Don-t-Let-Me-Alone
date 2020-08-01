@@ -30,7 +30,7 @@ public class PlayerCtrl : MonoBehaviour
         mCollider = GetComponent<BoxCollider2D>();
 
 
-        // stage clear
+        // stage clear check
         parents = GameObject.Find("Parents").GetComponent<ParentsCtrl>();
     }
 
@@ -123,7 +123,6 @@ public class PlayerCtrl : MonoBehaviour
         {
             mRB.AddForce(mJumpVector, ForceMode2D.Impulse);
         }
-
 
     }
 

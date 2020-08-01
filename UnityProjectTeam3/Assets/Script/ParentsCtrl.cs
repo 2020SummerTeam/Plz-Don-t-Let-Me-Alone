@@ -11,7 +11,7 @@ public class ParentsCtrl : MonoBehaviour
     public bool stageClear;
     private float coolTime = 2.0f;
     public float lefttime = 2.0f;
-    
+        
 
     // Start is called before the first frame update
     void Start()

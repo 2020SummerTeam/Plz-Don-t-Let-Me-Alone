@@ -38,7 +38,7 @@ public class PlayerCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (parents.stageClear == false)
+        if (parents.stageClear == false)    // stage 진행중
         {
             float horizontal = Input.GetAxis("Horizontal");
             //입력받는부분
@@ -89,26 +89,27 @@ public class PlayerCtrl : MonoBehaviour
                 Jump();
             }
         }
-        else
+        else    // 클리어 했을 때   
         {
             // 이동 멈춤
             mAnim.SetBool(AnimHash.RUN, false);
+            mAnim.SetBool(AnimHash.IDLE, true); // Jump ani 상태로 쫓는 것 방지
             mRB.velocity = new Vector2(0, mRB.velocity.y);
 
-            if (parents.lefttime < 1)
+            if (parents.lefttime < 1)   // 부모 오브젝트가 움직인 시간(1초) 후
             {
-                // 테스트용. 맵이 바뀌면 회전값 바꿀 예정입니다. 
-                //2020 07 30 sanghun making stage 1. i find rotation problem. bu tak hae yo~~
-                transform.rotation = Quaternion.Euler(0, 180, 0);
+                // 도망가는 방향과 똑같이 바라본 후 이동
+                transform.rotation = Quaternion.Euler(0, 0, 0);
                 mAnim.SetBool(AnimHash.RUN, true);
-                mRB.velocity = new Vector2((-1) * mSpeed, mRB.velocity.y);
+                mRB.velocity = new Vector2(mSpeed, mRB.velocity.y);
 
-                if (parents.lefttime <= 0)
+                if (parents.lefttime <= 0)  // 부모 쫓아간 후
                 {
-                    mAnim.SetBool(AnimHash.RUN, false);
+                    mAnim.SetBool(AnimHash.RUN, false); // 이동 멈춤
                     mRB.velocity = new Vector2(0, mRB.velocity.y);
                 }
             }
+            
         }
     }
 

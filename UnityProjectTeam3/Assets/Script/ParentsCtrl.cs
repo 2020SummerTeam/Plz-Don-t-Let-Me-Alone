@@ -27,14 +27,13 @@ public class ParentsCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stageClear)
+        if (stageClear) // 클리어 했을 때
         { 
-            // 테스트용. 맵이 바뀌면 회전값 바꿀 예정입니다. 
-            mTr.rotation = Quaternion.Euler(0, 180, 0); // 오브젝트 회전
+            mTr.rotation = Quaternion.Euler(0, 0, 0); // 오브젝트 회전 (우측 바라봄)
             mAnim.SetBool(AnimHash.RUN, true);  // 이동 애니메이션
-            mRB.velocity = new Vector2(-3, mRB.velocity.y);  // 이동
+            mRB.velocity = new Vector2(3, mRB.velocity.y);  // 이동
 
-            if(lefttime > 0)
+            if(lefttime > 0)    // rotation 방지를 위해 2초 동안 player와 이동 // destroy(this) 고려중
             {
                 lefttime -= Time.deltaTime;
             }

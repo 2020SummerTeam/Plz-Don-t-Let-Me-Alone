@@ -10,9 +10,12 @@ public class BoxPull : MonoBehaviour
     float yPos;
     float zPos;
 
+    Rigidbody2D rigidBody;  //20200808 sanghun
+
     // Start is called before the first frame update
     void Start()
     {
+        rigidBody = GetComponent<Rigidbody2D>();
         mTr = GetComponent<Transform>();
         xPos = mTr.position.x;
         yPos = mTr.position.y;
@@ -24,8 +27,14 @@ public class BoxPull : MonoBehaviour
     void FixedUpdate()
     {
         if (beingPushed == false)
-            transform.position = new Vector3(xPos, yPos, zPos);
+        {
+            rigidBody.mass = 100;
+        }
+        //transform.position = new Vector3(xPos, yPos, zPos);
         else
-            xPos = transform.position.x;
+        {
+            rigidBody.mass = 1;
+        }
+            //xPos = transform.position.x;
     }
 }

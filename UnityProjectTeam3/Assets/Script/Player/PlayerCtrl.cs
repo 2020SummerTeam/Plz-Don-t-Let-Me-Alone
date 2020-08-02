@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -21,7 +22,9 @@ public class PlayerCtrl : MonoBehaviour
     private Vector2 preTouchPos; //used for drag movement
     private Vector2 deltaTouchPos; //used for drag movement
     private float centerOfScreen; //used for drag movement
-    private bool IsSit;  //if drag down -> true
+    
+    [HideInInspector]   //곰나오는 스크립트에서 써야되가지고 퍼블릭으로 바꿨습니다
+    public bool IsSit;  //if drag down -> true
     public bool IsInteracObj;   //PlayerPush에서 쏜 ray에서 검출된 물체가 InteractObj라면 true
 
     ParentsCtrl parents;    // parents 오브젝트의 ParentsCtrl 스크립트
@@ -59,7 +62,7 @@ public class PlayerCtrl : MonoBehaviour
             float horizontal = Input.GetAxis("Horizontal");
             float vertical;
             //입력받는부분
-            
+
             //drag coding
             // 1. you got touch overthan 1
             // 2. check touchPosition at beginning of touch
@@ -110,13 +113,13 @@ public class PlayerCtrl : MonoBehaviour
                         }
 
                         //아래로 드래그 했을 때 IsSit을 true -> oncollision에서 체크
-                        if(vertical < -1)
+                        if (vertical < -1)
                         {
-                            IsSit = true;
+                            Sit(true);
                         }
-                        else
+                        else if (vertical > 1)
                         {
-                            IsSit = false;
+                            Sit(false);
                         }
                     }
                     else if (touch.phase == TouchPhase.Ended)
@@ -126,46 +129,56 @@ public class PlayerCtrl : MonoBehaviour
                 }
 
             }
-
-
-            mRB.velocity = new Vector2(horizontal * mSpeed, mRB.velocity.y);
-            //rigidbody의 Velocity를 정하면 그방향으로 움직인다.
-
-
-            //걷는 애니메이션 및 걷는 방향으로 보는 것 구현
-            if (horizontal < 0)
+            //20200808 상훈 추가
+            //움직일 때 앉아있는 상태라면 앉은상태 해제를 위해 추가.
+            if (horizontal == 1 || horizontal == -1)
             {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                mAnim.SetBool(AnimHash.RUN, true);
+                Sit(false);
             }
-            else if (horizontal > 0)
+
+
+            if (!IsSit)
             {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                mAnim.SetBool(AnimHash.RUN, true);
+                mRB.velocity = new Vector2(horizontal * mSpeed, mRB.velocity.y);
+                //rigidbody의 Velocity를 정하면 그방향으로 움직인다.
+
+
+                //걷는 애니메이션 및 걷는 방향으로 보는 것 구현
+                if (horizontal < 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    mAnim.SetBool(AnimHash.RUN, true);
+                }
+                else if (horizontal > 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    mAnim.SetBool(AnimHash.RUN, true);
+                }
+                else
+                {
+                    mAnim.SetBool(AnimHash.RUN, false);
+                }
             }
-            else
-            {
-                mAnim.SetBool(AnimHash.RUN, false);
-            }
+            
 
             if (Input.GetKeyDown(KeyCode.Z) && IsInteracObj)   //drag로 구현시 IsSit && IsInteractObj
             {
-                mAnim.SetBool(AnimHash.SIT, true);
+                Sit(true);
             }
             else if (Input.GetKeyUp(KeyCode.Z))
             {
-                mAnim.SetBool(AnimHash.SIT, false);
+
+                Sit(false);
             }
 
             //20200808 sanghun added for debug. cant press alphabet
             if (Input.GetKeyDown(KeyCode.DownArrow) && IsInteracObj)   //drag로 구현시 IsSit && IsInteractObj
             {
-                Debug.Log("sitted");
-                mAnim.SetBool(AnimHash.SIT, true);
+                Sit(true);
             }
             else if (Input.GetKeyUp(KeyCode.DownArrow))
             {
-                mAnim.SetBool(AnimHash.SIT, false);
+                Sit(false);
             }
 
             //기어코 하기싫었던 update에 SetFloat넣기를 했습니다..
@@ -227,10 +240,28 @@ public class PlayerCtrl : MonoBehaviour
         //점프가 아닐 때만 위로 힘을 준다!
         //2020 08 08 changed ==0 to <=1 >=-1
         if (mAnim.GetFloat(AnimHash.JUMP) >= -1
-            || mAnim.GetFloat(AnimHash.JUMP) <=1)
+            && mAnim.GetFloat(AnimHash.JUMP) <=1)
         {
             mRB.AddForce(mJumpVector, ForceMode2D.Impulse);
         }
+    }
+
+    //20200808 상훈
+    //forset1에서 흔들었을 때 콜을 해줘야돼서 그렇다.
+    public void Sit(bool isSitting)
+    {
+        IsSit = isSitting;
+        mAnim.SetBool(AnimHash.SIT, isSitting);
+    }
+
+    //20200808 상훈
+    //곰, 아이들과같은 요소가 등장하면서 fail이 생긴다
+    //그 페일 떄 사용할 함수. 원하는대로 수정하세요
+    //현재는 액티브된 씬만 리로드하도록 설정하였습니다.
+    public void OnStageFail()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
 }

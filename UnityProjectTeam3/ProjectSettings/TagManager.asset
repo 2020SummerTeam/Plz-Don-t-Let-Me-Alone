@@ -8,6 +8,7 @@ TagManager:
   - InteractObj
   - Obstacle
   - Wall
+  - Bee
   layers:
   - Default
   - TransparentFX

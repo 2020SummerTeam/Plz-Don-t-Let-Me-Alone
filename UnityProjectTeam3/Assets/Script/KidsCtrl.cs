@@ -1,23 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KidsCtrl : MonoBehaviour
 {
     private Animator mAnim;
-    private Transform mTr;
-
-    private float coolTime = 4.0f;  // 좌 우 번갈아보는 시간
-    StoneZone StoneZone; // player가 StoneZone에 있는지
+    private SpriteRenderer renderer;
+    public float coolTime = 4.0f;  // 좌 우 번갈아보는 시간
+    public Text kidsText;
 
     void Start()
     {
         //GetComponent로 초기화.
-        mAnim = GetComponent<Animator>();
-        mTr = GetComponent<Transform>();
+        mAnim = GetComponent<Animator>();   // 임시로 player animator을 쓰고 있지만 나중에 kids로 수정
+        renderer = GetComponent<SpriteRenderer>();
 
         coolTime = 4.0f;
-        StoneZone = GameObject.Find("StoneZone").GetComponent<StoneZone>();
     }
 
     void Update()
@@ -30,28 +29,17 @@ public class KidsCtrl : MonoBehaviour
         else
         {
             // 회전 (좌<->우)
-            if (mTr.rotation.y == 180)   // Kids와 Player가 마주보게 됨
+            if (renderer.flipX)
             {
-                if (StoneZone.isStoneZone)  //  + 돌을 던질 위치에 player 있는지 확인
-                {
-                    GameObject.Find("Stone").GetComponent<ThrowStone>().Throw();
-                    Debug.Log("throw Stone!!");
-                    // Game Over
-                }
-                else
-                {
-                    mTr.rotation = Quaternion.Euler(0, 180, 0);
-                } 
+                renderer.flipX = false;
             }
             else
             {
-                mTr.rotation = Quaternion.Euler(0, 180, 0);
+                renderer.flipX = true;
             }
-
+            
             coolTime = 4.0f;    // 4초로 초기화
         }
-
-
     }
 
 }

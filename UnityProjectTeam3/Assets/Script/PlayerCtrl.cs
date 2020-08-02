@@ -24,10 +24,9 @@ public class PlayerCtrl : MonoBehaviour
     private bool IsSit;  //if drag down -> true
     public bool IsInteracObj;   //PlayerPush에서 쏜 ray에서 검출된 물체가 InteractObj라면 true
 
-    ParentsCtrl parents;
+    ParentsCtrl parents;    // parents 오브젝트의 ParentsCtrl 스크립트
 
 
-    // Start is called before the first frame update
     void Start()
     {
         //GetComponent로 초기화.
@@ -44,11 +43,9 @@ public class PlayerCtrl : MonoBehaviour
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         if (parents.stageClear == false)    // stage 진행중
-
         {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical;

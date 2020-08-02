@@ -8,22 +8,17 @@ public class ThrowStone : MonoBehaviour
     public float firingAngle = 45.0f;
     public float gravity = 9.8f;
 
-    public Transform Projectile;    // 발사체. stone
+    public Transform Projectile;    // 발사체(Stone)
     private Transform mTr;
+
+    public bool HitPlayer;
 
     void Awake()
     {
         mTr = transform;
+        HitPlayer = false;
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            Throw();
-        }
-    }
-
+    
     public void Throw() // KidsCtrl에서 참조. 돌을 던져야 할 경우에 Throw를 실행함
     {
         StartCoroutine(SimulateProjectile());
@@ -34,8 +29,8 @@ public class ThrowStone : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);  // 투사체 던지기 전에 기다림
 
-        mTr.transform.position += new Vector3(0, 0, 10);    // 숨겨놨다가 앞으로 당겨옴
-
+        mTr.transform.position += new Vector3(0, 0, 20);    // 숨겨놨다가 앞으로 당겨옴, 위치 정확히 조정
+        
         float target_Distance = Vector3.Distance(Projectile.position, Target.position); // taget(player)와의 거리 계산
         float projectile_Velocity = target_Distance / (Mathf.Sin(2 * firingAngle * Mathf.Deg2Rad) / gravity);   // 각도(45도)에서 물체를 던지는데 필요한 속도 계산
 
@@ -58,7 +53,8 @@ public class ThrowStone : MonoBehaviour
             yield return null;
         }
 
-        Destroy(gameObject);  // 닿으면 파괴 // Game Over
+        HitPlayer = true;
+        mTr.transform.position -= new Vector3(0, 0, 20);    // 뒤로 사라지게 함
     }
 
 

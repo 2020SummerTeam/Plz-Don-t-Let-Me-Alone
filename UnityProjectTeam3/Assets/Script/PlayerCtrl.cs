@@ -21,6 +21,8 @@ public class PlayerCtrl : MonoBehaviour
     private Vector2 preTouchPos; //used for drag movement
     private Vector2 deltaTouchPos; //used for drag movement
     private float centerOfScreen; //used for drag movement
+    private bool IsSit;  //if drag down -> true
+    public bool IsInteracObj;   //PlayerPush에서 쏜 ray에서 검출된 물체가 InteractObj라면 true
 
     ParentsCtrl parents;
 
@@ -49,6 +51,7 @@ public class PlayerCtrl : MonoBehaviour
 
         {
             float horizontal = Input.GetAxis("Horizontal");
+            float vertical;
             //입력받는부분
 
             //drag coding
@@ -89,6 +92,7 @@ public class PlayerCtrl : MonoBehaviour
                         //if touch moves, then character moves
                         deltaTouchPos = touch.position - preTouchPos;
                         horizontal = deltaTouchPos.x;
+                        vertical = deltaTouchPos.y;
 
                         if (horizontal < -1)
                         {
@@ -97,6 +101,16 @@ public class PlayerCtrl : MonoBehaviour
                         else if (horizontal > 1)
                         {
                             horizontal = 1;
+                        }
+
+                        //아래로 드래그 했을 때 IsSit을 true -> oncollision에서 체크
+                        if(vertical < -1)
+                        {
+                            IsSit = true;
+                        }
+                        else
+                        {
+                            IsSit = false;
                         }
                     }
                     else if (touch.phase == TouchPhase.Ended)
@@ -126,6 +140,15 @@ public class PlayerCtrl : MonoBehaviour
             else
             {
                 mAnim.SetBool(AnimHash.RUN, false);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z) && IsInteracObj)   //drag로 구현시 IsSit && IsInteractObj
+            {
+                mAnim.SetBool(AnimHash.SIT, true);
+            }
+            else if (Input.GetKeyUp(KeyCode.Z))
+            {
+                mAnim.SetBool(AnimHash.SIT, false);
             }
 
             //기어코 하기싫었던 update에 SetFloat넣기를 했습니다..
@@ -179,8 +202,6 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-
-
     //j버튼 누르면 점프가 발동되게 할 것이다.
     public void Jump()
     {
@@ -189,8 +210,31 @@ public class PlayerCtrl : MonoBehaviour
         {
             mRB.AddForce(mJumpVector, ForceMode2D.Impulse);
         }
-
-
     }
 
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+      
+    //    //충돌체가 Player고 아래로 드래그했을 시 sit
+    //    if(collision.gameObject.CompareTag("InteractObj") && IsSit)
+    //    {
+    //        mAnim.SetBool(AnimHash.SIT, true);
+    //    }
+    //    else
+    //    {
+    //        mAnim.SetBool(AnimHash.SIT, false);
+    //        mAnim.SetBool(AnimHash.IDLE, true);
+    //    }
+    //}
+
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("InteractObj") && !IsSit)
+    //    {
+    //        mAnim.SetBool(AnimHash.SIT, false);
+    //        mAnim.SetBool(AnimHash.IDLE, true);
+    //        Debug.Log("Exit");
+    //    }
+
+    //}
 }

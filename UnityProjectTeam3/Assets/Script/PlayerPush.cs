@@ -5,28 +5,24 @@ using UnityEngine.UI;
 
 
 //question 1, where is this script's gameObject
-//밀리는 물체한테 붙여야됨
+//player한테 붙여서 player가 ray로 object를 검출하게
 //question 2, what's this scritps doing;
-//상호작용 버튼이 눌리고, 부딪친 물체가 player라면 밀리는 물체가 player를 따라가게
+//상호작용 버튼이 눌리고, 부딪친 물체가 InteractObj라면 밀리는 물체가 player를 따라가게
 public class PlayerPush : MonoBehaviour
 {
-    Rigidbody2D mRB_InteractObj;
-    FixedJoint2D mFixed_InteractObj;
-    PlayerCtrl mPlayerCtrl;
     BoxPull mBoxPull;
-    public float distance = 1f;
-    public LayerMask boxMask;
+    PlayerCtrl mPlayerCtrl;
+    public float distance = 1f;   //ray를 쏘는 거리
+    public LayerMask boxMask;     //밀리는 object를 검출할 layer
     float horizontal;
-    GameObject box;
+    GameObject box;     //ray에 부딪친 물체 가져올 gameObject
 
     bool ISButtonDown;
-    bool IsPush;
+    bool IsPush;   //button이 눌리면 true, 떼지면 false
     void Start()
     {
-        mRB_InteractObj = GetComponent<Rigidbody2D>();
-        mFixed_InteractObj = GetComponent<FixedJoint2D>();
+        mBoxPull = GetComponent<BoxPull>();    //BoxPull script 가져오기
         mPlayerCtrl = GetComponent<PlayerCtrl>();
-        mBoxPull = GetComponent<BoxPull>();
     }
     void Update()
     {
@@ -36,18 +32,18 @@ public class PlayerPush : MonoBehaviour
 
         if (horizontal > 0)
         {
-            hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance, boxMask);
+            hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance, boxMask);  //오른쪽으로 이동시 오른쪽으로 ray쏘기
         }
         else
         {
-            hit = Physics2D.Raycast(transform.position, Vector2.left * transform.localScale.x, distance, boxMask);
+            hit = Physics2D.Raycast(transform.position, Vector2.left * transform.localScale.x, distance, boxMask); //왼쪽으로 이동시 왼쪽으로 ray쏘기
         }
 
-        if (hit.collider != null && hit.collider.CompareTag("InteractObj") && IsPush)
+        if (hit.collider != null && hit.collider.CompareTag("InteractObj") && IsPush)   //충돌체가 null이 아니고 Tag가 InteractObj고, 버튼이 눌렸다면
         {
             box = hit.collider.gameObject;
-            box.GetComponent<FixedJoint2D>().enabled = true;
-            box.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();
+            box.GetComponent<FixedJoint2D>().enabled = true;  //충돌체의 FixedJoint2D활성화 -> 캐릭터 따라가게
+            box.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();  //player의 rigidbody에 붙인다
             box.GetComponent<BoxPull>().beingPushed = true;
 
         }
@@ -55,6 +51,11 @@ public class PlayerPush : MonoBehaviour
         {
             hit.collider.GetComponent<FixedJoint2D>().enabled = false;
             hit.collider.GetComponent<BoxPull>().beingPushed = false;
+            mPlayerCtrl.IsInteracObj = true;   //interactObj가 검출되었고 상호작용버튼이 눌리지 않았다면 true return
+        }
+        else if(hit.collider == null)
+        {
+            mPlayerCtrl.IsInteracObj = false; //아무것도 검출이 안되었다면 return false
         }
 
         //A Button이 눌렸으면 박스가 움직일 수 있게 하고, 마우스가 버튼에서 떼지면 못움직이게 
@@ -68,23 +69,7 @@ public class PlayerPush : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    //충돌한 물체가 player 고, 마우스가 눌렸다면 fixed joint = true, 박스가 플레이어를 따라가게
-    //    if (collision.gameObject.CompareTag("Player") && ISButtonDown)
-    //    {
-    //        Rigidbody2D collisionRB = collision.gameObject.GetComponent<Rigidbody2D>();
-    //        mFixed_InteractObj.connectedBody = collisionRB;
-    //        mFixed_InteractObj.enabled = true;
-
-    //    }
-    //    else if (!ISButtonDown)
-    //    {
-    //        mFixed_InteractObj.enabled = false;
-    //        //마우스가 버튼에서 떼졌다면 fixed joint를 false 로
-    //    }
-    //}
-
+    //화면상 ray 그려주기
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

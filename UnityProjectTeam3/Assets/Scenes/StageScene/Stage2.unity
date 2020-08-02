@@ -680,7 +680,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2177862124171801059, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!1 &1607543292
 GameObject:
@@ -832,7 +838,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tractor
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2177862124171801059, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!1001 &1922332934
 PrefabInstance:

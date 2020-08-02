@@ -28,7 +28,8 @@ public class TreeScript : MonoBehaviour
 
     IEnumerator CheckCoroutine()
     {
-        while(transform.position.x > playerTransform.position.x)
+        //check : true -> wait, check : false -> gravity =1, end
+        while(transform.position.x+3 > playerTransform.position.x)
         {
             yield return new WaitForSeconds(0.5f);
         }

@@ -25,6 +25,7 @@ public class PlayerCtrl : MonoBehaviour
     public bool IsInteracObj;   //PlayerPush에서 쏜 ray에서 검출된 물체가 InteractObj라면 true
 
     ParentsCtrl parents;    // parents 오브젝트의 ParentsCtrl 스크립트
+    Stone stone;
 
 
     void Start()
@@ -40,6 +41,9 @@ public class PlayerCtrl : MonoBehaviour
 
         // stage clear
         parents = GameObject.Find("Parents").GetComponent<ParentsCtrl>();
+
+        // Kids StoneEvent
+        stone = GameObject.Find("Stone").GetComponent<Stone>();
     }
 
 
@@ -179,6 +183,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             // 이동 멈춤
             mAnim.SetBool(AnimHash.RUN, false);
+            mAnim.SetFloat(AnimHash.JUMP, 0);
             mAnim.SetBool(AnimHash.IDLE, true); // Jump ani 상태로 쫓는 것 방지
             mRB.velocity = new Vector2(0, mRB.velocity.y);
 
@@ -191,8 +196,8 @@ public class PlayerCtrl : MonoBehaviour
 
                 if (parents.lefttime <= 0)  // 부모 쫓아간 후
                 {
+                    mRB.constraints = RigidbodyConstraints2D.FreezePosition;
                     mAnim.SetBool(AnimHash.RUN, false); // 이동 멈춤
-                    mRB.velocity = new Vector2(0, mRB.velocity.y);
                 }
             }
 

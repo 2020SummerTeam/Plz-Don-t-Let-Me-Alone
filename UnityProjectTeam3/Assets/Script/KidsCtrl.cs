@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class KidsCtrl : MonoBehaviour
 {
+    // Ctrl 스크립트는 좌 우 반전만 합니다
+
     private Animator mAnim;
     private SpriteRenderer renderer;
     public float coolTime = 4.0f;  // 좌 우 번갈아보는 시간
-    public Text kidsText;
+
+    public GameObject findMark; // kids가 발견하면 
 
     void Start()
     {
@@ -29,7 +32,7 @@ public class KidsCtrl : MonoBehaviour
         else
         {
             // 회전 (좌<->우)
-            if (renderer.flipX)
+            if (renderer.flipX) // true일 때 좌, false일 때 우
             {
                 renderer.flipX = false;
             }
@@ -37,7 +40,7 @@ public class KidsCtrl : MonoBehaviour
             {
                 renderer.flipX = true;
             }
-            
+
             coolTime = 4.0f;    // 4초로 초기화
         }
     }

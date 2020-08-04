@@ -47,9 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
+  Projectile: {fileID: 0}
   firingAngle: 45
   gravity: 9.8
-  Projectile: {fileID: 3746089668817364243}
+  isThrow: 0
+  playerCtrl: {fileID: 0}
+  findSign: {fileID: 0}
 --- !u!212 &3746089668817364240
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class ParentsCtrl : MonoBehaviour
             mAnim.SetBool(AnimHash.RUN, true);  // 이동 애니메이션
             mRB.velocity = new Vector2(3, mRB.velocity.y);  // 이동
 
-            if(lefttime > 0)    // rotation 방지를 위해 2초 동안 player와 이동 // destroy(this) 고려중
+            if(lefttime > 0)    // rotation 방지를 위해 2초 동안 player와 이동
             {
                 lefttime -= Time.deltaTime;
             }

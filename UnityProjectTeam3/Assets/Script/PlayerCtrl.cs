@@ -51,6 +51,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (parents.stageClear == false)    // stage 진행중
         {
+
             float horizontal = Input.GetAxis("Horizontal");
             float vertical;
             //입력받는부분

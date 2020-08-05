@@ -12,11 +12,13 @@ public class Country3manager : MonoBehaviour
     public GameObject Rock; // 가림막이 될 돌
     public GameObject Cap;  // 차고 뚜껑
     public GameObject Kids;
-
+    public GameObject Player;
 
     // Button & Puzzle
     public ButtonEvent buttonEvent;
     public Rigidbody2D FallingTree;
+    private float t=1f;
+
     void Start()
     {
         // 초기화
@@ -33,7 +35,7 @@ public class Country3manager : MonoBehaviour
             {
                 if (Cap.activeSelf == false)    // 차고 뚜껑이 없을때
                 {
-                    if (Kids.transform.position.x > Rock.transform.position.x)  // Rock이 player를 가려주지 않을 때
+                    if (Player.transform.position.x > Rock.transform.position.x)  // Rock이 player를 가려주지 않을 때
                     {
                         stone.isThrow = true; // Stonezone 스크립트의 변수 수정
                     }
@@ -46,7 +48,11 @@ public class Country3manager : MonoBehaviour
         if (buttonEvent.buttonTriggerd) // 높이가 높아서 Rock으로 버튼 안눌러짐
         {
             Cap.SetActive(false);
-            FallingTree.gravityScale = 1;
+            if (t > 0)
+            {
+                FallingTree.transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
+                t -= Time.deltaTime;
+            }
         }
     }
 }

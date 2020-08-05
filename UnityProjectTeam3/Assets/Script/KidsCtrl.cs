@@ -24,6 +24,7 @@ public class KidsCtrl : MonoBehaviour
 
     void Update()
     {
+        
         // 4초마다 오브젝트 회전
         if (coolTime > 0)
         {

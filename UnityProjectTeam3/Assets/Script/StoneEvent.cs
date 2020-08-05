@@ -9,6 +9,7 @@ public class StoneEvent : MonoBehaviour
     public StoneEvent stoneEvent;    // player가 StoneZone에 있는지 전달받기 위해 사용
     public Stone stone;  // 조건 만족 후 돌을 던짐
     public GameObject Kids;
+    public GameObject Player;
     public SpriteRenderer KidsRenderer; // Kids가 쳐다보는 방향을 알려줌
 
     void Start()
@@ -26,7 +27,7 @@ public class StoneEvent : MonoBehaviour
             {
                 // * if 사용해 조건 추가
 
-                tone.isThrow = true; // Stonezone 스크립트의 변수 수정
+                stone.isThrow = true; // Stonezone 스크립트의 변수 수정
             }
         }
 

@@ -12,7 +12,7 @@ public class Stone : MonoBehaviour
     public GameObject player;
     public Transform Projectile;    // stone의 tr
 
-    private Transform pTr;    // player의 tr
+    public Transform pTr;    // player(target)의 tr
     private Transform mTr;  // stone의 Tr    
     public float firingAngle = 45.0f;
     public float gravity = 9.8f;
@@ -35,8 +35,8 @@ public class Stone : MonoBehaviour
         if (isThrow && cnt == 0)  // cnt를 이용해 공이 던져진 적 없을 때 한 번만 던지게 됩니다
         {
             findSign.SetActive(true); // Kids 자식 오브젝트(=느낌표findMark) 비활성화
-            StartCoroutine(SimulateProjectile());
             playerCtrl.enabled = false;
+            StartCoroutine(SimulateProjectile());
             cnt++;
             
         }

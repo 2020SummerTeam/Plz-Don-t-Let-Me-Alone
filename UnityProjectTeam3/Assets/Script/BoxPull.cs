@@ -5,11 +5,18 @@ using UnityEngine;
 public class BoxPull : MonoBehaviour
 {
     public bool beingPushed;
+    public Transform mTr;
     float xPos;
+    float yPos;
+    float zPos;
+
     // Start is called before the first frame update
     void Start()
     {
-        xPos = transform.position.x;
+        mTr = GetComponent<Transform>();
+        xPos = mTr.position.x;
+        yPos = mTr.position.y;
+        zPos = mTr.position.z;
 
     }
 
@@ -17,7 +24,7 @@ public class BoxPull : MonoBehaviour
     void FixedUpdate()
     {
         if (beingPushed == false)
-            transform.position = new Vector3(xPos, transform.position.y);
+            transform.position = new Vector3(xPos, yPos, zPos);
         else
             xPos = transform.position.x;
     }

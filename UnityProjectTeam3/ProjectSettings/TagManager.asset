@@ -17,7 +17,7 @@ TagManager:
   - 
   - 
   - Player
-  - 
+  - dragPlatfrom
   - 
   - 
   - 
@@ -43,4 +43,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: dragPlatform
+    uniqueID: 2600757791
     locked: 0

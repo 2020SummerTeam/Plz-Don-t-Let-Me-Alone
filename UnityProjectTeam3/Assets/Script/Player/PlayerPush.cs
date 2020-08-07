@@ -40,7 +40,7 @@ public class PlayerPush : MonoBehaviour
         ISButtonDown = IsDown;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("InteractObj") && IsPush)
         {
@@ -51,7 +51,7 @@ public class PlayerPush : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (!IsPush && collision.gameObject.CompareTag("InteractObj"))
+        if (collision.gameObject.CompareTag("InteractObj"))
         {
             collision.transform.parent = null;
             collision.gameObject.GetComponent<BoxPull>().beingPushed = false;

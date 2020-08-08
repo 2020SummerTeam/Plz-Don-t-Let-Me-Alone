@@ -27,9 +27,13 @@ public class PlayerCtrl : MonoBehaviour
     ParentsCtrl parents;    // parents 오브젝트의 ParentsCtrl 스크립트
     Stone stone;
 
+    [HideInInspector]
+    public bool stageEnd;//20208080 sanghun. added because of bear move
+
 
     void Start()
     {
+        stageEnd = false;
         //GetComponent로 초기화.
         mRB = GetComponent<Rigidbody2D>();
         mAnim = GetComponent<Animator>();
@@ -55,7 +59,7 @@ public class PlayerCtrl : MonoBehaviour
             float horizontal = Input.GetAxis("Horizontal");
             float vertical;
             //입력받는부분
-
+            
             //drag coding
             // 1. you got touch overthan 1
             // 2. check touchPosition at beginning of touch
@@ -153,6 +157,17 @@ public class PlayerCtrl : MonoBehaviour
                 mAnim.SetBool(AnimHash.SIT, false);
             }
 
+            //20200808 sanghun added for debug. cant press alphabet
+            if (Input.GetKeyDown(KeyCode.DownArrow) && IsInteracObj)   //drag로 구현시 IsSit && IsInteractObj
+            {
+                Debug.Log("sitted");
+                mAnim.SetBool(AnimHash.SIT, true);
+            }
+            else if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                mAnim.SetBool(AnimHash.SIT, false);
+            }
+
             //기어코 하기싫었던 update에 SetFloat넣기를 했습니다..
             //저는 업데이트에 입력 이외에걸 넣는걸 싫어하지만, 저희게임에서는 그닥 문제는 없을것 같습니다
             mAnim.SetFloat(AnimHash.JUMP, mRB.velocity.y);
@@ -182,6 +197,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         else    // 클리어 했을 때   
         {
+            stageEnd = true;
             // 이동 멈춤
             mAnim.SetBool(AnimHash.RUN, false);
             mAnim.SetFloat(AnimHash.JUMP, 0);
@@ -209,7 +225,9 @@ public class PlayerCtrl : MonoBehaviour
     public void Jump()
     {
         //점프가 아닐 때만 위로 힘을 준다!
-        if (mAnim.GetFloat(AnimHash.JUMP) == 0)
+        //2020 08 08 changed ==0 to <=1 >=-1
+        if (mAnim.GetFloat(AnimHash.JUMP) >= -1
+            || mAnim.GetFloat(AnimHash.JUMP) <=1)
         {
             mRB.AddForce(mJumpVector, ForceMode2D.Impulse);
         }

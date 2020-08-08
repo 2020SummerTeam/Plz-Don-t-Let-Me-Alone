@@ -21,6 +21,7 @@ public class Forest6 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(mPlayer.transform.position.x < -9.3f)
         {
             mPlayer.transform.position = mPosition;

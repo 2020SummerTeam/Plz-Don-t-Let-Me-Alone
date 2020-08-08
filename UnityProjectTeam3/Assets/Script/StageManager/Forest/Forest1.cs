@@ -28,7 +28,7 @@ public class Forest1 : MonoBehaviour
         {
             smallBox.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.Home))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             //for debug
             OnShake();

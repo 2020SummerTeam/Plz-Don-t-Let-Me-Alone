@@ -14,11 +14,12 @@ public class Forest4 : MonoBehaviour
     public GameObject platformObject;
     public GameObject smallBox;         //작은박스 위치도 알아야된다
 
+
     bool isPlayerGoRight;       //플레이어가 충분히 오른쪽으로 진행하였는지
     bool isBoxDunked;           //박스가 바닥에 빠졌는지
     bool isBeeSpawned;
     bool isBearDead;
-
+    bool isPlayerTarget;//isPlayer is bee's target?
     //스테이지 4의 주 재료들
     //
     private void Start()
@@ -27,6 +28,7 @@ public class Forest4 : MonoBehaviour
         isBoxDunked = false;
         isBeeSpawned = false;
         isBearDead = false;
+        isPlayerTarget = false;
 
         beeObjectList = new List<GameObject>();
         beeObject.SetActive(false);
@@ -98,7 +100,7 @@ public class Forest4 : MonoBehaviour
         Vector2 pos = bearScript.transform.position;
         //bearTextBallon.SetActive(false);
         bearTextBallon.text = "!!!!";
-        while (!bearScript.isBeeCol)    //벌의 공격을 받지않을때만 움직여요
+        while (true)    //벌의 공격을 받지않을때만 움직여요
         {
             //곰이 움직움직여요
             pos.x -= Time.deltaTime;
@@ -118,6 +120,11 @@ public class Forest4 : MonoBehaviour
                 playerScript.OnStageFail();
             }
             yield return null;
+            if (!isPlayerTarget && bearScript.isBeeCol)
+            {
+                //if beartarget & bee collisions bear
+                break;
+            }
         }
         //벌에 부딪히면 열루 내려와요
         bearTextBallon.text = "죽은곰";
@@ -138,6 +145,7 @@ public class Forest4 : MonoBehaviour
 
             if (isBoxDunked)
             {
+                isPlayerTarget = true;
                 //박스가 아래로 빠졌다면
                 target = playerScript.transform.position;
             }
@@ -145,11 +153,13 @@ public class Forest4 : MonoBehaviour
             {
                 if (playerScript.IsSit)
                 {
+                    isPlayerTarget = false;
                     //박스가 빠지지않았는데 잘 숨었어
                     target = bearScript.transform.position;
                 }
                 else
                 {
+                    isPlayerTarget = true;
                     //박스가 빠지지않았고 잘 못숨었으면
                     target = playerScript.transform.position;
                 }
@@ -167,7 +177,7 @@ public class Forest4 : MonoBehaviour
                 beeTimer = 0;
             }
 
-
+            bool notRandom = false;//just one is not random
             //실제로 벌들이 이동하는 함수
             foreach (GameObject obj in beeObjectList)
             {
@@ -175,8 +185,14 @@ public class Forest4 : MonoBehaviour
                 if (obj.activeSelf)
                 {
                     //이동속도랑 방향이 꿈틀거리게 한다. 꿀벌이니까
+                    if (notRandom)
+                    {
+                        //just one is not random
                     target.x *= Random.Range(0f, 10f);
                     target.y *= Random.Range(0f, 10f);
+                    }
+                    notRandom = true;
+
                     obj.transform.position = Vector2.MoveTowards(obj.transform.position, target, Time.deltaTime * Random.Range(5, 10));
 
                     //벌들하고 거리재는 방법

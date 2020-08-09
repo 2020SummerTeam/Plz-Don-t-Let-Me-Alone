@@ -7,7 +7,8 @@ public class InteractButton : MonoBehaviour
 {
     [SerializeField]
     GameObject mPlayer;
-    PlayerPush script;
+    //2020 0809 playerpush에서 ctrl로 바꿉니다
+    PlayerCtrl script;
 
     void Start()
     {
@@ -20,7 +21,8 @@ public class InteractButton : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-        script = mPlayer.GetComponent<PlayerPush>();
+        //2020 0809 playerpush에서 ctrl로 바꿉니다
+        script = mPlayer.GetComponent<PlayerCtrl>();
 
 
     }
@@ -32,13 +34,13 @@ public class InteractButton : MonoBehaviour
 
     public void PointerDown()
     {
-        script.AButtonDown(true);
+        script.isButtonDown = true;
         Debug.Log("IsButtonDown");
     }
 
     public void PointerUp()
     {
-        script.AButtonDown(false);
+        script.isButtonDown = false;
         Debug.Log("IsButtonUp");
     }
 

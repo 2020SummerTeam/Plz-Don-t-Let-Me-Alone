@@ -14,10 +14,17 @@ public class PlayerPush : MonoBehaviour
     PlayerCtrl mPlayerCtrl;
 
     bool ISButtonDown;
-    bool IsPush;   //button이 눌리면 true, 떼지면 false
+    bool IsPush;
+    //20200809 상훈
+    //button이 눌리면 true, 떼지면 false 로 사용하는거면 그냥 Ispush랑 IsButotnDown이랑 항상 값이 같으니까 다르게 쓰겠습니다
+
+    bool isWatchingRightOnGrab; //잡는시접에서 오른쪽을 보고있었는가. 이게 변화하면은 상자 풀었다가 다시해줘야하니까
     void Start()
     {
-        mBoxPull = GetComponent<BoxPull>();    //BoxPull script 가져오기
+        ISButtonDown = false;
+        IsPush = true;
+        isWatchingRightOnGrab = true;
+        //mBoxPull = GetComponent<BoxPull>();    //BoxPull script 가져오기
         mPlayerCtrl = GetComponent<PlayerCtrl>();
     }
     void Update()
@@ -41,20 +48,27 @@ public class PlayerPush : MonoBehaviour
     public void AButtonDown(bool IsDown)
     {
         ISButtonDown = IsDown;
-        IsPush = IsDown;
+//        IsPush = IsDown;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        
         if (collision.gameObject.CompareTag("InteractObj"))
         {
+            if (ISButtonDown)
+            {
+                collision.transform.parent = this.transform;
+
+            }
+            /*
             mPlayerCtrl.IsInteracObj = true;   //interactObj가 검출. => true
             if (IsPush)
             {
                 collision.transform.parent = this.transform;
                 collision.gameObject.GetComponent<BoxPull>().beingPushed = true;
 
-            }
+            }*/
         }
     }
 
@@ -62,9 +76,11 @@ public class PlayerPush : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("InteractObj"))
         {
+            /*
             collision.transform.parent = null;
             collision.gameObject.GetComponent<BoxPull>().beingPushed = false;
             mPlayerCtrl.IsInteracObj = false;   //interactObj가 검출되었고 상호작용버튼이 눌리지 않았다면 true return
+            */
         }
     }
 }

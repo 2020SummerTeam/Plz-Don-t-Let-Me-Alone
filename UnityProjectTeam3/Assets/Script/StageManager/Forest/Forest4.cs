@@ -19,7 +19,9 @@ public class Forest4 : MonoBehaviour
     bool isBoxDunked;           //박스가 바닥에 빠졌는지
     bool isBeeSpawned;
     bool isBearDead;
+    bool isBearMoved;   //곰이 안깼는데 벌이 나온거면 샌디가 깨운거니까 샌디를 컷하기 위함.
     bool isPlayerTarget;//isPlayer is bee's target?
+   
     //스테이지 4의 주 재료들
     //
     private void Start()
@@ -29,6 +31,7 @@ public class Forest4 : MonoBehaviour
         isBeeSpawned = false;
         isBearDead = false;
         isPlayerTarget = false;
+        isBearMoved = false;
 
         beeObjectList = new List<GameObject>();
         beeObject.SetActive(false);
@@ -49,7 +52,15 @@ public class Forest4 : MonoBehaviour
         if (buttonEvent.buttonTriggerd)
         {
             OnButtonTrigger();
-            buttonEvent.buttonTriggerd = true;
+            buttonEvent.buttonTriggerd = false;
+        }
+        else
+        {
+            if (playerScript.transform.position.y < -4)
+            {
+                //플레이어 떨어지면 바로 탈락~
+                playerScript.OnStageFail();
+            }
         }
         
     }
@@ -99,6 +110,7 @@ public class Forest4 : MonoBehaviour
     {
         Vector2 pos = bearScript.transform.position;
         //bearTextBallon.SetActive(false);
+        isBearMoved = true;
         bearTextBallon.text = "!!!!";
         while (true)    //벌의 공격을 받지않을때만 움직여요
         {
@@ -143,10 +155,10 @@ public class Forest4 : MonoBehaviour
 
             
 
-            if (isBoxDunked)
+            if (isBoxDunked || !isBearMoved)
             {
                 isPlayerTarget = true;
-                //박스가 아래로 빠졌다면
+                //박스가 아래로 빠졌거나, + 곰이 깨지않은상태라면
                 target = playerScript.transform.position;
             }
             else

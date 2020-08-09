@@ -703,7 +703,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: DrawCharacter
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 822020921140924976, guid: f981dacf98c5cf147a217bc3bcc1bc86, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f981dacf98c5cf147a217bc3bcc1bc86, type: 3}
 --- !u!114 &859977013 stripped
 MonoBehaviour:
@@ -858,11 +859,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SmallBox (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575166150335560629, guid: 7e25758aa675ea34bbb62fe3b92c1201,
-        type: 3}
-      propertyPath: m_Mass
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8575166150335560630, guid: 7e25758aa675ea34bbb62fe3b92c1201,
         type: 3}

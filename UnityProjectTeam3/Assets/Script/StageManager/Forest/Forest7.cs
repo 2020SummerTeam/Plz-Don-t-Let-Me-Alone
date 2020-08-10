@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Forest7 : MonoBehaviour
 {
-    int i = 0;
+    int fingerCount = 0;
     private Vector3 scaleChange;
 
     private void Awake()
@@ -16,17 +16,32 @@ public class Forest7 : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            i++;
+            fingerCount++;
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
             if (hit.collider != null && hit.collider.CompareTag("Wall"))
             {
-                if (i < 6)
+                if (fingerCount < 6)
                 {
                     hit.collider.transform.localScale += scaleChange;
                 }
             }
         }
+
+        //if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        //{
+        //    fingerCount++;
+        //    Vector3 pos = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
+        //    RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+
+        //    if (hit.collider != null && hit.collider.CompareTag("Wall"))
+        //    {
+        //        if (fingerCount < 6)
+        //        {
+        //            hit.collider.transform.localScale += scaleChange;
+        //        }
+        //    }
+        //}
     }
 }

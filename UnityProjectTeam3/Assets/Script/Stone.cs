@@ -44,7 +44,7 @@ public class Stone : MonoBehaviour
 
     IEnumerator SimulateProjectile()
     {
-        yield return new WaitForSeconds(0.5f);  // 투사체 던지기 전에 기다림
+        yield return new WaitForSeconds(1f);  // 1초 (player가 점프 중일 경우 떨어진 이후의 위치로 계산)
 
         mTr.transform.position += new Vector3(0, 0, 20);    // 숨겨놨다가 앞으로 당겨옴, 위치 정확히 조정
 

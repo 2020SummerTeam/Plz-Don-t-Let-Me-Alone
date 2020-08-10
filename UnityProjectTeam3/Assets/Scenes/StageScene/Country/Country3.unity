@@ -961,7 +961,6 @@ MonoBehaviour:
   buttonEvent: {fileID: 1591705282}
   FallingTree: {fileID: 597667003}
   Button: {fileID: 365811546}
-  isCapOpen: 0
   roof: {fileID: 2043028986}
 --- !u!4 &1019904229
 Transform:
@@ -1511,7 +1510,7 @@ PrefabInstance:
     - target: {fileID: 4186236228525854783, guid: 334a71e99a192cc4a97afdce1f0fab2a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.67
+      value: 4.43
       objectReference: {fileID: 0}
     - target: {fileID: 4186236228525854783, guid: 334a71e99a192cc4a97afdce1f0fab2a,
         type: 3}
@@ -1661,6 +1660,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1473626728}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2095806779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095806778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a056b49e0d80842910ca6d88b03555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2095806785 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9178944669881340026, guid: f981dacf98c5cf147a217bc3bcc1bc86,

@@ -14,6 +14,7 @@ public class Forest7 : MonoBehaviour
     }
     void Update()
     {
+        //마우스가 클릭한 위치가 wall 이라면 wall의 y 값을 줄여준다
         if (Input.GetMouseButtonDown(0))
         {
             fingerCount++;
@@ -29,6 +30,7 @@ public class Forest7 : MonoBehaviour
             }
         }
 
+        //touch script
         //if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         //{
         //    fingerCount++;

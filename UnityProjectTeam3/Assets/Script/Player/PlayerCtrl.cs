@@ -19,6 +19,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField]
     private Vector2 mJumpVector;
     //player의 speed와 jumpVector인데, private이지만 serializeField가 붙어서 Unity의 Inspector에서 정해준다.
+    public float horizontal;
 
     private Vector2 preTouchPos; //used for drag movement
     private Vector2 deltaTouchPos; //used for drag movement
@@ -33,6 +34,7 @@ public class PlayerCtrl : MonoBehaviour
 
     [HideInInspector]
     public bool stageEnd;//20208080 sanghun. added because of bear move
+    public bool isForestTen = false;  //검은숲 10단계에서 플레이어의 방향키를 반대로 하기위한 변수 -> forest 10 스크립트에서 받아옴
 
     public bool watchingRight;  //상자이동방향 맞추기위해서
     public bool isButtonDown;   //2020 0809 푸시 여기서 해결할래요
@@ -59,6 +61,12 @@ public class PlayerCtrl : MonoBehaviour
 
         // Kids StoneEvent
       //  stone = GameObject.Find("Stone").GetComponent<Stone>();
+    } 
+
+    //검은숲 10이 실행됐을 때 true 받아옴
+    public void forestTen(bool isTen)
+    {
+        isForestTen = isTen;
     }
 
 
@@ -67,7 +75,7 @@ public class PlayerCtrl : MonoBehaviour
         if (parents.stageClear == false)    // stage 진행중
         {
 
-            float horizontal = Input.GetAxis("Horizontal");
+            horizontal = Input.GetAxis("Horizontal");
             float vertical;
             //입력받는부분
 
@@ -77,8 +85,7 @@ public class PlayerCtrl : MonoBehaviour
             // 3. if you move your finger, then touchphase == moved
             // 4. check deltaposition with preTouchPos. and it goes on horizontal
             if (Input.touchCount != 0)
-            {
-
+            {                
                 //i want to use touch = null; but i cant....
                 //so you start with getTouch(0) not to make nullError
                 Touch touch = Input.GetTouch(0);
@@ -111,13 +118,28 @@ public class PlayerCtrl : MonoBehaviour
                         horizontal = deltaTouchPos.x;
                         vertical = deltaTouchPos.y;
 
-                        if (horizontal < -1)
+                        //검은숲 10단계가 아니면 제대로 동작
+                        if (!isForestTen)
                         {
-                            horizontal = -1;
+                            if (horizontal < -1)
+                            {
+                                horizontal = -1;
+                            }
+                            else if (horizontal > 1)
+                            {
+                                horizontal = 1;
+                            }
                         }
-                        else if (horizontal > 1)
+                        else  //검은숲 10단계라면 방향을 거꾸로
                         {
-                            horizontal = 1;
+                            if (horizontal < -1)
+                            {
+                                horizontal = 1;
+                            }
+                            else if (horizontal > 1)
+                            {
+                                horizontal = -1;
+                            }
                         }
 
                         //아래로 드래그 했을 때 IsSit을 true -> oncollision에서 체크
@@ -147,76 +169,128 @@ public class PlayerCtrl : MonoBehaviour
 
             if (!IsSit)
             {
-                mRB.velocity = new Vector2(horizontal * mSpeed, mRB.velocity.y);
-                //rigidbody의 Velocity를 정하면 그방향으로 움직인다.
-
-
-                //걷는 애니메이션 및 걷는 방향으로 보는 것 구현
-                if (horizontal < 0)
+               
+                //검은숲10이 아니라면
+                if (!isForestTen)
                 {
-                    //박스를 
-                    if (isPushingBox)
+                    mRB.velocity = new Vector2(horizontal * mSpeed, mRB.velocity.y);
+                    //rigidbody의 Velocity를 정하면 그방향으로 움직인다.
+
+                    //걷는 애니메이션 및 걷는 방향으로 보는 것 구현
+                    if (horizontal < 0)
                     {
-                        if (watchingRight)  
+                        //박스와 상호작용 하고있는 상태라면
+                        if (isPushingBox)
                         {
-                            //기존에 오른쪽을 보다가 왼쪽으로 돌아온거라면 당기는 거겟죠
-                            //당기는거는 방향을 바꿔줄 필요가 없습니다. 애니메이션이 나오면 여기에다가 추가합시다
-                            mAnim.SetBool(AnimHash.RUN, true);
+                            if (watchingRight)
+                            {
+                                //기존에 오른쪽을 보다가 왼쪽으로 돌아온거라면 당기는 거겟죠
+                                //당기는거는 방향을 바꿔줄 필요가 없습니다. 애니메이션이 나오면 여기에다가 추가합시다
+                                mAnim.SetBool(AnimHash.RUN, true);
+                            }
+                            else
+                            {
+                                //이거는 그냥 미는거겠죠 미는애니메이션이 나오면 여기에다가 추가합시다
+                                //그리고 보는방향이 왼쪽에서 왼쪽으로 동일하니까, 방향 굳이 바꿔줄 필요 없죠?
+                                //그러니까 pushingBox일때는 우리 아무것도 건들지 맙시다
+                                mAnim.SetBool(AnimHash.RUN, true);
+                            }
                         }
                         else
                         {
-                            //이거는 그냥 미는거겠죠 미는애니메이션이 나오면 여기에다가 추가합시다
-                            //그리고 보는방향이 왼쪽에서 왼쪽으로 동일하니까, 방향 굳이 바꿔줄 필요 없죠?
-                            //그러니까 pushingBox일때는 우리 아무것도 건들지 맙시다
+                            //이거를 else로 놓아주는 이유는 보는방향이 바뀌면 안되니까
+                            watchingRight = false;
+                            transform.rotation = Quaternion.Euler(0, 180, 0);
+                            mAnim.SetBool(AnimHash.RUN, true);
+                        }
+                    }
+                    else if (horizontal > 0)
+                    {
+                        //이거는 위에거랑 정반대죠. 그냥 반대로만 합시다
+                        if (isPushingBox)
+                        {
+                            if (watchingRight)
+                            {
+                                //기존에 오른쪽을 보다가 오른쪽으로 돌아온거라면 미는거겠죠
+                                //그리고 보는방향이 오른쪽에서 오른쪽으로 동일하니까, 방향 굳이 바꿔줄 필요 없죠?
+                                mAnim.SetBool(AnimHash.RUN, true);
+                            }
+                            else
+                            {
+                                //당기는거는 방향을 바꿔줄 필요가 없습니다. 애니메이션이 나오면 여기에다가 추가합시다
+                                //그러니까 pushingBox일때는 우리 아무것도 건들지 맙시다
+                                mAnim.SetBool(AnimHash.RUN, true);
+                            }
+                        }
+                        else
+                        {
+                            //이거를 else로 놓아주는 이유는 보는방향이 바뀌면 안되니까
+                            watchingRight = true;
+                            transform.rotation = Quaternion.Euler(0, 0, 0);
+                            mAnim.SetBool(AnimHash.RUN, true);
+                        }
+
+
+                    }
+                    else
+                    {
+                        mAnim.SetBool(AnimHash.RUN, false);
+                    }
+                }
+                else  //forest10 이라면 반대로
+                {
+                    mRB.velocity = new Vector2(horizontal * -mSpeed, mRB.velocity.y);
+
+                    //걷는 애니메이션 및 걷는 방향으로 보는 것 구현
+                    if (horizontal > 0)
+                    {
+                        //박스와 상호작용 하고있는 상태라면
+                        if (isPushingBox)
+                        {
+                            if (watchingRight)
+                            {
+                                mAnim.SetBool(AnimHash.RUN, true);
+                            }
+                            else
+                            {
+                                mAnim.SetBool(AnimHash.RUN, true);
+                            }
+                        }
+                        else
+                        {
+                            watchingRight = false;
+                            transform.rotation = Quaternion.Euler(0, 180, 0);
+                            mAnim.SetBool(AnimHash.RUN, true);
+                        }
+                    }
+                    else if (horizontal < 0)
+                    {
+                        if (isPushingBox)
+                        {
+                            if (watchingRight)
+                            {
+                                mAnim.SetBool(AnimHash.RUN, true);
+                            }
+                            else
+                            {
+                                mAnim.SetBool(AnimHash.RUN, true);
+                            }
+                        }
+                        else
+                        {
+                            //이거를 else로 놓아주는 이유는 보는방향이 바뀌면 안되니까
+                            watchingRight = true;
+                            transform.rotation = Quaternion.Euler(0, 0, 0);
                             mAnim.SetBool(AnimHash.RUN, true);
                         }
                     }
                     else
                     {
-                        //이거를 else로 놓아주는 이유는 보는방향이 바뀌면 안되니까
-                        watchingRight = false;
-                        transform.rotation = Quaternion.Euler(0, 180, 0);
-                        mAnim.SetBool(AnimHash.RUN, true);
-
+                        mAnim.SetBool(AnimHash.RUN, false);
                     }
-
-
-
-                }
-                else if (horizontal > 0)
-                {
-                    //이거는 위에거랑 정반대죠. 그냥 반대로만 합시다
-                    if (isPushingBox)
-                    {
-                        if (watchingRight)
-                        {
-                            //기존에 오른쪽을 보다가 오른쪽으로 돌아온거라면 미는거겠죠
-                            //그리고 보는방향이 오른쪽에서 오른쪽으로 동일하니까, 방향 굳이 바꿔줄 필요 없죠?
-                            mAnim.SetBool(AnimHash.RUN, true);
-                        }
-                        else
-                        {
-                            //당기는거는 방향을 바꿔줄 필요가 없습니다. 애니메이션이 나오면 여기에다가 추가합시다
-                            //그러니까 pushingBox일때는 우리 아무것도 건들지 맙시다
-                            mAnim.SetBool(AnimHash.RUN, true);
-                        }
-                    }
-                    else
-                    {
-                        //이거를 else로 놓아주는 이유는 보는방향이 바뀌면 안되니까
-                        watchingRight = true;
-                        transform.rotation = Quaternion.Euler(0, 0, 0);
-                        mAnim.SetBool(AnimHash.RUN, true);
-                    }
-
-                    
-                }
-                else
-                {
-                    mAnim.SetBool(AnimHash.RUN, false);
                 }
             }
-            
+                       
 
             if (Input.GetKeyDown(KeyCode.Z) && IsInteracObj)   //drag로 구현시 IsSit && IsInteractObj
             {

@@ -10,6 +10,7 @@ public class InteractButton : MonoBehaviour
     //2020 0809 playerpush에서 ctrl로 바꿉니다
     PlayerCtrl script;
 
+
     void Start()
     {
         mPlayer = GameObject.FindWithTag("Player");

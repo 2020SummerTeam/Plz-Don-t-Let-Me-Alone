@@ -24,7 +24,6 @@ public class Country3manager : MonoBehaviour
     private bool isCapOpen; // 차고 문이 완전히 열렸는지
     public GameObject roof; // 차고 뚜껑
     private float roofHeight;   // 올라오는 차고 문과 높이 비교
-    private float playerHeight; //
     private float playerHead;
     void Start()
     {
@@ -34,9 +33,6 @@ public class Country3manager : MonoBehaviour
         rockHalfSize = Rock.GetComponent<Renderer>().bounds.size.x / 2;
         roofHeight = Cap.transform.position.y + Cap.GetComponent<Renderer>().bounds.size.y;
         isCapOpen = false;
-        playerHeight = Player.GetComponent<BoxCollider2D>().size.y;
-
-
     }
 
 
@@ -49,12 +45,16 @@ public class Country3manager : MonoBehaviour
             {
                 if (isCapOpen == true)    // 차고 뚜껑이 다 열렸을 때
                 {
-                    playerHead = Player.GetComponent<Transform>().position.y + playerHeight / 2;    //player의 키 update
-                    if ((Player.transform.position.x > Rock.transform.position.x) ||
-                    (playerHead > Rock.transform.position.y + rockHalfSize))  // Rock이 player를 가려주지 않을 때
-                    //  player가 rock보다 앞에 있거나, player의 키가 rock의 높이보다 클 때
+                    if (Player.transform.position.x > Rock.transform.position.x) // player가 rock보다 앞에 있거나
                     {
                         stone.isThrow = true; // Stonezone 스크립트의 변수 수정
+                    }
+                    else
+                    {
+                        if (Player.GetComponent<PlayerCtrl>().IsSit == false)   // rock 뒤에서 숨기 X 일때
+                        {
+                            stone.isThrow = true;
+                        }
                     }
                 }
             }

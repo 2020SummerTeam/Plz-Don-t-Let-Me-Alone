@@ -13,7 +13,7 @@ public class Researchers : MonoBehaviour
     public GameObject findSign; // 느낌표
     public bool isFind; // player를 발견했을 경우 (stageManager에서 넘어옴)
     public Transform playerTr; // target
-    public GameObject player;
+    public GameObject player;   // 인게임에서 해주면 됩니다
 
     private int LorR;
     public int EachNum; // 각각 스테이지에서 설정해주세요.
@@ -33,6 +33,7 @@ public class Researchers : MonoBehaviour
         coolTime = 4.0f;
         isFind = false;
         findSign.SetActive(false);
+        playerTr = player.GetComponent<Transform>();
     }
 
     void Update()

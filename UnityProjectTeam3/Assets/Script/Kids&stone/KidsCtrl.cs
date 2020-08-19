@@ -11,13 +11,14 @@ public class KidsCtrl : MonoBehaviour
     private Transform mTr;
     public float coolTime = 4.0f;  // 좌 우 번갈아보는 시간
 
+    private GameObject findSign;
 
     void Start()
     {
         //GetComponent로 초기화.
         mAnim = GetComponent<Animator>();
         mTr = GetComponent<Transform>();
-
+        findSign = transform.GetChild(0).gameObject;
         coolTime = 4.0f;
     }
 
@@ -31,17 +32,23 @@ public class KidsCtrl : MonoBehaviour
         }
         else
         {
-            // 회전 (좌<->우)
-            if (mTr.rotation == Quaternion.Euler(0, 180, 0)) // true일 때 좌, false일 때 우
+
+            if(findSign.activeSelf == true) // findSign이 활성화되어 있으면 비활성화시킨다음 회전
             {
-                mTr.rotation = Quaternion.Euler(0, 0, 0);
+                findSign.SetActive(false);
+            }
+            // 회전 (좌<->우)
+            if (mTr.rotation == Quaternion.Euler(0, 0, 0)) // y가 180일 때 좌, 0일 때 우
+            {
+                mTr.rotation = Quaternion.Euler(0, 180, 0); // 좌
             }
             else
             {
-                mTr.rotation = Quaternion.Euler(0, 180, 0);
+                mTr.rotation = Quaternion.Euler(0, 0, 0);   // 우
             }
 
             coolTime = 4.0f;    // 4초로 초기화
+            
         }
     }
 

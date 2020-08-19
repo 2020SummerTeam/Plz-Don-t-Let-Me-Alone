@@ -953,14 +953,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stoneEvent: {fileID: 135299055}
   stone: {fileID: 1520706639}
-  KidsRenderer: {fileID: 0}
   Rock: {fileID: 1806883407}
   Cap: {fileID: 1189952581}
   Kids: {fileID: 936121232}
   Player: {fileID: 2095806778}
+  playerCtrl: {fileID: 0}
   buttonEvent: {fileID: 1591705282}
   FallingTree: {fileID: 597667003}
   Button: {fileID: 365811546}
+  isCapOpen: 0
   roof: {fileID: 2043028986}
 --- !u!4 &1019904229
 Transform:
@@ -1071,12 +1072,12 @@ PrefabInstance:
     - target: {fileID: 4941697659346120599, guid: dfa81a0f8d3196a43bc91ca15421d073,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.33
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4941697659346120599, guid: dfa81a0f8d3196a43bc91ca15421d073,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.79
+      value: -3.23
       objectReference: {fileID: 0}
     - target: {fileID: 4941697659346120599, guid: dfa81a0f8d3196a43bc91ca15421d073,
         type: 3}
@@ -1264,12 +1265,12 @@ PrefabInstance:
     - target: {fileID: 6083361843235296948, guid: 5051f15da43c3354d9de93a44edaf1bf,
         type: 3}
       propertyPath: m_Offset.y
-      value: 0.11315665
+      value: -0.02779293
       objectReference: {fileID: 0}
     - target: {fileID: 6083361843235296948, guid: 5051f15da43c3354d9de93a44edaf1bf,
         type: 3}
       propertyPath: m_Size.y
-      value: 1.9463317
+      value: 2.228231
       objectReference: {fileID: 0}
     - target: {fileID: 6083361843235296948, guid: 5051f15da43c3354d9de93a44edaf1bf,
         type: 3}

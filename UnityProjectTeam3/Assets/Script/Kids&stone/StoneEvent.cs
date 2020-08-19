@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StoneEvent : MonoBehaviour
 {
-    /* stageManager에서 조건 추가적으로 설정해서 사용하시면 됩니다
+    /* stageManager로 붙여넣어 조건 추가적으로 설정해서 사용하시면 됩니다
 
     public StoneEvent stoneEvent;    // player가 StoneZone에 있는지 전달받기 위해 사용
     public Stone stone;  // 조건 만족 후 투사체 던지기 위해 변수 전달
@@ -17,7 +17,9 @@ public class StoneEvent : MonoBehaviour
         // Kids
         if (stoneEvent.isStoneEvent == true)  // player가 StoneZone에 있을 때
         {
-                // * 조건 if로 추가
+                / * 조건 if로 추가
+                // 20200819
+                // ex) if (Kids.transform.rotation == Quaternion.Euler(0, 180, 0)) // Kids가 좌측 볼 때
 
                 stone.isThrow = true; // Stone 스크립트의 변수 수정
         }

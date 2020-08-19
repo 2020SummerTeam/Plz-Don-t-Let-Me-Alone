@@ -6,11 +6,13 @@ public class Stone : MonoBehaviour
 {
     // 초기화되지 않은 변수들은
     // 해당 스테이지에서의 변수로 직접 설정해서 사용 (prefab X)
+    // = 해당 스테이지의 player, projectile, findsign
 
     public bool isThrow;    // stageManager에서 조건에 따라 T/F 바꿔줌 
 
     public GameObject player;
     public Transform Projectile;    // stone의 tr
+    private Vector3 InitPos;    // 던진 후 위치 초기화
 
     public Transform pTr;    // player(target)의 tr
     private Transform mTr;  // stone의 Tr    
@@ -21,11 +23,12 @@ public class Stone : MonoBehaviour
     public PlayerCtrl playerCtrl;  // player가 던진 돌을 피하는 것 방지
     public GameObject findSign; // Kids 위의 느낌표
 
+
     void Start()
     {
-        playerCtrl = player.GetComponent<PlayerCtrl>();
         pTr = player.transform;
         mTr = transform;
+        InitPos = transform.position;
         isThrow = false;
         findSign.SetActive(false);
     }
@@ -35,10 +38,9 @@ public class Stone : MonoBehaviour
         if (isThrow && cnt == 0)  // cnt를 이용해 공이 던져진 적 없을 때 한 번만 던지게 됩니다
         {
             findSign.SetActive(true); // Kids 자식 오브젝트(=느낌표findMark) 비활성화
-            playerCtrl.enabled = false;
             StartCoroutine(SimulateProjectile());
             cnt++;
-            
+
         }
     }
 
@@ -69,8 +71,9 @@ public class Stone : MonoBehaviour
 
             yield return null;
         }
-        mTr.transform.position -= new Vector3(0, 0, 20);    // 뒤로 사라지게 함
+        
+        mTr.transform.position = InitPos - new Vector3(0, 0, 20);    // 뒤로 사라지게 함
     }
 
-}
 
+}

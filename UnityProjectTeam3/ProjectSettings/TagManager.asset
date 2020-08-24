@@ -46,6 +46,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: dragPlatform
+  - name: sprite
     uniqueID: 2600757791
     locked: 0

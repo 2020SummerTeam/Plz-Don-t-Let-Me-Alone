@@ -15,12 +15,13 @@ public class FadeIn : MonoBehaviour
 
     void Update()
     {
-        Target.SetActive(false);
         timer += Time.deltaTime;
 
-        if (timer >= waitingTime)
+        if (timer <= waitingTime)
         {
-            Target.SetActive(true);
+            Target.GetComponent<SpriteRenderer>().enabled = false;
         }
+        else
+            Target.GetComponent<SpriteRenderer>().enabled = true;
     }
 }

@@ -1,36 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 
-public class dragPlatform : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class dragPlatform : MonoBehaviour
 {
-    Transform cachedTransform;
-    Vector2 startingPos;
-
-    void Start()
+    // 플랫폼 상하 드래그
+    IEnumerator OnMouseDown()
     {
-        cachedTransform = transform;
-        startingPos = cachedTransform.position;
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        Vector2 mousePosition = new Vector2(startingPos.x, Input.mousePosition.y);
-        transform.position = mousePosition;
+        Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(scrSpace.x, Input.mousePosition.y, scrSpace.z));
+       
         
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-
+        while (Input.GetMouseButton(0))
+        {
+            Vector3 curScreenSpace = new Vector3(scrSpace.x, Input.mousePosition.y, scrSpace.z);
+            Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenSpace) + offset;
+            Vector3 worldpos = curPosition;
+           
+            if (worldpos.y < -0.5f)  // 플랫폼 이동 범위 제한
+                worldpos.y = -0.5f;
+            if (worldpos.y > 1.5f)
+                worldpos.y = 1.5f;
+            
+            transform.position = worldpos;
+            yield return null;
+        }
     }
 }
-    
-    
+
+
 

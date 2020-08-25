@@ -14,7 +14,7 @@ public class Forest10 : MonoBehaviour
     [SerializeField]
     float speed1 = 1.0f;
     [SerializeField]
-    float speed2 = 1.2f;
+    float speed2 = 1.0f;
 
     //platform 1 이동위치
     private Vector3 pos1 = new Vector3(-2f, -2f, 0f);
@@ -40,7 +40,7 @@ public class Forest10 : MonoBehaviour
         if (mButton.buttonTriggerd)
         {
             MovePlatform1.transform.position = Vector3.Lerp(pos2, pos1, (Mathf.Sin(speed1 * Time.time) + 1.0f) / 2.0f);
-            MovePlatform2.transform.position = Vector3.Lerp(pos4, pos3, (Mathf.Sin(speed2 * Time.time) + 1.0f) / 2.0f);
+            MovePlatform2.transform.position = Vector3.Lerp(pos3, pos4, (Mathf.Sin(speed2 * Time.time) + 1.0f) / 2.0f);
         }
     }
     

@@ -522,7 +522,7 @@ MonoBehaviour:
   MovePlatform1: {fileID: 265166219}
   MovePlatform2: {fileID: 1029556186}
   speed1: 1
-  speed2: 1.2
+  speed2: 1
 --- !u!1 &908151986
 GameObject:
   m_ObjectHideFlags: 0

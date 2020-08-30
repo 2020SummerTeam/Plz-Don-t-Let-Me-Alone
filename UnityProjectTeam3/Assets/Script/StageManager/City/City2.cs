@@ -1,12 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class City2 : MonoBehaviour
 {
     [SerializeField]
     private GameObject MovePlatform;
 
+    [Header("Buttons")]
+    public Button mB;
+    public Button mN;
+    public Button[] mO;
+    public Button mU;
+    public Button mT;
+    public Button mX;
+
+    [Header("ButtonVariable")]
+    private bool isB;
+    private bool isN;
+    private bool isO;
+    private bool isU;
+    private bool isT;
+    private bool isX;
+
+    private int mCount; //t should click twice
+
+    public GameObject mBox;
+    public GameObject mButton;
+    public GameObject mBlind;
+    public ButtonEvent mButtonEvent;
+    public Camera mCamera;
+    
     [SerializeField]
     float speed = 1.0f;
 
@@ -24,5 +49,72 @@ public class City2 : MonoBehaviour
     void Update()
     {
         MovePlatform.transform.position = Vector3.Lerp(pos1, pos2, (Mathf.Sin(speed * Time.time) + 1.0f) / 2.0f);
+
+        if (isB)
+        {
+            if (isO)
+            {
+                if (isX)
+                {
+                    mBox.SetActive(true);
+                }
+            }
+        }
+
+        if (isB)
+        {
+            if (isU)
+            {
+                if (isT)
+                {
+                    if (isO && mCount ==2)
+                    {
+                        if (isN)
+                        {
+                            mButton.SetActive(true);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (mButtonEvent.buttonTriggerd)
+        {
+            mButton.SetActive(false);
+            mBlind.SetActive(false);
+        }
     }
+
+    public void ClickB()
+    {
+        isB = true;
+    }
+
+    public void ClickN()
+    {
+        isN = true;
+    }
+
+    public void ClickO()
+    {
+        isO = true;
+    }
+
+    public void ClickX()
+    {
+        isX = true;
+    }
+
+    public void ClickU()
+    {
+        isU = true;
+    }
+
+    public void ClickT()
+    {
+        isT = true;
+        mCount++;
+    }
+
+
 }

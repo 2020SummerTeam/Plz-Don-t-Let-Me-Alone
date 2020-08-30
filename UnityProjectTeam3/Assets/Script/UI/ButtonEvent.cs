@@ -13,8 +13,9 @@ public class ButtonEvent : MonoBehaviour
     //is button is pressed
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        Debug.Log("Button enable");
         buttonTriggerd = false;
     }
 
@@ -24,10 +25,9 @@ public class ButtonEvent : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-
+            Debug.Log("hit player");
+            this.gameObject.SetActive(false);
             buttonTriggerd = true;
-            gameObject.SetActive(false);
-
         }
     }
 }

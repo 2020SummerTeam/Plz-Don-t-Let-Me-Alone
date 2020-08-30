@@ -394,7 +394,7 @@ PrefabInstance:
     - target: {fileID: 9178944669881340026, guid: f981dacf98c5cf147a217bc3bcc1bc86,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.7593317
+      value: 2.97
       objectReference: {fileID: 0}
     - target: {fileID: 9178944669881340026, guid: f981dacf98c5cf147a217bc3bcc1bc86,
         type: 3}
@@ -626,7 +626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018645667132249708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.04, y: -4.32, z: -5.439453}
+  m_LocalPosition: {x: 4.04, y: -4.45, z: -5.439453}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 1979834863}
   - component: {fileID: 1979834859}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Button&Forest9Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -669,8 +669,6 @@ MonoBehaviour:
   m_platform:
   - {fileID: 3231444911530587334}
   - {fileID: 1183735340}
-  isPlatformTouch: 0
-  platform_num: 0
   player: {fileID: 1815010502}
   buttonTriggerd: 0
   platform: {fileID: 5051248574453586283}
@@ -1026,7 +1024,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5051248574453586283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.24, y: 2.98, z: 840.6443}
+  m_LocalPosition: {x: 6.27, y: 2.98, z: 840.6443}
   m_LocalScale: {x: 6, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

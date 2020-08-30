@@ -26,17 +26,16 @@ public class Forest13 : MonoBehaviour
     private Transform wallTr;
     public bool isParentsMove;
     private Vector2 pos, oldpos;    // 부모 오브젝트 position
-    private float wallLimit;    // 벽이 올라갈 수 있는 한계
-    private float parentsLimit; // 부모 오브젝트가 내려갈 수 있는 한계 = 플랫폼 콜라이더 max y좌표
+    private float platform_maxY; // 부모 오브젝트가 내려갈 수 있는 한계 = 플랫폼 콜라이더 max y좌표
 
-    private float parentsY; // 부모 bound 사이즈 절반
+    private float parentsPosY; // 시작할 때의 부모 머리 위 y좌표
+    private Transform parents_minY; // 부모 발 밑 y좌표의 transform
     public float wallSpeed; // 벽 올라가는 속도
 
     // button event
     public GameObject bug;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         isCameraMove = false;
@@ -46,12 +45,13 @@ public class Forest13 : MonoBehaviour
 
         isParentsMove = false;
         pTr = parents.GetComponent<Transform>();
-        parentsLimit = gameover.GetComponent<BoxCollider2D>().bounds.max.y;
-        parentsY = parents.GetComponent<BoxCollider2D>().bounds.size.y / 2;
+        platform_maxY = gameover.GetComponent<BoxCollider2D>().bounds.max.y; // 바닥 플랫폼 콜라이더 max y좌표
+        parents_minY = parents.transform.GetChild(0).transform;  // 부모 첫번째 자식 오브젝트의 transform
+        parentsPosY = parents.transform.GetChild(1).transform.position.y;  // 부모 두번째 자식 오브젝트의 시작할 때의 y좌표
         wallTr = wall.GetComponent<Transform>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
 
@@ -70,21 +70,25 @@ public class Forest13 : MonoBehaviour
                 }
                 if (touchedObject == parents)
                 {
-                    oldpos = pTr.position;
+                    pos = pTr.position;
                     isParentsMove = true;
-                    Debug.Log("1");
                 }
 
             }
         }
         else if (Input.GetMouseButton(0))
         {
+            Debug.Log(pos.y);
             if (isParentsMove == true)
             {
                 oldpos = pos;
                 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-                pTr.position = new Vector3(pTr.position.x, pTr.position.y + (pos.y - oldpos.y), 0);
-                wallTr.position = new Vector3(wallTr.position.x, wallTr.position.y - (pos.y - oldpos.y) * wallSpeed, 0);
+                float distance = pos.y - oldpos.y;
+                if (distance < 0)
+                {
+                    pTr.position = new Vector3(pTr.position.x, pTr.position.y + distance, 0);
+                    wallTr.position = new Vector3(wallTr.position.x, wallTr.position.y - distance * wallSpeed, 0);
+                }
             }
         }
         else if (Input.GetMouseButtonUp(0))
@@ -119,7 +123,7 @@ public class Forest13 : MonoBehaviour
         }
 
         // parents 
-        if(pTr.position.y - parentsY <= parentsLimit) // 부모 오브젝트가 바닥에 닿으면
+        if(parents_minY.position.y <= platform_maxY) // 부모 오브젝트가 바닥에 닿으면
         {
             isParentsMove = false;
         }

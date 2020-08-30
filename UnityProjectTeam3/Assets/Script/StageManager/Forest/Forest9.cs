@@ -121,10 +121,9 @@ public class Forest9 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-
             buttonTriggerd = true;
             platform.SetActive(true);
-            Debug.Log(reflectObj.position);
+            this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 }

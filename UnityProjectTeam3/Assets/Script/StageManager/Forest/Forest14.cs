@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Forest14 : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public GameObject lamp;
+    public GameObject lamplight;
+    public GameObject rockshadow;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.L)) // 설정-야간모드 활성화 미구현
+        {
+            lamplight.SetActive(false);
+            rockshadow.SetActive(false);
+        }
+
     }
 }

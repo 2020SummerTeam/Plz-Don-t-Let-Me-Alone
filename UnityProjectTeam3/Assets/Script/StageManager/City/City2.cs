@@ -29,14 +29,19 @@ public class City2 : MonoBehaviour
     public GameObject mBox;
     public GameObject mButton;
     public GameObject mBlind;
+    public GameObject mPanel;
+    public GameObject mPlayer;
+
     public ButtonEvent mButtonEvent;
-    public Camera mCamera;
+    public StoneEvent mStone;
+    public PlayerCtrl mPlayerCtrl;
+   
     
     [SerializeField]
     float speed = 1.0f;
 
     //platform 1 이동위치
-    private Vector3 pos1 = new Vector3(26f, -1f, 0f);
+    private Vector3 pos1 = new Vector3(26f, -1.2f, 0f);
     private Vector3 pos2 = new Vector3(26f, 2.5f, 0f);
 
     // Start is called before the first frame update
@@ -83,6 +88,21 @@ public class City2 : MonoBehaviour
             mButton.SetActive(false);
             mBlind.SetActive(false);
         }
+
+        if (mStone.isStoneEvent)
+        {
+            mPlayerCtrl.OnStageFail();
+        }
+
+        if(mPlayer.transform.position.x > 20f)
+        {
+            mPanel.SetActive(true);
+        }
+        else
+        {
+            mPanel.SetActive(false);
+        }
+
     }
 
     public void ClickB()

@@ -15,12 +15,13 @@ public class City1 : MonoBehaviour
 
     // open door
     public GameObject smallBox;
-    public GameObject button;
-    public ButtonEvent buttonEvent;
+    public Transform sTr;
+    public GameObject button; //상자와 박스 좌표 동일시 문 열림
+    public Transform bTr;
     public GameObject door;
-    private bool isOpen;
-    public float max_y = 5f;   // 문이 닿을 수 있는 최대 y좌표
-    private float door_hh;   // door half height
+    private float timer = 0.0f;
+    public float max_y = 3f;   // 문이 닿을 수 있는 최대 y좌표
+    
 
     void Start()
     {
@@ -28,9 +29,8 @@ public class City1 : MonoBehaviour
         findEvent = GameObject.Find("findEvent").GetComponent<findEvent>();
 
         rTr = researchers.GetComponent<Transform>();
-        buttonEvent = button.GetComponent<ButtonEvent>();
-        isOpen = false;
-        door_hh = door.GetComponent<BoxCollider2D>().bounds.size.y / 2;
+        sTr = smallBox.GetComponent<Transform>();
+        bTr = button.GetComponent<Transform>();
     }
 
 
@@ -41,25 +41,26 @@ public class City1 : MonoBehaviour
         {
             Researchers.isFind = true; // player를 발견했을때 // Researchers 스크립트의 변수 수정
         }
-        if (rTr.position.x >= -3.555)
+        if (rTr.position.x >= -2)
         {
             movingPlatform.GetComponent<MovingPlatform_CIty1>().enabled = true; //player를 발견하면 플랫폼 올라감
         }
 
-        //door
-        if (isOpen)  // open
+        if (sTr.position.x >= (bTr.position.x-1))
         {
-            if (door.transform.position.y + door_hh < max_y)
+            researchers.GetComponent<Researchers>().enabled = false;
+            button.SetActive(false);
+
+            timer += Time.deltaTime; // 버튼이 사라지고 나서 문이 올라갈 수 있도록 딜레이 줌
+            if (timer >= 0.25)
+            {
                 door.transform.position += new Vector3(0, Time.deltaTime, 0);
-
+                if (door.transform.position.y >= max_y)
+                {
+                    door.transform.position = new Vector3(door.transform.position.x, max_y, door.transform.position.y);
+                }
+            }
         }
-
-        if (buttonEvent.isBoxTriggerd)
-        {
-            researchers.transform.position += new Vector3(0, 0, 0);
-            isOpen = true;
-        }
-      
     }
 
 }

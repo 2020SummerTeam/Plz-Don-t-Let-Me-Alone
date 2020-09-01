@@ -1,0 +1,2 @@
+C:\Users\엄지민\Documents\GitHub\Plz-Don-t-Let-Me-Alone\UnityProjectTeam3\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\엄지민\Documents\GitHub\Plz-Don-t-Let-Me-Alone\UnityProjectTeam3\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

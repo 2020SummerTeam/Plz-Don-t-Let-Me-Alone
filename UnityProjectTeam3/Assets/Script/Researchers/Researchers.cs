@@ -26,7 +26,8 @@ public class Researchers : MonoBehaviour
                          * 오른쪽을 바라볼 때 player를 발견해야 한다면 1로 설정해주면 됩니다
                          * LorR과 일치할 때 player를 발견하고 쫓습니다
                          */
-
+    private float timer;     /* City1 에서 연구원이 플레이어를 발견하고 나서 좀 지나고 움직이도록 만들기 위해서*
+                              * GoOn이 참일때만 적용가능하다.*/
 
     void Start()
     {
@@ -38,6 +39,7 @@ public class Researchers : MonoBehaviour
         isFind = false;
         findSign.SetActive(false);
         playerTr = player.GetComponent<Transform>();
+        timer = 0.0f;
     }
 
     void Update()
@@ -80,8 +82,12 @@ public class Researchers : MonoBehaviour
             }
             else
             {
-                Vector3 newPos = new Vector3(playerTr.position.x + distance, mTr.position.y, mTr.position.z);
-                transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * 0.5f);
+                timer += Time.deltaTime;
+                if (timer >= 0.7)
+                {
+                    Vector3 newPos = new Vector3(mTr.position.x + distance, mTr.position.y, mTr.position.z);
+                    transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * 0.7f);
+                }
             }
              
         }

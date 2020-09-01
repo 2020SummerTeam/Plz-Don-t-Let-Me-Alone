@@ -9,14 +9,16 @@ using UnityEngine.UI;
 //if it's triggerd, it goes on setactive false;
 public class ButtonEvent : MonoBehaviour
 {
-    public bool buttonTriggerd;
+    public bool objects = false; // 박스로 버튼 누를때 체크, 플레이어가 누를 시 체크 x
+    public bool isPlayerTriggerd = false; // 플레이어가 버튼 누를때
+    public bool isBoxTriggerd = false;
     //is button is pressed
 
     // Start is called before the first frame update
     void Awake()
     {
         Debug.Log("Button enable");
-        buttonTriggerd = false;
+       
     }
 
     //collision is triggering button,
@@ -27,7 +29,16 @@ public class ButtonEvent : MonoBehaviour
         {
             Debug.Log("hit player");
             this.gameObject.SetActive(false);
-            buttonTriggerd = true;
+            isPlayerTriggerd = true;
+        }
+
+
+
+        if (collision.gameObject.CompareTag("interactObj"))
+        {
+            Debug.Log("hit smallBOX");
+            this.gameObject.SetActive(false);
+            isBoxTriggerd = true;
         }
     }
 }

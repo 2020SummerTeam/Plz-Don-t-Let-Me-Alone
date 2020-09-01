@@ -20,7 +20,7 @@ public class findEvent : MonoBehaviour
     void Update()
     {
         // Researchers
-        if (findEvent.Canfind == true)  // player가 findEvent 박스 콜라이더 안에 있을 때
+        if (findEvent.CanFind == true)  // player가 findEvent 박스 콜라이더 안에 있을 때
         {
                 // * 조건 if로 추가
 

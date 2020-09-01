@@ -15,14 +15,18 @@ public class Researchers : MonoBehaviour
     public Transform playerTr; // target
     public GameObject player;   // 인게임에서 해주면 됩니다
 
+    public float distance = 4.0f;
+    public bool GoOn = false;  // 연구원들이 필요한 곳까지 계속 이동하게 하기 위한 코드
+
+    public bool Spin = true;
     private int LorR;
     public int EachNum; // 각각 스테이지에서 설정해주세요.
-    /* 
-     * researchers가 왼쪽을 바라볼 때 player를 발견해야 한다면 -1,
-     * 오른쪽을 바라볼 때 player를 발견해야 한다면 1로 설정해주면 됩니다
-     * LorR과 일치할 때 player를 발견하고 쫓습니다
-     */
-    
+                        /* 
+                         * researchers가 왼쪽을 바라볼 때 player를 발견해야 한다면 -1,
+                         * 오른쪽을 바라볼 때 player를 발견해야 한다면 1로 설정해주면 됩니다
+                         * LorR과 일치할 때 player를 발견하고 쫓습니다
+                         */
+
 
     void Start()
     {
@@ -38,7 +42,8 @@ public class Researchers : MonoBehaviour
 
     void Update()
     {
-        if (isFind == false)    // player가 findEvent 박스 콜라이더에 없을 때
+
+        if (Spin)
         {
             // 4초마다 오브젝트 회전
             if (coolTime > 0)
@@ -62,17 +67,23 @@ public class Researchers : MonoBehaviour
                 coolTime = 4.0f;    // 4초로 초기화
             }
         }
-        else // player가 박스 콜라이더에 있을 때
+
+        if ((LorR == EachNum) && (isFind == true)) // player가 박스 콜라이더에 있을 때
         {
-            if (LorR == EachNum)
+            Spin = false;
+            findSign.SetActive(true);
+
+            if(!GoOn)
             {
-                findSign.SetActive(true);
-
-                Vector3 newPos = new Vector3 (playerTr.position.x, mTr.position.y, mTr.position.z); 
+                Vector3 newPos = new Vector3(playerTr.position.x, mTr.position.y, mTr.position.z);
                 transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime);
-
-
             }
+            else
+            {
+                Vector3 newPos = new Vector3(playerTr.position.x + distance, mTr.position.y, mTr.position.z);
+                transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * 0.5f);
+            }
+             
         }
     }
 
@@ -85,3 +96,4 @@ public class Researchers : MonoBehaviour
         }
     }
 }
+

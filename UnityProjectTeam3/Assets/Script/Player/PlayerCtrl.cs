@@ -72,6 +72,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void Update()
     {
+ 
         if (parents.stageClear == false)    // stage 진행중
         {
 

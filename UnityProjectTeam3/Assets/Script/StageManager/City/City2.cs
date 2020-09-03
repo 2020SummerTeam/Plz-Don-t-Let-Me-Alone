@@ -29,6 +29,7 @@ public class City2 : MonoBehaviour
     public GameObject mBox;
     public GameObject mButton;
     public GameObject mBlind;
+    public GameObject mPlatform;
     public GameObject mPanel;
     public GameObject mPlayer;
 
@@ -87,6 +88,7 @@ public class City2 : MonoBehaviour
         {
             mButton.SetActive(false);
             mBlind.SetActive(false);
+            mPlatform.SetActive(true);
         }
 
         if (mStone.isStoneEvent)

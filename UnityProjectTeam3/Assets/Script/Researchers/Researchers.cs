@@ -78,7 +78,7 @@ public class Researchers : MonoBehaviour
             if(!GoOn)
             {
                 Vector3 newPos = new Vector3(playerTr.position.x, mTr.position.y, mTr.position.z);
-                transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime);
             }
             else
             {
@@ -86,10 +86,18 @@ public class Researchers : MonoBehaviour
                 if (timer >= 0.7)
                 {
                     Vector3 newPos = new Vector3(mTr.position.x + distance, mTr.position.y, mTr.position.z);
-                    transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * 0.7f);
+                    transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime * 0.7f);
                 }
             }
-             
+            
+            if(playerTr.position.x < transform.position.x)  // player가 연구원의 좌측에 있을 때
+            {
+                mTr.rotation = Quaternion.Euler(0, 180, 0); // 좌
+            }
+            else
+            {
+                mTr.rotation = Quaternion.Euler(0, 0, 0);   // 우
+            }
         }
     }
 

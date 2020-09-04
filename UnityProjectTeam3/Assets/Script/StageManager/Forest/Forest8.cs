@@ -18,18 +18,20 @@ public class Forest8 : MonoBehaviour
     private BoxCollider2D mCol;
     private float buttonHalfSize;
     public GameObject door;
+    private BoxCollider2D doorCol;
     public bool isOpen;
-    private float min_y = -0.8f;    // 문이 닿을 수 있는 최소 y좌표
-    private float max_y = 5f;   // 문이 닿을 수 있는 최대 y좌표
     private float door_hh;   // door half height
 
     void Start()
     {
         isOpen = false;
         mCol = GetComponent<BoxCollider2D>();
-        door_hh = door.GetComponent<BoxCollider2D>().bounds.size.y / 2;
+
+        doorCol = door.GetComponent<BoxCollider2D>();
+        door_hh = doorCol.bounds.size.y / 2;
         boxHalfSize = smallBox.GetComponent<BoxCollider2D>().bounds.size.x / 2;
         buttonHalfSize = GetComponent<BoxCollider2D>().bounds.size.x / 2;
+
     }
 
     // Update is called once per frame
@@ -51,13 +53,13 @@ public class Forest8 : MonoBehaviour
         // open door
         if(isOpen)  // open
         {
-            if (door.transform.position.y + door_hh < max_y)
+            if (doorCol.bounds.center.y + door_hh < 5.72f)
                 door.transform.position += new Vector3(0, Time.deltaTime, 0);
 
         }
         else    // close
         {
-            if (door.transform.position.y - door_hh > min_y)
+            if (doorCol.bounds.center.y - door_hh > -1.195f)
                 door.transform.position -= new Vector3(0, Time.deltaTime, 0);
         }
 

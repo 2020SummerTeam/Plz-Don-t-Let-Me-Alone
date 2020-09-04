@@ -15,18 +15,20 @@ public class Forest15 : MonoBehaviour
     public bool expandPa = false;
     public GameObject researchers;
     public bool expandRe = false;
-    Researchers researchersCtrl;
     ParentsCtrl parentsCtrl;
     public GameObject findSign;
 
+
     public findEvent findEvent;    // player가 findEvent 박스 콜라이더 안에 있는지 전달받기 위해 사용
+    public Researchers Researchers;
 
     void Start()
     {
-        findEvent = GameObject.Find("findEvent").GetComponent<findEvent>();
-        researchersCtrl = researchers.GetComponent<Researchers>();
-        researchersCtrl.enabled = false;
         parentsCtrl = parents.GetComponent<ParentsCtrl>();
+
+        findEvent = GameObject.Find("findEvent").GetComponent<findEvent>();
+        Researchers = GameObject.Find("Researchers").GetComponent<Researchers>();
+        Researchers.enabled = false;
     }
 
     void Update()
@@ -35,11 +37,7 @@ public class Forest15 : MonoBehaviour
         // Researchers
         if (findEvent.CanFind == true)  // player가 findEvent 박스 콜라이더 안에 있을 때
         {
-            // player를 발견
-            findSign.SetActive(true);
-
-            // 따라가야 하는 것 추가
-            // +애니메이션
+            Researchers.isFind = true; // player를 발견했을때 // Researchers 스크립트의 변수 수정
         }
 
         if (parentsCtrl.stageClear) // 클리어 이벤트 발동(부모 이동->플레이어 이동)을 위해
@@ -60,33 +58,31 @@ public class Forest15 : MonoBehaviour
                 mTr.position = new Vector3(mTr.position.x + (pos.x - oldpos.x), mTr.position.y + (pos.y - oldpos.y), 0);
             }
 
-            if(expandBox)
+            if (expandBox)
             {
                 if (box.transform.localScale.x < 1.7f)
                     box.transform.localScale += new Vector3(Time.deltaTime * 0.3f, Time.deltaTime * 0.3f, 0f);
                 else
                     box.transform.localScale = new Vector3(1.7f, 1.7f, 0f);
             }
-            if(expandPa)
+            if (expandPa)
             {
                 if (parents.transform.localScale.x < 0.6f)
                     parents.transform.localScale += new Vector3(Time.deltaTime * 0.3f, Time.deltaTime * 0.3f, 0f);
                 else
                     parents.transform.localScale = new Vector3(0.6f, 0.6f, 0f);
             }
-            if(expandRe)
+            if (expandRe && Researchers.enabled == false)
             {
                 if (researchers.transform.localScale.x < 0.6f)
                     researchers.transform.localScale += new Vector3(Time.deltaTime * 0.3f, Time.deltaTime * 0.3f, 0f);
                 else
                 {
                     researchers.transform.localScale = new Vector3(0.6f, 0.6f, 0f);
-                    researchers.transform.rotation = Quaternion.Euler(0, 180, 0); 
+                    researchers.transform.rotation = Quaternion.Euler(0, 180, 0);
+                    Researchers.enabled = true;
                 }
-                
             }
-
-
         }
     }
 
@@ -132,7 +128,7 @@ public class Forest15 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject == box)
+        if (collision.gameObject == box)
         {
             expandBox = true;
         }
@@ -140,7 +136,7 @@ public class Forest15 : MonoBehaviour
         {
             expandPa = true;
         }
-        if(collision.gameObject == researchers)
+        if (collision.gameObject == researchers)
         {
             expandRe = true;
         }

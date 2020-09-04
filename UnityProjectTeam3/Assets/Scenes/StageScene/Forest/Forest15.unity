@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 1716752844}
   - component: {fileID: 1716752843}
   m_Layer: 0
-  m_Name: textBallon
+  m_Name: textBallon&Forest15Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,9 +708,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 103e9b43b97379d40b2762fce8262506, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55eb4f1b3f5694b40956a7d8a3cb5646, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 4, y: 4}
@@ -727,8 +727,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716752840}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.14, y: -1.66, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -6.4, y: -1.78, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -746,9 +746,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.035185814, y: 0}
+  m_Offset: {x: -0.035185814, y: -0.27589178}
   serializedVersion: 2
-  m_Radius: 1.1203508
+  m_Radius: 0.84445906
 --- !u!114 &1716752844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,6 +771,7 @@ MonoBehaviour:
   expandRe: 0
   findSign: {fileID: 7490184849795905719}
   findEvent: {fileID: 2081663982}
+  Researchers: {fileID: 6519501927045682217}
 --- !u!114 &2081663982 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7884457112323689321, guid: c632b8cc9e4129441a14bcf11e0861e9,
@@ -1250,6 +1251,9 @@ MonoBehaviour:
   isFind: 0
   playerTr: {fileID: 0}
   player: {fileID: 483371514}
+  distance: 4
+  GoOn: 0
+  Spin: 1
   EachNum: -1
 --- !u!1 &7490184849795905719
 GameObject:
@@ -1281,7 +1285,7 @@ GameObject:
   - component: {fileID: 8575166150116726371}
   - component: {fileID: 8575166150116726370}
   m_Layer: 0
-  m_Name: SmallBox (1)
+  m_Name: SmallBox
   m_TagString: InteractObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1321,18 +1325,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0061887503, y: -0.0061885715}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.4, y: 2.4}
+    oldSize: {x: 5.73, y: 5.88}
     newSize: {x: 2.4, y: 2.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.4, y: 2.4}
+  m_Size: {x: 2.6599271, y: 2.6599274}
   m_EdgeRadius: 0
 --- !u!212 &8575166150116726372
 SpriteRenderer:
@@ -1373,7 +1377,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ebbbab7e8766f1747999fd3dadc4f426, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea43b56d7acfb3241b68baf6335ca5e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1392,7 +1396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8575166150116726369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6852574, y: -3.481264, z: 0}
+  m_LocalPosition: {x: -3.6852574, y: -3.386, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}

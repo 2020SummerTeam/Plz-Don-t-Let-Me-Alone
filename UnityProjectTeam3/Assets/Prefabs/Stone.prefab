@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ae9846ccd1f754b940d2ee5ee2c4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  isThrow: 0
+  player: {fileID: 0}
   Projectile: {fileID: 0}
+  pTr: {fileID: 0}
   firingAngle: 45
   gravity: 9.8
-  isThrow: 0
   playerCtrl: {fileID: 0}
   findSign: {fileID: 0}
 --- !u!212 &3746089668817364240
@@ -92,7 +93,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ab294bb9aa0b0b247bdf57bb4f855c4f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a8bb679552b4cc047bb87417ce6808d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -116,9 +117,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01614384, y: 0.029597124}
+  m_Offset: {x: -0.008524895, y: -0.004939154}
   serializedVersion: 2
-  m_Radius: 0.23362648
+  m_Radius: 0.11028266
 --- !u!50 &3746089668817364242
 Rigidbody2D:
   serializedVersion: 4

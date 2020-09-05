@@ -16,6 +16,8 @@ public class BearScript : MonoBehaviour
     public bool isSmallBoxCol; //collidingBox -> true 
     public bool isBeeCol;      //on forest4 there are bees // hey bee~~
 
+    public Animator mAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class BearScript : MonoBehaviour
         isPlayerCol = false;
         isSmallBoxCol = false;
         isBeeCol = false;
+        mAnim = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,6 +35,7 @@ public class BearScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerCol = true;
+            mAnim.SetTrigger("Attack");
         }
         if (collision.gameObject.CompareTag("InteractObj"))
         {

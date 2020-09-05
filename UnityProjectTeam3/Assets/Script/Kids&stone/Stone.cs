@@ -23,6 +23,7 @@ public class Stone : MonoBehaviour
     public PlayerCtrl playerCtrl;  // player가 던진 돌을 피하는 것 방지
     public GameObject findSign; // Kids 위의 느낌표
 
+    private Animator KidsAnim;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class Stone : MonoBehaviour
         mTr = transform;
         InitPos = transform.position;
         isThrow = false;
+        KidsAnim = GameObject.Find("Kids").GetComponent<Animator>();
         findSign.SetActive(false);
     }
 
@@ -40,7 +42,6 @@ public class Stone : MonoBehaviour
             findSign.SetActive(true); // Kids 자식 오브젝트(=느낌표findMark) 비활성화
             StartCoroutine(SimulateProjectile());
             cnt++;
-
         }
     }
 
@@ -60,7 +61,7 @@ public class Stone : MonoBehaviour
 
         // taget까지 발사체 회전
         Projectile.rotation = Quaternion.LookRotation(pTr.position - Projectile.position);
-
+        KidsAnim.SetTrigger("Throw");   // 자연스럽게 하기 위해 여기 추가
         float elapse_time = 0;
 
         while (elapse_time < flightDuration)    // 포물선 운동

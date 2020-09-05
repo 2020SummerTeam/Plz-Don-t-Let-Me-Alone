@@ -15,20 +15,34 @@ public class Forest15 : MonoBehaviour
     public bool expandPa = false;
     public GameObject researchers;
     public bool expandRe = false;
+
     ParentsCtrl parentsCtrl;
+    private BoxCollider2D paCol;
+    private Rigidbody2D paRB;
+
+
     public GameObject findSign;
-
-
     public findEvent findEvent;    // player가 findEvent 박스 콜라이더 안에 있는지 전달받기 위해 사용
-    public Researchers Researchers;
+    private Researchers Researchers; // researchers 스크립트
+    private BoxCollider2D ReCol;
+    private Rigidbody2D ReRB;
 
     void Start()
     {
+        // parents init
         parentsCtrl = parents.GetComponent<ParentsCtrl>();
+        parentsCtrl.enabled = false;
+        paCol = parents.GetComponent<BoxCollider2D>();
+        paRB = parents.GetComponent<Rigidbody2D>();
+        paRB.constraints = RigidbodyConstraints2D.FreezePositionY;  // Y축 못 움직이게
+        paCol.isTrigger = true; // 스쳐 지나갈 수 있게
 
+        // researchers init
         findEvent = GameObject.Find("findEvent").GetComponent<findEvent>();
-        Researchers = GameObject.Find("Researchers").GetComponent<Researchers>();
+        Researchers = researchers.GetComponent<Researchers>();
         Researchers.enabled = false;
+        ReCol = researchers.GetComponent<BoxCollider2D>();
+        ReRB = researchers.GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -40,48 +54,55 @@ public class Forest15 : MonoBehaviour
             Researchers.isFind = true; // player를 발견했을때 // Researchers 스크립트의 변수 수정
         }
 
-        if (parentsCtrl.stageClear) // 클리어 이벤트 발동(부모 이동->플레이어 이동)을 위해
+        if (parentsCtrl.stageClear && parentsCtrl.enabled) // 클리어 이벤트 발동(부모 이동->플레이어 이동)을 위해
         {
             this.enabled = false;
         }
-        else
-        {
-            // ballon 위치 마우스로 제어
-            if (Input.GetMouseButtonDown(0))
-            {
-                pos = mTr.position;
-            }
-            if (Input.GetMouseButton(0))
-            {
-                oldpos = pos;
-                pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-                mTr.position = new Vector3(mTr.position.x + (pos.x - oldpos.x), mTr.position.y + (pos.y - oldpos.y), 0);
-            }
 
-            if (expandBox)
+        // ballon 위치 마우스로 제어
+        if (Input.GetMouseButtonDown(0))
+        {
+            pos = mTr.position;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            oldpos = pos;
+            pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+            mTr.position = new Vector3(mTr.position.x + (pos.x - oldpos.x), mTr.position.y + (pos.y - oldpos.y), 0);
+        }
+
+        // 오브젝트 확대
+        if (expandBox)  // 상자
+        {
+            if (box.transform.localScale.x < 1.7f)
+                box.transform.localScale += new Vector3(Time.deltaTime * 0.3f, Time.deltaTime * 0.3f, 0f);
+            else
+                box.transform.localScale = new Vector3(1.7f, 1.7f, 0f);
+        }
+        if (expandPa && parentsCtrl.enabled == false)   // 부모
+        {
+            paRB.constraints = RigidbodyConstraints2D.None; // FreezeY 해제
+            paCol.isTrigger = false;    // stageClear 가능하게
+
+            if (parents.transform.localScale.x < 0.6f)
+                parents.transform.localScale += new Vector3(Time.deltaTime * 0.3f, Time.deltaTime * 0.3f, 0f);
+            else
             {
-                if (box.transform.localScale.x < 1.7f)
-                    box.transform.localScale += new Vector3(Time.deltaTime * 0.3f, Time.deltaTime * 0.3f, 0f);
-                else
-                    box.transform.localScale = new Vector3(1.7f, 1.7f, 0f);
+                parents.transform.localScale = new Vector3(0.6f, 0.6f, 0f);
+                parentsCtrl.enabled = true; // 스크립트 활성화
             }
-            if (expandPa)
+        }
+        if (expandRe && Researchers.enabled == false)   // 연구원
+        {
+            if (researchers.transform.localScale.x < 0.6f)
+                researchers.transform.localScale += new Vector3(Time.deltaTime * 0.3f, Time.deltaTime * 0.3f, 0f);
+            else
             {
-                if (parents.transform.localScale.x < 0.6f)
-                    parents.transform.localScale += new Vector3(Time.deltaTime * 0.3f, Time.deltaTime * 0.3f, 0f);
-                else
-                    parents.transform.localScale = new Vector3(0.6f, 0.6f, 0f);
-            }
-            if (expandRe && Researchers.enabled == false)
-            {
-                if (researchers.transform.localScale.x < 0.6f)
-                    researchers.transform.localScale += new Vector3(Time.deltaTime * 0.3f, Time.deltaTime * 0.3f, 0f);
-                else
-                {
-                    researchers.transform.localScale = new Vector3(0.6f, 0.6f, 0f);
-                    researchers.transform.rotation = Quaternion.Euler(0, 180, 0);
-                    Researchers.enabled = true;
-                }
+                researchers.transform.localScale = new Vector3(0.6f, 0.6f, 0f);
+                researchers.transform.rotation = Quaternion.Euler(0, 180, 0);
+                ReRB.constraints = RigidbodyConstraints2D.FreezePositionY;  // Y축 못 움직이게
+                ReCol.isTrigger = true;
+                Researchers.enabled = true;
             }
         }
     }

@@ -74,7 +74,7 @@ public class Researchers : MonoBehaviour
         {
             Spin = false;
             findSign.SetActive(true);
-
+            mAnim.SetBool("Run", true);
             if(!GoOn)
             {
                 Vector3 newPos = new Vector3(playerTr.position.x, mTr.position.y, mTr.position.z);
@@ -106,6 +106,7 @@ public class Researchers : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             player.GetComponent<PlayerCtrl>().enabled = false;
+            mAnim.SetBool("Run", false);
             Debug.Log("Game Over");
         }
     }

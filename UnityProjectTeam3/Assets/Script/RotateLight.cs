@@ -5,13 +5,14 @@ using UnityEngine.EventSystems;
 
 public class RotateLight : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public bool isButtonDown;
+    private bool isButtonDown;
     public GameObject mlight;
 
     private int num;
 
     void Start()
     {
+        isButtonDown = false;
         num = 0;
     }
     private void Update()
@@ -22,6 +23,9 @@ public class RotateLight : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 rotate();
                 num++;
+
+                if (Time.deltaTime >= 0.00000009)
+                    isButtonDown = false;
             }
         }
 

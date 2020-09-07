@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class City4 : MonoBehaviour
 {
+   
     public GameObject lightbulb;
     public GameObject teddybear;
     public Transform tTr;
     public GameObject shadow;
 
     private float timer = 0.0f;
-    public float waitingTime = 0.5f;
     public bool isShadow;
     public GameObject findsign;
     public GameObject researchers;
@@ -36,7 +36,7 @@ public class City4 : MonoBehaviour
         {
             if (tTr.position.x >= -3 && tTr.position.x <= -2.15)
             {
-                if (tTr.position.y >= 0.32 && tTr.position.y <= 0.72)
+                if (tTr.position.y >= 0.3 && tTr.position.y <= 0.7)
                 {
                     teddybear.GetComponent<TeddyBear>().enabled = false;
                     shadow.SetActive(true);
@@ -52,12 +52,15 @@ public class City4 : MonoBehaviour
         if (isShadow)
         {
             timer += Time.deltaTime;
-            if(timer >= waitingTime)
+            if(timer >= 0.5)
             {
                 findsign.SetActive(true);
-                researchers.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-                researchers.transform.position += new Vector3(Time.deltaTime, 0, 0);
+                if(timer >= 2.5)
+                {
+                    findsign.SetActive(false);
+                    researchers.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    researchers.transform.position += new Vector3(Time.deltaTime, 0, 0);
+                }
             }
         }
 

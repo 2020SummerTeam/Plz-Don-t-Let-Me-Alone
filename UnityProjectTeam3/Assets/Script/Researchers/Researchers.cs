@@ -94,7 +94,7 @@ public class Researchers : MonoBehaviour
                 if (timer >= 0.7)
                 {
                     Vector3 newPos = new Vector3(mTr.position.x + distance, mTr.position.y, mTr.position.z);
-                    transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime * 0.7f);
+                    transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime);
                 }
             }
 

@@ -5,17 +5,17 @@ using UnityEngine.EventSystems;
 
 public class Forest12 : MonoBehaviour
 {
-    public MeshRenderer targetRend;
+    public SpriteRenderer targetRend;
     public GameObject target;   // 투명도 조절 타겟 (터치한 타겟)
     public GameObject[] platform = new GameObject[5];   // 투명도 조절 타겟 (타겟 후보)
-    public MeshRenderer[] platformRend = new MeshRenderer[5];   // 버튼 눌렀을 때 투명하게 하기 위해
+    public SpriteRenderer[] platformRend = new SpriteRenderer[5];   // 버튼 눌렀을 때 투명하게 하기 위해
     public BoxCollider2D[] platformTouchArea = new BoxCollider2D[5]; // 주변(터치하면 모습이 보이는 영역) // 2개의 박스콜라이더가 존재할 때 위에 있는 걸로 할당함
 
     void Start()
     {
         for (int i = 0; i <= 4; i++)
         {
-            platformRend[i] = platform[i].GetComponent<MeshRenderer>();
+            platformRend[i] = platform[i].GetComponent<SpriteRenderer>();
             platformTouchArea[i] = platform[i].GetComponent<BoxCollider2D>();
         }
     }
@@ -41,14 +41,14 @@ public class Forest12 : MonoBehaviour
         {
             CastRay();
 
-            if (target == platform[0] || target == platform[1] || target == platform[2] || target == platform[3]) 
+            if (target == platform[0] || target == platform[1] || target == platform[2] || target == platform[3])
             {
-                targetRend = target.GetComponent<MeshRenderer>();
+                targetRend = target.GetComponent<SpriteRenderer>();
                 targetRend.enabled = true;  // 보여짐
             }
             else if (target == platform[4]) // 바닥 플랫폼
             {
-                targetRend = target.GetComponent<MeshRenderer>();
+                targetRend = target.GetComponent<SpriteRenderer>();
                 targetRend.enabled = false; // 투명해짐
             }
         }

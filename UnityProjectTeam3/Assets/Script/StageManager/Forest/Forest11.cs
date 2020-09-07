@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class Forest11 : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Forest11 : MonoBehaviour
     public GameObject smallBox; // 곰이 부딪히면 부숴지는 박스
     public int cnt = 0; // 곰이 박스와 부딪힐 때, smallBox일 경우 cnt = 1, bigBox일 경우 cnt = 2가 됨
     public GameObject bee;
+    public float attacktime = 0f;
 
     // bug
     public GameObject player;
@@ -55,8 +57,6 @@ public class Forest11 : MonoBehaviour
         }
         else
         {
-            bearAnim.SetBool("Run", true);
-
             if (bearScript.isBeeCol)    // 곰이 벌과 부딪혔을 때
             {
                 bear.transform.position += new Vector3(0, 0, 0); // 이동 멈춤
@@ -72,18 +72,18 @@ public class Forest11 : MonoBehaviour
             {
                 bear.transform.position += new Vector3(0, 0, 0); // 이동 멈춤
                 bearAnim.SetBool("Run", false);
+
                 if (cnt <= 2)
                 cnt++;  // smallBox일 경우 cnt = 1, bigBox일 경우 cnt = 2가 됨
 
                 if (cnt == 1)    // 작은 박스와 부딪힐 경우
                 {
-                    bearAnim.SetTrigger("Attack");  // 작은 박스를 부심
-                    smallBox.SetActive(false);  //작은 박스 비활성화
+                    attacktime = 1f;
                     bearScript.isSmallBoxCol = false;
                 }
                 else if (cnt == 2)  // 큰 박스와 부딪힐 경우
                 {
-                    bear.transform.rotation = Quaternion.Euler(180, 0, 0);  // 기절
+                    bearAnim.SetBool("Die", true);  // 기절
                 }
             }
             else // 곰과 부딪힌 물체가 없을 경우 (default)
@@ -92,8 +92,28 @@ public class Forest11 : MonoBehaviour
 
                 if (bee.activeSelf == false)    // bee가 나무에서 떨어지지 않았을 경우
                 {
-                    bear.transform.rotation = Quaternion.Euler(0, 0, 0);    // 회전
-                    bear.transform.position -= new Vector3(Time.deltaTime, 0, 0);   // 5초의 쿨타임이 지나고 bear 왼쪽으로 이동
+                    if(attacktime > 0)
+                    {
+                        attacktime -= Time.deltaTime;
+                        if (attacktime > 0.5f)
+                        {
+                            bear.transform.position += new Vector3(0, 0, 0); // 이동 멈춤
+                            bearAnim.SetBool("Run", false);
+
+                            bearAnim.SetTrigger("Attack");  // 작은 박스를 부심
+                        }
+                        else
+                        {
+                            smallBox.SetActive(false);  //작은 박스 비활성화
+                            bearAnim.SetBool("Run", true);
+                        }
+                    }
+                    else
+                    {
+                        bear.transform.rotation = Quaternion.Euler(0, 0, 0);    // 회전
+                        bear.transform.position -= new Vector3(Time.deltaTime, 0, 0);   // 5초의 쿨타임이 지나고 bear 왼쪽으로 이동
+
+                    }
                 }
                 else
                 {

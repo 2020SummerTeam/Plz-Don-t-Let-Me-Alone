@@ -919,11 +919,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bearScript: {fileID: 0}
-  bearCooltime: 5
+  bearCooltime: 0
   bear: {fileID: 451670632}
   smallBox: {fileID: 639234457}
   cnt: 0
   bee: {fileID: 223712251}
+  attacktime: 0
   player: {fileID: 1604724956}
   tree: {fileID: 1016158967}
   bug: {fileID: 1189287167}

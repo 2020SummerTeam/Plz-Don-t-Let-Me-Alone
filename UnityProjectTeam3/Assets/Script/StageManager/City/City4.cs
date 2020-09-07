@@ -55,7 +55,7 @@ public class City4 : MonoBehaviour
             if(timer >= 0.5)
             {
                 findsign.SetActive(true);
-                if(timer >= 2.5)
+                if(timer >= 1.5)
                 {
                     findsign.SetActive(false);
                     researchers.transform.rotation = Quaternion.Euler(0, 0, 0);

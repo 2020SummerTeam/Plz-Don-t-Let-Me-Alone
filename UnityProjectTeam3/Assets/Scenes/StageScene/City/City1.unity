@@ -780,6 +780,11 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 2.724967
       objectReference: {fileID: 0}
+    - target: {fileID: 8575166150335560624, guid: 7e25758aa675ea34bbb62fe3b92c1201,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8575166150335560626, guid: 7e25758aa675ea34bbb62fe3b92c1201,
         type: 3}
       propertyPath: m_Name
@@ -1173,7 +1178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 3
-  speed: 1
+  speed: 0.5
 --- !u!1001 &1441429984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1651,6 +1656,10 @@ PrefabInstance:
       propertyPath: objects
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 125803190, guid: e333ec78f13a1d844a8c8b052bec2ef5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 321207131914223544, guid: e333ec78f13a1d844a8c8b052bec2ef5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1895,6 +1904,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Researchers
+      objectReference: {fileID: 0}
+    - target: {fileID: 6120269072161904898, guid: 89921c6df742ba14284be7101863a018,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6120269072161904898, guid: 89921c6df742ba14284be7101863a018,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6519501925636133244, guid: 89921c6df742ba14284be7101863a018,
         type: 3}

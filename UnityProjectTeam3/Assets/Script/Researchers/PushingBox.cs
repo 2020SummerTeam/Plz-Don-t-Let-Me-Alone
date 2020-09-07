@@ -19,7 +19,7 @@ public class PushingBox : MonoBehaviour
 
     public bool watchingRight;
     bool isPushingBox;          //상자를 미는중인지 알아야 호출을 하빈다
-    
+
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class PushingBox : MonoBehaviour
         pushingBoxObj = gameObject;
     }
 
-   
+
     void Update()
     {
         mRB.velocity = new Vector2(horizontal * mSpeed, mRB.velocity.y);
@@ -46,14 +46,14 @@ public class PushingBox : MonoBehaviour
                 {
                     //기존에 오른쪽을 보다가 왼쪽으로 돌아온거라면 당기는 거겟죠
                     //당기는거는 방향을 바꿔줄 필요가 없습니다. 애니메이션이 나오면 여기에다가 추가합시다
-                    mAnim.SetBool(AnimHash.RUN, true);
+                    mAnim.SetBool("Push", true);
                 }
                 else
                 {
                     //이거는 그냥 미는거겠죠 미는애니메이션이 나오면 여기에다가 추가합시다
                     //그리고 보는방향이 왼쪽에서 왼쪽으로 동일하니까, 방향 굳이 바꿔줄 필요 없죠?
                     //그러니까 pushingBox일때는 우리 아무것도 건들지 맙시다
-                    mAnim.SetBool(AnimHash.RUN, true);
+                    mAnim.SetBool("Push", true);
                 }
             }
             else
@@ -61,9 +61,9 @@ public class PushingBox : MonoBehaviour
                 //이거를 else로 놓아주는 이유는 보는방향이 바뀌면 안되니까
                 watchingRight = false;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
-                mAnim.SetBool(AnimHash.RUN, true);
+                mAnim.SetBool("Push", true);
             }
-             
+
         }
         else if (horizontal > 0)
         {
@@ -74,13 +74,13 @@ public class PushingBox : MonoBehaviour
                 {
                     //기존에 오른쪽을 보다가 오른쪽으로 돌아온거라면 미는거겠죠
                     //그리고 보는방향이 오른쪽에서 오른쪽으로 동일하니까, 방향 굳이 바꿔줄 필요 없죠?
-                    mAnim.SetBool(AnimHash.RUN, true);
+                    mAnim.SetBool("Push", true);
                 }
                 else
                 {
                     //당기는거는 방향을 바꿔줄 필요가 없습니다. 애니메이션이 나오면 여기에다가 추가합시다
                     //그러니까 pushingBox일때는 우리 아무것도 건들지 맙시다
-                    mAnim.SetBool(AnimHash.RUN, true);
+                    mAnim.SetBool("Push", true);
                 }
             }
             else
@@ -88,14 +88,14 @@ public class PushingBox : MonoBehaviour
                 //이거를 else로 놓아주는 이유는 보는방향이 바뀌면 안되니까
                 watchingRight = true;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-                mAnim.SetBool(AnimHash.RUN, true);
+                mAnim.SetBool("Push", true);
             }
 
 
         }
         else
         {
-            mAnim.SetBool(AnimHash.RUN, false);
+            mAnim.SetBool("Push", false);
         }
     }
 
@@ -120,15 +120,6 @@ public class PushingBox : MonoBehaviour
 
     }
 
-
-    //차일드로 해보니 exit이 발동을 죽어도 안해서 update에서 해제를 해줘야됩니다.
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("InteractObj"))
-        {
-            IsInteracObj = false;
-        }
-    }
 }
 
 

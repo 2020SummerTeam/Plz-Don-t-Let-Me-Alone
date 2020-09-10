@@ -21,7 +21,7 @@ public class Forest8Tree : MonoBehaviour
     {
         if (HitTree)
         {
-            bee.transform.position = Vector3.Lerp(bee.transform.position, Pos.transform.position, Time.deltaTime);
+            bee.SetActive(true);
         }
     }
 

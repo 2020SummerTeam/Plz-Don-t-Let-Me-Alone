@@ -220,6 +220,8 @@ GameObject:
   m_Component:
   - component: {fileID: 223496295}
   - component: {fileID: 223496294}
+  - component: {fileID: 223496296}
+  - component: {fileID: 223496297}
   m_Layer: 0
   m_Name: bug
   m_TagString: Untagged
@@ -266,9 +268,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e56905a43caa2ac4d9985065022d0cd8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e3a53a20377d3f74788d3879d3a08daf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 9.2, y: 11.7}
@@ -286,11 +288,43 @@ Transform:
   m_GameObject: {fileID: 223496293}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.65, y: -5.72, z: 0}
-  m_LocalScale: {x: 0.08, y: 0.08, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &223496296
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223496293}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.19115314, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.7817356
+--- !u!111 &223496297
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223496293}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: aa9ab302d55283c479b1a85915b5e9bd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: aa9ab302d55283c479b1a85915b5e9bd, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 1
+  m_CullingType: 0
 --- !u!1 &244692434 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4186236228525854781, guid: 334a71e99a192cc4a97afdce1f0fab2a,
@@ -601,7 +635,7 @@ PrefabInstance:
     - target: {fileID: 9178944669881340026, guid: f981dacf98c5cf147a217bc3bcc1bc86,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.7199998
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 9178944669881340026, guid: f981dacf98c5cf147a217bc3bcc1bc86,
         type: 3}

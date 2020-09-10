@@ -46,12 +46,24 @@ public class Forest11 : MonoBehaviour
         {
             bearCooltime -= Time.deltaTime;
 
-            // 벌통을 떨어뜨리지 않고, 나무 지나갈 경우 (game over)
-            if (bee.activeSelf == false && player.transform.position.x >= tree.transform.position.x - 2)
+            // 벌통을 떨어뜨리지 않고, 나무 지나갈 경우 bug 나타남 (game over)
+            if (bee.activeSelf == false && player.transform.position.x >= tree.transform.position.x - 1.2f)
             {
                 Debug.Log("Game Over");
                 player.GetComponent<PlayerCtrl>().enabled = false;
                 bug.SetActive(true);
+
+                // bug의 player 추적
+                if (bug.transform.position.x < player.transform.position.x - 0.01)   // bug가 player의 왼쪽에 있을 경우
+                {
+                    bug.transform.rotation = Quaternion.Euler(0, 180, 0);    // 회전
+                    bug.transform.position += new Vector3(Time.deltaTime, 0, 0);
+                }
+                else if (bug.transform.position.x > player.transform.position.x + 0.01)   //  bug가 player의 오른쪽에 있을 경우
+                {
+                    bug.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    bug.transform.position -= new Vector3(Time.deltaTime, 0, 0);
+                }
             }
 
         }
@@ -92,7 +104,7 @@ public class Forest11 : MonoBehaviour
 
                 if (bee.activeSelf == false)    // bee가 나무에서 떨어지지 않았을 경우
                 {
-                    if(attacktime > 0)
+                    if (attacktime > 0)
                     {
                         attacktime -= Time.deltaTime;
                         if (attacktime > 0.5f)
@@ -119,17 +131,18 @@ public class Forest11 : MonoBehaviour
                 {
                     if (bear.transform.position.x < bee.transform.position.x - 0.01)   // bear가 bee보다 왼쪽에 있을 경우
                     {
-                        bear.transform.rotation = Quaternion.Euler(0, 0, 0);    // 회전
+                        bear.transform.rotation = Quaternion.Euler(0, 180, 0);    // 회전
                         bear.transform.position += new Vector3(Time.deltaTime, 0, 0);
                     }
                     else if (bear.transform.position.x > bee.transform.position.x + 0.01)   // bear가 bee보다 오른쪽에 있을 경우
                     {
-                        bear.transform.rotation = Quaternion.Euler(0, 180, 0);
+                        bear.transform.rotation = Quaternion.Euler(0, 0, 0);
                         bear.transform.position -= new Vector3(Time.deltaTime, 0, 0);
                     }
-                    else // bear의 무한 회전 방지
+                    else // bear의 무한 회전 방지  // bear와 bee의 x좌표가 일치
                     {
                         bear.transform.position += new Vector3(0, 0, 0);
+                        bearAnim.SetBool("Run", false);
                     }
                 }
             }

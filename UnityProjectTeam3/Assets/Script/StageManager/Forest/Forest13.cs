@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 public class Forest13 : MonoBehaviour
@@ -34,21 +36,30 @@ public class Forest13 : MonoBehaviour
 
     // button event
     public GameObject bug;
-
+    private bool BugActive;
+    private Transform bugTr;
+    private int direction = 1;
 
     void Start()
     {
+        // camera moving init
         isCameraMove = false;
         boundX = bound.GetComponent<Transform>().position.x;
         cameraSize = Camera.main.orthographicSize * Camera.main.aspect;
         gameoverY = gameover.GetComponent<Transform>().position.y;
 
+        // parents no moving & platform init
         isParentsMove = false;
         pTr = parents.GetComponent<Transform>();
         platform_maxY = gameover.GetComponent<BoxCollider2D>().bounds.max.y; // 바닥 플랫폼 콜라이더 max y좌표
         parents_minY = parents.transform.GetChild(0).transform;  // 부모 첫번째 자식 오브젝트의 transform
         parentsPosY = parents.transform.GetChild(1).transform.position.y;  // 부모 두번째 자식 오브젝트의 시작할 때의 y좌표
         wallTr = wall.GetComponent<Transform>();
+
+        // button event
+        bug.SetActive(false);
+        BugActive = false;
+        bugTr = bug.GetComponent<Transform>();
     }
 
 
@@ -78,7 +89,6 @@ public class Forest13 : MonoBehaviour
         }
         else if (Input.GetMouseButton(0))
         {
-            Debug.Log(pos.y);
             if (isParentsMove == true)
             {
                 oldpos = pos;
@@ -128,20 +138,35 @@ public class Forest13 : MonoBehaviour
             isParentsMove = false;
         }
 
-        // player game over
-        if(player.transform.position.y < gameoverY)
+        // player game over // bug와 닿거나, 플랫폼 아래로 떨어질 때
+        if((player.transform.position.y < gameoverY) || (player.transform.position.x == bug.transform.position.x))
         {
             Debug.Log("gameOver");
         }
 
+        // button trigger
+        if(BugActive)
+        {
+            bug.transform.position += new Vector3(Time.deltaTime * 2f, Time.deltaTime * direction, 0);
+            if (bugTr.position.y >= -3.0f)
+            {
+                direction = -1;
+            }
+            else if (bugTr.position.y <= -3.3f)
+            {
+                direction = 1;
+            }
+        }
+
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject == player)
         {
-            // button event
+            bug.SetActive(true);
+            BugActive = true;
         }
     }
-
 
 }

@@ -1153,7 +1153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411865700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6960001, y: 3.74, z: 0}
+  m_LocalPosition: {x: 1.96, y: 3.74, z: 0}
   m_LocalScale: {x: 0.47132295, y: 0.47132295, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1364,13 +1364,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1672588559}
   - component: {fileID: 1672588558}
+  - component: {fileID: 1672588560}
   m_Layer: 0
   m_Name: honeybee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1672588558
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1429,12 +1430,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672588557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.168, y: 3.218, z: 0}
+  m_LocalPosition: {x: 2.432, y: 3.218, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &1672588560
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672588557}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 621468fbf6593ca48bd4b4a516d510af, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 621468fbf6593ca48bd4b4a516d510af, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &1685554956
 PrefabInstance:
   m_ObjectHideFlags: 0

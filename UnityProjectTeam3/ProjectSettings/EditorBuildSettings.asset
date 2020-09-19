@@ -4,5 +4,92 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: c023b2b7eb8d3544384ca21b17b36d62
+  - enabled: 1
+    path: Assets/Scenes/Stages.unity
+    guid: e0d2338647180044f85233a883fabbcb
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Stage/Stage1.unity
+    guid: e5c677b543153d34fb1933f481793d7f
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Stage/Stage2.unity
+    guid: 5eec26dfc2012bc4d82203fe1564d82c
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Stage/Stage3.unity
+    guid: fc74aaf01d24be445af12e9cd1241c7f
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Stage/Stage4.unity
+    guid: f5cf660554286c84c881baf98dd131b8
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Stage/Stage5.unity
+    guid: 150d28317c24dc743b5d3eb11d96f54c
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest1.unity
+    guid: 061d64f557cc5fd41b615f8eedb82416
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest2.unity
+    guid: e07af519d57c0fa478314d63a2412816
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest3.unity
+    guid: 846512a14fb93034296acbca7fc3f553
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest4.unity
+    guid: ad72f788bea165048afc8b35117153f5
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest5.unity
+    guid: 10aa6afcc4d5c69409faa04277200a52
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest6.unity
+    guid: c2d220f7429b2ad46b23bd9dbec5e48a
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest7.unity
+    guid: c8c52eb68f324a444b008de5f024704d
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest8.unity
+    guid: 7462b395b1670ad46a254d4d4b3454dc
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest9.unity
+    guid: 2858809dde7a55a4cad90c67e576761e
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest10.unity
+    guid: 36639c6fe5f166d4b97d12789baabd9d
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest11.unity
+    guid: 816a195cc1fce954984e822de1ba1f36
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest12.unity
+    guid: 5004a9b75e5ec0240a5379702861085b
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest13.unity
+    guid: b130d76a8b81c674897d44e6e9d415e2
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest14.unity
+    guid: bfe127a843dfdd44c8619b4a13bd8931
+  - enabled: 1
+    path: Assets/Scenes/StageScene/Forest/Forest15.unity
+    guid: 7c1e69bc1a1be6f4b8fc1bbbaee090fa
+  - enabled: 1
+    path: Assets/Scenes/StageScene/City/City1.unity
+    guid: 0c7e84f1baf267f469f64ce94bdc3d4a
+  - enabled: 1
+    path: Assets/Scenes/StageScene/City/City2.unity
+    guid: f8bb69c367f50534a94fc19586b28b59
+  - enabled: 1
+    path: Assets/Scenes/StageScene/City/City3.unity
+    guid: 832b9a82ad3443f41a42f43324cf93a6
+  - enabled: 1
+    path: Assets/Scenes/StageScene/City/City4.unity
+    guid: 533debc7c6074554e9f410b9ed5d5947
+  - enabled: 1
+    path: Assets/Scenes/StageScene/City/City5.unity
+    guid: 88842c0bf14bf8e44a043d78b3be1d28
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: 1ac11bb84fdf6404ebb0738ab68a6497
+  - enabled: 1
+    path: Assets/Scenes/Prolog.unity
+    guid: cd030eafb26349649ae3b457ef33ed06
   m_configObjects: {}

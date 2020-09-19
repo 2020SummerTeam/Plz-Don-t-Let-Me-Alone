@@ -43,6 +43,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void Start()
     {
+        GameSave(); // 스테이지 데이터 저장
         stageEnd = false;
         //GetComponent로 초기화.
         mRB = GetComponent<Rigidbody2D>();
@@ -68,7 +69,6 @@ public class PlayerCtrl : MonoBehaviour
     {
         isForestTen = isTen;
     }
-
 
     void Update()
     {
@@ -368,6 +368,14 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     mRB.constraints = RigidbodyConstraints2D.FreezePosition;
                     mAnim.SetBool(AnimHash.RUN, false); // 이동 멈춤
+
+                    int StageLevel = SceneManager.GetActiveScene().buildIndex;
+                    PlayerPrefs.SetInt("ClearStage", StageLevel);   // main-stages 저장
+                    if (StageLevel != 27)    // City 5 = 26, Ending = 27
+                    {
+                        StageLevel++;
+                        SceneManager.LoadScene(StageLevel); // 다음 씬으로 이동
+                    }
                 }
             }
 
@@ -388,6 +396,15 @@ public class PlayerCtrl : MonoBehaviour
         {
             mRB.AddForce(mJumpVector, ForceMode2D.Impulse);
         }
+    }
+
+    // 데이터 저장
+    public void GameSave()
+    {
+        int CurrentStage = PlayerPrefs.GetInt("CurrentStage");  // 최근 scene
+        int StageLevel = SceneManager.GetActiveScene().buildIndex;  // 현재 scene의 번호 저장
+        if (StageLevel >= CurrentStage) // 제일 높은 스테이지 번호 저장
+            PlayerPrefs.SetInt("CurrentStage", StageLevel);
     }
 
     //20200808 상훈

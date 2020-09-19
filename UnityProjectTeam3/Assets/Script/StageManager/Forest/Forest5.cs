@@ -32,7 +32,3 @@ public class Forest5 : MonoBehaviour
 
 
 }
-
-
-
-//https://docs.unity3d.com/kr/2018.4/Manual/AndroidMobileAdvanced.html 참조

@@ -10,16 +10,7 @@ public class MainUI : MonoBehaviour
     int CurrentStage;
     void Awake()
     {
-        if (Start.activeSelf)   // Start Btn이 활성화 상태인 경우 (처음 시작)
-        {
-            // Init
-            PlayerPrefs.SetInt("CurrentStage", 0);  // Main = 0, Stages(menu) = 1  // scene "stage 1" = 2, ...
-            PlayerPrefs.SetInt("ClearStage", 0);   // 26일 경우 엔딩
-        }
-        else
-        {
             GameLoad();
-        }
     }
 
     // 데이터 불러오기

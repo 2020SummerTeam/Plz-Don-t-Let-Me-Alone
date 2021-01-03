@@ -5,7 +5,17 @@ using UnityEngine;
 
 public class dragPlatform : MonoBehaviour
 {
+
+    public GameObject malPoongSun;
     // 플랫폼 상하 드래그
+
+    float timer = 0;
+
+    private void Update()
+    {
+
+    }
+
     IEnumerator OnMouseDown()
     {
         Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position);

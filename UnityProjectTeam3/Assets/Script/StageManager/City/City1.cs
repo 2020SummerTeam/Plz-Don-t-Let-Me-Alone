@@ -31,6 +31,7 @@ public class City1 : MonoBehaviour
         rTr = researchers.GetComponent<Transform>();
         sTr = smallBox.GetComponent<Transform>();
         bTr = button.GetComponent<Transform>();
+        Researchers.EachNum = 1;
     }
 
 

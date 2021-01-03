@@ -16,7 +16,10 @@ public class doubleClick : MonoBehaviour
         if (e.clickCount == 2)
         {
             CastRay();
-
+            if(target == null)
+            {
+                return;
+            }
             if (target.name == "BigBox" || target.name == "parents_door")
             {
 

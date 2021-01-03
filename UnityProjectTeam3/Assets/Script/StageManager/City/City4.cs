@@ -14,6 +14,8 @@ public class City4 : MonoBehaviour
     public bool isShadow;
     public GameObject findsign;
     public GameObject researchers;
+    Researchers res;
+    public StoneEvent stoneEvent;
     
     public GameObject button;
  
@@ -25,28 +27,37 @@ public class City4 : MonoBehaviour
         findsign.SetActive(false);
         shadow.SetActive(false);
         tTr = teddybear.GetComponent<Transform>();
+        res = researchers.GetComponent<Researchers>();
     }
 
     
     void Update()
     {
-        
 
-        if (lightbulb.transform.eulerAngles.z <= 220)
+
+
+        if (stoneEvent.isStoneEvent && !isShadow)
         {
-            if (tTr.position.x >= -3 && tTr.position.x <= -2.15)
-            {
-                if (tTr.position.y >= 0.3 && tTr.position.y <= 0.7)
-                {
-                    teddybear.GetComponent<TeddyBear>().enabled = false;
-                    shadow.SetActive(true);
-                }
-                isShadow = true;
-            }
-            else
-                shadow.SetActive(false);
+            res.EachNum = 0;
+            res.isFind = true;
         }
-           
+        else
+        {
+            if (lightbulb.transform.eulerAngles.z <= 220 && lightbulb.transform.eulerAngles.z != 0)
+            {
+                if (tTr.position.x >= -3 && tTr.position.x <= -2.15)
+                {
+                    if (tTr.position.y >= 0.3 && tTr.position.y <= 0.7)
+                    {
+                        teddybear.GetComponent<TeddyBear>().enabled = false;
+                        shadow.SetActive(true);
+                    }
+                    isShadow = true;
+                }
+                else
+                    shadow.SetActive(false);
+            }
+        }
  
         
         if (isShadow)
@@ -60,6 +71,7 @@ public class City4 : MonoBehaviour
                     findsign.SetActive(false);
                     researchers.transform.rotation = Quaternion.Euler(0, 0, 0);
                     researchers.transform.position += new Vector3(Time.deltaTime, 0, 0);
+                    res.RunAnimation();
                 }
             }
         }

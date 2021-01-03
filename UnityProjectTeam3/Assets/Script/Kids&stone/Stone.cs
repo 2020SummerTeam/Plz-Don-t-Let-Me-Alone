@@ -24,6 +24,7 @@ public class Stone : MonoBehaviour
     public GameObject findSign; // Kids 위의 느낌표
 
     private Animator KidsAnim;
+    public bool stageFail;  //돌에 맞아도 스테이지페일이 안될 수도 있게.
 
     void Start()
     {
@@ -33,6 +34,7 @@ public class Stone : MonoBehaviour
         isThrow = false;
         KidsAnim = GameObject.Find("Kids").GetComponent<Animator>();
         findSign.SetActive(false);
+        stageFail = true;
     }
 
     void Update()
@@ -72,7 +74,11 @@ public class Stone : MonoBehaviour
 
             yield return null;
         }
-        
+        if(stageFail)
+            playerCtrl.OnStageFail();
+
+        cnt = 0;
+        isThrow = false;
         mTr.transform.position = InitPos - new Vector3(0, 0, 20);    // 뒤로 사라지게 함
     }
 

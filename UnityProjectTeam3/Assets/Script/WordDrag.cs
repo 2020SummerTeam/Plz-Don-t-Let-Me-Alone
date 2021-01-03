@@ -24,8 +24,8 @@ public class WordDrag : MonoBehaviour
                 worldpos.x = -5f;
             if (worldpos.y < -4f)
                 worldpos.y = -4f;
-            if (worldpos.x > 0f)
-                worldpos.x = 0f;
+            if (worldpos.x > 5f)
+                worldpos.x = 5f;
             if (worldpos.y > 4f)
                 worldpos.y = 4f;
 

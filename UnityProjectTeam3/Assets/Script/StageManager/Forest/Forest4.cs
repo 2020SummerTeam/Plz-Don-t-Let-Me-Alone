@@ -9,6 +9,7 @@ public class Forest4 : MonoBehaviour
     public BearScript bearScript;
     public PlayerCtrl playerScript;
     public GameObject beeObject;
+    public GameObject bee1Object;
     List<GameObject> beeObjectList;//벌은 많이생기니까 리스ㅡㅌ로 만들었다
     public Text bearTextBallon;
     public GameObject platformObject;
@@ -35,15 +36,20 @@ public class Forest4 : MonoBehaviour
 
         beeObjectList = new List<GameObject>();
         beeObject.SetActive(false);
+        bee1Object.SetActive(false);
         beeObjectList.Add(beeObject);
+        beeObjectList.Add(bee1Object);
 
-        for (int i =0; i < 10; i++)
+        for (int i =0; i < 5; i++)
         {
             beeObjectList.Add(Instantiate(beeObject));
+            beeObjectList.Add(Instantiate(bee1Object));
             //벌들을 만들고 리스트ㅔㅇ 넣어주었따
         }
         bearTextBallon.text = "";     //텍스트 ! 넣어줘야된다
         StartCoroutine(BoolCheckCor());
+
+        bearScript.SleepAnimation();
     }
     private void Update()
     {
@@ -56,7 +62,7 @@ public class Forest4 : MonoBehaviour
         }
         else
         {
-            if (playerScript.transform.position.y < -4)
+            if (playerScript.transform.position.y < -3)
             {
                 //플레이어 떨어지면 바로 탈락~
                 playerScript.OnStageFail();
@@ -95,7 +101,7 @@ public class Forest4 : MonoBehaviour
             
 
             //박스가 빠졌는지두 해준다
-            if (smallBox.transform.position.y < -2.8f)
+            if (smallBox.transform.position.y < -3.0f)
             {
                 isBoxDunked = true;
             }
@@ -112,6 +118,7 @@ public class Forest4 : MonoBehaviour
         //bearTextBallon.SetActive(false);
         isBearMoved = true;
         bearTextBallon.text = "!!!!";
+        bearScript.MoveAnimation();
         while (true)    //벌의 공격을 받지않을때만 움직여요
         {
             //곰이 움직움직여요
@@ -140,6 +147,7 @@ public class Forest4 : MonoBehaviour
         }
         //벌에 부딪히면 열루 내려와요
         bearTextBallon.text = "죽은곰";
+        bearScript.DieAnimation();
         isBearDead = true;
     }
 

@@ -24,9 +24,8 @@ public class Forest10 : MonoBehaviour
     private Vector3 pos3 = new Vector3(0f, 2f, 0f);
     private Vector3 pos4 = new Vector3(4f, 2f, 0f);
 
-    private void Awake()
-    {
-    }
+    public PlayerCtrl playerCtrl;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +40,11 @@ public class Forest10 : MonoBehaviour
         {
             MovePlatform1.transform.position = Vector3.Lerp(pos2, pos1, (Mathf.Sin(speed1 * Time.time) + 1.0f) / 2.0f);
             MovePlatform2.transform.position = Vector3.Lerp(pos3, pos4, (Mathf.Sin(speed2 * Time.time) + 1.0f) / 2.0f);
+        }
+
+        if(playerCtrl.transform.position.y < -4.5f)
+        {
+            playerCtrl.OnStageFail();
         }
     }
     

@@ -40,6 +40,8 @@ public class Forest13 : MonoBehaviour
     private Transform bugTr;
     private int direction = 1;
 
+    public PlayerCtrl playerCtrl;
+
     void Start()
     {
         // camera moving init
@@ -139,9 +141,11 @@ public class Forest13 : MonoBehaviour
         }
 
         // player game over // bug와 닿거나, 플랫폼 아래로 떨어질 때
-        if((player.transform.position.y < gameoverY) || (player.transform.position.x == bug.transform.position.x))
+        if((player.transform.position.y < gameoverY) || Mathf.Abs(player.transform.position.x - bug.transform.position.x) <0.5f)
         {
             Debug.Log("gameOver");
+            playerCtrl.OnStageFail();
+
         }
 
         // button trigger

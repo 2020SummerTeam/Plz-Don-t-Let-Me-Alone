@@ -7,10 +7,19 @@ public class Forest14 : MonoBehaviour
 
     public GameObject lamp;
     public GameObject lamplightNshadow;
+    public SettingMenu settings;
 
     void Start()
     {
-        
+        if (PlayerPrefs.GetInt("NightMode")==1)
+        {
+            settings.OnClickNightMode();
+        }
+    }
+
+    public void OnNightMode()
+    {
+        lamplightNshadow.SetActive(!lamplightNshadow.activeSelf);
     }
 
     void Update()

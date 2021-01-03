@@ -24,11 +24,13 @@ public class Forest9 : MonoBehaviour
     public Transform originObj;
     public Transform reflectObj;
 
+    public GameObject buttonObject;
+
 
     void Start()
     {
         // Moving Platform 범위 지정
-        max_x_scale[0] = m_platform[0].GetComponent<Transform>().position.x + 5;
+        max_x_scale[0] = m_platform[0].GetComponent<Transform>().position.x + 6;
         min_x_scale[0] = m_platform[0].GetComponent<Transform>().position.x;
         max_x_scale[1] = m_platform[1].GetComponent<Transform>().position.x + 2;
         min_x_scale[1] = m_platform[1].GetComponent<Transform>().position.x;
@@ -39,6 +41,11 @@ public class Forest9 : MonoBehaviour
 
     void Update()
     {
+        if (player.transform.position.y > 5)
+        {
+            playerCtrl.OnStageFail();
+        }
+
         if (parents.stageClear) // 클리어 이벤트 발동(부모 이동->플레이어 이동)을 위해
         {
             playerCtrl.enabled = true;
@@ -49,10 +56,18 @@ public class Forest9 : MonoBehaviour
             // Moving Platform 마우스로 제어
             if (Input.GetMouseButtonDown(0))
             {
+                if(mTr == null)
+                {
+                    return;
+                }
                 pos = mTr.position;
             }
             if (Input.GetMouseButton(0))
             {
+                if (mTr == null)
+                {
+                    return;
+                }
                 oldpos = pos;
                 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
                 mTr.position = new Vector3(mTr.position.x + (pos.x - oldpos.x), mTr.position.y, 0);
@@ -122,6 +137,7 @@ public class Forest9 : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             buttonTriggerd = true;
+            buttonObject.SetActive(false);
             platform.SetActive(true);
             this.GetComponent<BoxCollider2D>().enabled = false;
         }

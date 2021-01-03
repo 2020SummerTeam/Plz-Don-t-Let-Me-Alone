@@ -16,13 +16,13 @@ public class City2 : MonoBehaviour
     public Button mT;
     public Button mX;
 
-    [Header("ButtonVariable")]
+   /* [Header("ButtonVariable")]
     private bool isB;
     private bool isN;
     private bool isO;
     private bool isU;
     private bool isT;
-    private bool isX;
+    private bool isX;*/
 
     private int mCount; //t should click twice
 
@@ -36,6 +36,11 @@ public class City2 : MonoBehaviour
     public ButtonEvent mButtonEvent;
     public StoneEvent mStone;
     public PlayerCtrl mPlayerCtrl;
+    public KidsCtrl kidsCtrl;
+    public Stone stone;
+
+    public bool[] buttonIndex;
+    public bool[] boxIndex;
    
     
     [SerializeField]
@@ -48,41 +53,48 @@ public class City2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        boxIndex = new bool[3];
+        for (int i =0; i<3; i++)
+        {
+            boxIndex[i] = false;
+        }
+        buttonIndex = new bool[6];
+        for (int i = 0; i < 6; i++)
+        {
+            buttonIndex[i] = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         MovePlatform.transform.position = Vector3.Lerp(pos1, pos2, (Mathf.Sin(speed * Time.time) + 1.0f) / 2.0f);
-
-        if (isB)
+        bool trueable = true;
+        for (int i = 0; i < 3; i++)
         {
-            if (isO)
+            if (!boxIndex[i])
             {
-                if (isX)
-                {
-                    mBox.SetActive(true);
-                }
+                trueable = false;
             }
         }
-
-        if (isB)
+        if (trueable)
         {
-            if (isU)
+            mBox.SetActive(true);
+        }
+        trueable = true;
+        for (int i = 0; i < 6; i++)
+        {
+            if (!buttonIndex[i])
             {
-                if (isT)
-                {
-                    if (isO && mCount ==2)
-                    {
-                        if (isN)
-                        {
-                            mButton.SetActive(true);
-                        }
-                    }
-                }
+                trueable = false;
             }
         }
+        if (trueable)
+        {
+            mButton.SetActive(true);
+
+        }
+
 
         if (mButtonEvent.buttonTriggerd)
         {
@@ -93,7 +105,15 @@ public class City2 : MonoBehaviour
 
         if (mStone.isStoneEvent)
         {
-            mPlayerCtrl.OnStageFail();
+            if (kidsCtrl.watchingLeft)
+            {
+                if (!mPlayerCtrl.IsSit)
+                {
+                    stone.isThrow = true;
+                    kidsCtrl.coolTime = 10;
+                }
+                
+            }
         }
 
         if(mPlayer.transform.position.x > 20f)
@@ -109,33 +129,135 @@ public class City2 : MonoBehaviour
 
     public void ClickB()
     {
-        isB = true;
+
+        boxIndex[0] = true;
+        buttonIndex[0] = true;
     }
 
     public void ClickN()
     {
-        isN = true;
+        if (buttonIndex[4])
+        {
+            buttonIndex[5] = true;
+        }
+        else
+        {
+            ButtonIndexReset();
+        }
     }
 
     public void ClickO()
     {
-        isO = true;
+        if (boxIndex[1])
+        {
+            BoxIndexReset();
+        }
+        else
+        {
+            if (boxIndex[0] == true)
+            {
+                boxIndex[1] = true;
+            }
+            else
+            {
+                BoxIndexReset();
+            }
+        }
+
+
+        if (buttonIndex[4])
+        {
+            ButtonIndexReset();
+        }
+        else
+        {
+            if (buttonIndex[3])
+            {
+                buttonIndex[4] = true;
+            }
+            else
+            {
+                ButtonIndexReset();
+            }
+        }
+       
+
     }
 
     public void ClickX()
     {
-        isX = true;
+        if (boxIndex[1] == true)
+        {
+            boxIndex[2] = true;
+        }
+        else
+        {
+            BoxIndexReset();
+        }
+
     }
 
     public void ClickU()
     {
-        isU = true;
+        if (buttonIndex[1])
+        {
+            ButtonIndexReset();
+
+        }
+        else
+        {
+            if (buttonIndex[0])
+            {
+                buttonIndex[1] = true;
+            }
+            else
+            {
+                ButtonIndexReset();
+            }
+        }
+       
+
     }
 
     public void ClickT()
     {
-        isT = true;
-        mCount++;
+        if (buttonIndex[3])
+        {
+            ButtonIndexReset();
+        }
+        else
+        {
+            if (buttonIndex[2])
+            {
+                buttonIndex[3] = true;
+            }
+            if (buttonIndex[1])
+            {
+                buttonIndex[2] = true;
+            }
+            else
+            {
+                ButtonIndexReset();
+            }
+        }
+       
+    }
+
+    public void ButtonIndexReset()
+    {
+        for(int i = 0; i < 6;i++)
+        {
+            buttonIndex[i] = false;
+        }
+    }
+
+    public void BoxIndexReset()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            boxIndex[i] = false;
+        }
+
     }
 
 

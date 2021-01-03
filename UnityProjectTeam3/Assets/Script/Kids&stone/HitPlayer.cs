@@ -8,6 +8,7 @@ public class HitPlayer : MonoBehaviour
     Stone stone;   // Stone 오브젝트의 ThrowStone 스크립트
     private Animator mAnim; // 쓰러지는 모션에 필요한 애니메이터
     Rigidbody2D rigid;
+    float timer = 0;
 
     void Start()
     {
@@ -23,7 +24,12 @@ public class HitPlayer : MonoBehaviour
         {
             Ctrl.enabled = false;   // 모든 조작을 제어
             // 쓰러지는 모션 추가할 예정
-            Debug.Log("Game Over!");
+            timer += Time.deltaTime;
+            if (timer > 2)
+            {
+                Ctrl.OnStageFail();
+                timer = 0;
+            }
         }
         else
         {

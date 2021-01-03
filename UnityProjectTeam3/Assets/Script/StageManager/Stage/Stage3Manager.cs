@@ -12,7 +12,8 @@ public class Stage3Manager : MonoBehaviour
     public GameObject Cap;  // 차고 뚜껑
     public GameObject Kids;
     public GameObject Player;
-    private PlayerCtrl playerCtrl;  // player가 던진 돌을 피하는 것 방지
+    private PlayerCtrl playerCtrl;  // player가 던진 돌을 피하는 것 방지\
+    public KidsCtrl kidsCtrl;
 
     // Button & Puzzle
     private ButtonEvent buttonEvent;
@@ -34,6 +35,7 @@ public class Stage3Manager : MonoBehaviour
         rockHalfSize = Rock.GetComponent<Renderer>().bounds.size.x / 2;
         isCapOpen = false;
         playerCtrl = Player.GetComponent<PlayerCtrl>();
+        kidsCtrl = kidsCtrl.GetComponent<KidsCtrl>();
     }
 
 
@@ -42,8 +44,9 @@ public class Stage3Manager : MonoBehaviour
         // Kids' StoneEvent
         if (stoneEvent.isStoneEvent == true)  // player가 StoneZone에 있을 때
         {
-            if (Kids.transform.rotation == Quaternion.Euler(0, 180, 0))    // kids가 Player를 쳐다볼 때
+            if (kidsCtrl.watchingLeft)    // kids가 Player를 쳐다볼 때
             {
+                Debug.Log("바라볼때");
                 if (isCapOpen == true)    // 차고 뚜껑이 다 열렸을 때
                 {
                     if (Player.transform.position.x > Rock.transform.position.x) // player가 rock보다 앞에 있거나
@@ -83,7 +86,7 @@ public class Stage3Manager : MonoBehaviour
 
             if (t > 0)  // 큰 상자 하강
             {
-                FallingTree.transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
+                FallingTree.transform.position += new Vector3(0, -2.5f * Time.deltaTime, 0);
                 t -= Time.deltaTime;
             }
         }

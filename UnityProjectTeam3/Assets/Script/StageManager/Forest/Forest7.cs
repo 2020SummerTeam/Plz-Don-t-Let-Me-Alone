@@ -7,27 +7,34 @@ public class Forest7 : MonoBehaviour
 {
     int fingerCount = 0;
     private Vector3 scaleChange;
+    public GameObject playerObject;
+    public PlayerCtrl player;
 
     private void Awake()
     {
-        scaleChange = new Vector3(0f, -2f, 0f);
+        scaleChange = new Vector3(0f, -2.2f, 0f);
     }
     void Update()
     {
         //마우스가 클릭한 위치가 wall 이라면 wall의 y 값을 줄여준다
         if (Input.GetMouseButtonDown(0))
         {
-            fingerCount++;
+
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
             if (hit.collider != null && hit.collider.CompareTag("Wall"))
             {
+                fingerCount++;
                 if (fingerCount < 6)
                 {
                     hit.collider.transform.localScale += scaleChange;
                 }
             }
+        }
+        if (playerObject.transform.position.x < -9)
+        {
+            player.OnStageFail();
         }
 
         //touch script

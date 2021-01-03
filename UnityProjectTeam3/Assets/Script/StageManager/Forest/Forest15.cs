@@ -41,6 +41,7 @@ public class Forest15 : MonoBehaviour
         findEvent = GameObject.Find("findEvent").GetComponent<findEvent>();
         Researchers = researchers.GetComponent<Researchers>();
         Researchers.enabled = false;
+        Researchers.EachNum = 0;
         ReCol = researchers.GetComponent<BoxCollider2D>();
         ReRB = researchers.GetComponent<Rigidbody2D>();
     }
@@ -60,16 +61,20 @@ public class Forest15 : MonoBehaviour
         }
 
         // ballon 위치 마우스로 제어
-        if (Input.GetMouseButtonDown(0))
+        if (mTr != null)
         {
-            pos = mTr.position;
+            if (Input.GetMouseButtonDown(0))
+            {
+                pos = mTr.position;
+            }
+            if (Input.GetMouseButton(0))
+            {
+                oldpos = pos;
+                pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+                mTr.position = new Vector3(mTr.position.x + (pos.x - oldpos.x), mTr.position.y + (pos.y - oldpos.y), 0);
+            }
         }
-        if (Input.GetMouseButton(0))
-        {
-            oldpos = pos;
-            pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-            mTr.position = new Vector3(mTr.position.x + (pos.x - oldpos.x), mTr.position.y + (pos.y - oldpos.y), 0);
-        }
+        
 
         // 오브젝트 확대
         if (expandBox)  // 상자
@@ -115,10 +120,14 @@ public class Forest15 : MonoBehaviour
         if (e.clickCount == 1)
         {
             CastRay();
-
+            if(target == null)
+            {
+                return;
+            }
             if (target == ballon)
             {
                 mTr = ballon.GetComponent<Transform>();
+                
             }
             else
             {

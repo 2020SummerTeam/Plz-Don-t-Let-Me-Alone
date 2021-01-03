@@ -29,6 +29,8 @@ public class Forest11 : MonoBehaviour
     // ballon ctrl
     public GameObject textBallon;
 
+    public PlayerCtrl playerCtrl;
+
     void Start()
     {
         bearScript = bear.GetComponent<BearScript>();
@@ -37,6 +39,7 @@ public class Forest11 : MonoBehaviour
         Researchers = GameObject.Find("Researchers").GetComponent<Researchers>();
         findEvent = GameObject.Find("findEvent").GetComponent<findEvent>();
         isOpenDoor = false;
+        Researchers.EachNum = 0;
     }
 
     void Update()
@@ -50,6 +53,7 @@ public class Forest11 : MonoBehaviour
             if (bee.activeSelf == false && player.transform.position.x >= tree.transform.position.x - 1.2f)
             {
                 Debug.Log("Game Over");
+                playerCtrl.OnStageFail();
                 player.GetComponent<PlayerCtrl>().enabled = false;
                 bug.SetActive(true);
 
@@ -78,6 +82,8 @@ public class Forest11 : MonoBehaviour
             {
                 bear.transform.position += new Vector3(0, 0, 0); // 이동 멈춤
                 bearAnim.SetBool("Run", false);
+                if(bee.activeSelf == false)
+                    playerCtrl.OnStageFail();
                 Debug.Log("Game Over");
             }
             else if (bearScript.isSmallBoxCol)  // 곰이 박스와 부딪혔을 때

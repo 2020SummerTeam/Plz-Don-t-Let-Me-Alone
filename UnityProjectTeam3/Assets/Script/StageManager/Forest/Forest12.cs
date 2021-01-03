@@ -10,6 +10,8 @@ public class Forest12 : MonoBehaviour
     public GameObject[] platform = new GameObject[5];   // 투명도 조절 타겟 (타겟 후보)
     public SpriteRenderer[] platformRend = new SpriteRenderer[5];   // 버튼 눌렀을 때 투명하게 하기 위해
     public BoxCollider2D[] platformTouchArea = new BoxCollider2D[5]; // 주변(터치하면 모습이 보이는 영역) // 2개의 박스콜라이더가 존재할 때 위에 있는 걸로 할당함
+    public GameObject player;
+    public PlayerCtrl playerCtrl;
 
     void Start()
     {
@@ -17,6 +19,14 @@ public class Forest12 : MonoBehaviour
         {
             platformRend[i] = platform[i].GetComponent<SpriteRenderer>();
             platformTouchArea[i] = platform[i].GetComponent<BoxCollider2D>();
+        }
+    }
+
+    private void Update()
+    {
+        if (player.transform.position.y < -5)
+        {
+            playerCtrl.OnStageFail();
         }
     }
 

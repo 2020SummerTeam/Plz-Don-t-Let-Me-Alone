@@ -17,7 +17,10 @@ public class SettingMenu : MonoBehaviour
     Transform nightmodeBtn;
     GameObject nightmodeOn;
 
-    public SettingsData Data;   // scene 바뀌어도 data 저장 // asset-creat-settingsdata와 연결
+    public GameObject nightModeObject;
+
+    //public SettingsData Data;   // scene 바뀌어도 data 저장 // asset-creat-settingsdata와 연결
+    //이거하니까 씬사이 건너갈때 오류생겨서 playerPrefs로 바꿈ㅠㅠ
 
     void Awake()
     {
@@ -28,13 +31,27 @@ public class SettingMenu : MonoBehaviour
         nightmodeBtn = menu.GetChild(6).GetComponent<RectTransform>();
         nightmodeOn = menu.GetChild(5).gameObject;
 
+        if (!PlayerPrefs.HasKey("Sound"))
+        {
+            PlayerPrefs.SetInt("Sound", 1);
+        }
+        if (!PlayerPrefs.HasKey("NightMode"))
+        {
+            PlayerPrefs.SetInt("NightMode", 1);
+        }
+
+        if (PlayerPrefs.GetInt("NightMode") == 1)
+        {
+            nightModeObject.SetActive(true);
+        }
+
     }
 
     void Update()
     {
         if (menu.gameObject.activeSelf)
         {
-            if (Data.sounds) // on 상태
+            if (PlayerPrefs.GetInt("Sound")==1) // on 상태
             {
                 soundBtn.localPosition = new Vector3(344.5f, soundBtn.localPosition.y, 0);
                 soundOn.SetActive(true);
@@ -45,7 +62,7 @@ public class SettingMenu : MonoBehaviour
                 soundOn.SetActive(false);
             }
 
-            if (Data.nightmode)
+            if (PlayerPrefs.GetInt("NightMode") == 1)
             {
                 nightmodeBtn.localPosition = new Vector2(344.5f, nightmodeBtn.localPosition.y);
                 nightmodeOn.SetActive(true);
@@ -63,26 +80,28 @@ public class SettingMenu : MonoBehaviour
     // move btn, green&red light on/off
     public void OnClickSound()
     {
-        if (Data.sounds)    // on -> off
+        if (PlayerPrefs.GetInt("Sound") == 1)    // on -> off
         {
-            Data.sounds = false;
+            PlayerPrefs.SetInt("Sound",0);
         }
         else  // off -> on
         {
-            Data.sounds = true;
+            PlayerPrefs.SetInt("Sound", 1);
         }
         BGMBtn();
     }
 
     public void OnClickNightMode()
     {
-        if (Data.nightmode)    // on -> off
-        {;
-            Data.nightmode = false;
-        }
-        else // off -> on
+        if (PlayerPrefs.GetInt("NightMode") == 1)    // on -> off
         {
-            Data.nightmode = true;
+            nightModeObject.SetActive(false);
+            PlayerPrefs.SetInt("NightMode", 0);
+        }
+        else  // off -> on
+        {
+            nightModeObject.SetActive(true);
+            PlayerPrefs.SetInt("NightMode", 1);
         }
     }
 

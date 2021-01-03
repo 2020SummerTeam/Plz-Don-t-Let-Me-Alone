@@ -40,7 +40,7 @@ public class PlayerCtrl : MonoBehaviour
     public bool isButtonDown;   //2020 0809 푸시 여기서 해결할래요
     bool isPushingBox;          //상자를 미는중인지 알아야 호출을 하빈다
     GameObject pushingBoxObj;     //내가 밀고있는 상자
-
+    bool jumpable;
     void Start()
     {
         GameSave(); // 스테이지 데이터 저장
@@ -55,6 +55,7 @@ public class PlayerCtrl : MonoBehaviour
         watchingRight = true;
         isPushingBox = false;
         pushingBoxObj = null;
+        jumpable = true;
         //find center x on scren
 
         // stage clear
@@ -77,8 +78,14 @@ public class PlayerCtrl : MonoBehaviour
         {
 
             horizontal = Input.GetAxis("Horizontal");
+            
             float vertical;
             //입력받는부분
+
+            if (transform.position.y < -20)
+            {
+                OnStageFail();
+            }
 
             //drag coding
             // 1. you got touch overthan 1
@@ -183,19 +190,13 @@ public class PlayerCtrl : MonoBehaviour
                         //박스와 상호작용 하고있는 상태라면
                         if (isPushingBox)
                         {
-                            if (watchingRight)
-                            {
-                                //기존에 오른쪽을 보다가 왼쪽으로 돌아온거라면 당기는 거겟죠
+                            mAnim.SetBool(AnimHash.GRAB, true);
+                                                            //기존에 오른쪽을 보다가 왼쪽으로 돌아온거라면 당기는 거겟죠
                                 //당기는거는 방향을 바꿔줄 필요가 없습니다. 애니메이션이 나오면 여기에다가 추가합시다
-                                mAnim.SetBool(AnimHash.RUN, true);
-                            }
-                            else
-                            {
+
                                 //이거는 그냥 미는거겠죠 미는애니메이션이 나오면 여기에다가 추가합시다
                                 //그리고 보는방향이 왼쪽에서 왼쪽으로 동일하니까, 방향 굳이 바꿔줄 필요 없죠?
                                 //그러니까 pushingBox일때는 우리 아무것도 건들지 맙시다
-                                mAnim.SetBool(AnimHash.RUN, true);
-                            }
                         }
                         else
                         {
@@ -203,6 +204,7 @@ public class PlayerCtrl : MonoBehaviour
                             watchingRight = false;
                             transform.rotation = Quaternion.Euler(0, 180, 0);
                             mAnim.SetBool(AnimHash.RUN, true);
+                            mAnim.SetBool(AnimHash.GRAB, false);
                         }
                     }
                     else if (horizontal > 0)
@@ -210,18 +212,7 @@ public class PlayerCtrl : MonoBehaviour
                         //이거는 위에거랑 정반대죠. 그냥 반대로만 합시다
                         if (isPushingBox)
                         {
-                            if (watchingRight)
-                            {
-                                //기존에 오른쪽을 보다가 오른쪽으로 돌아온거라면 미는거겠죠
-                                //그리고 보는방향이 오른쪽에서 오른쪽으로 동일하니까, 방향 굳이 바꿔줄 필요 없죠?
-                                mAnim.SetBool(AnimHash.RUN, true);
-                            }
-                            else
-                            {
-                                //당기는거는 방향을 바꿔줄 필요가 없습니다. 애니메이션이 나오면 여기에다가 추가합시다
-                                //그러니까 pushingBox일때는 우리 아무것도 건들지 맙시다
-                                mAnim.SetBool(AnimHash.RUN, true);
-                            }
+                            mAnim.SetBool(AnimHash.GRAB, true);
                         }
                         else
                         {
@@ -229,6 +220,7 @@ public class PlayerCtrl : MonoBehaviour
                             watchingRight = true;
                             transform.rotation = Quaternion.Euler(0, 0, 0);
                             mAnim.SetBool(AnimHash.RUN, true);
+                            mAnim.SetBool(AnimHash.GRAB, false);
                         }
 
 
@@ -369,16 +361,22 @@ public class PlayerCtrl : MonoBehaviour
                     mRB.constraints = RigidbodyConstraints2D.FreezePosition;
                     mAnim.SetBool(AnimHash.RUN, false); // 이동 멈춤
 
-                    int StageLevel = SceneManager.GetActiveScene().buildIndex;
-                    PlayerPrefs.SetInt("ClearStage", StageLevel);   // main-stages 저장
-                    if (StageLevel != 27)    // City 5 = 26, Ending = 27
-                    {
-                        StageLevel++;
-                        SceneManager.LoadScene(StageLevel); // 다음 씬으로 이동
-                    }
+                    OnEnd();
+
                 }
             }
+        }
+    }
 
+    public void OnEnd()
+    {
+        int StageLevel = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("ClearStage", StageLevel);   // main-stages 저장
+        GameSave();
+        if (StageLevel != 27)    // City 5 = 26, Ending = 27
+        {
+            StageLevel++;
+            SceneManager.LoadScene(StageLevel); // 다음 씬으로 이동
         }
     }
 
@@ -388,6 +386,10 @@ public class PlayerCtrl : MonoBehaviour
         //점프가 아닐 때만 위로 힘을 준다!
         //2020 08 08 changed ==0 to <=1 >=-1
         if (isPushingBox)
+        {
+            return;
+        }
+        if (!jumpable)
         {
             return;
         }
@@ -404,7 +406,10 @@ public class PlayerCtrl : MonoBehaviour
         int CurrentStage = PlayerPrefs.GetInt("CurrentStage");  // 최근 scene
         int StageLevel = SceneManager.GetActiveScene().buildIndex;  // 현재 scene의 번호 저장
         if (StageLevel >= CurrentStage) // 제일 높은 스테이지 번호 저장
+        {
             PlayerPrefs.SetInt("CurrentStage", StageLevel);
+        }
+            
     }
 
     //20200808 상훈
@@ -413,6 +418,10 @@ public class PlayerCtrl : MonoBehaviour
     {
         IsSit = isSitting;
         mAnim.SetBool(AnimHash.SIT, isSitting);
+    }
+    public void Die()
+    {
+        mAnim.SetBool(AnimHash.DEAD,true);
     }
 
     //20200808 상훈
@@ -427,7 +436,14 @@ public class PlayerCtrl : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-
+        if(collision.transform.position.y < transform.position.y)
+        {
+            jumpable = true;
+        }
+        else
+        {
+            jumpable = false;
+        }
         if (collision.gameObject.CompareTag("InteractObj"))
         {
             IsInteracObj = true;
@@ -450,6 +466,7 @@ public class PlayerCtrl : MonoBehaviour
     //차일드로 해보니 exit이 발동을 죽어도 안해서 update에서 해제를 해줘야됩니다.
     private void OnCollisionExit2D(Collision2D collision)
     {
+        jumpable = false;
         if (collision.gameObject.CompareTag("InteractObj"))
         {
             IsInteracObj = false;

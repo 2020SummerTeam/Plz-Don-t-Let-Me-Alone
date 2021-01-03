@@ -7,6 +7,7 @@ public class MainUI : MonoBehaviour
 {
     public GameObject Ending;
     public GameObject Start;
+    public GameObject continueButton;
     int CurrentStage;
     void Awake()
     {
@@ -16,8 +17,23 @@ public class MainUI : MonoBehaviour
     // 데이터 불러오기
     public void GameLoad()
     {
-        CurrentStage = PlayerPrefs.GetInt("stageLevel");    // 제일 높은 스테이지 번호
+        if (!PlayerPrefs.HasKey("CurrentStage"))
+        {
+            PlayerPrefs.SetInt("CurrentStage", 2);
+        }
+        if (!PlayerPrefs.HasKey("ClearStage"))
+        {
+            PlayerPrefs.SetInt("ClearStage", 2);
+        }
+        CurrentStage = PlayerPrefs.GetInt("CurrentStage");    // 제일 높은 스테이지 번호
         int ClearStage = PlayerPrefs.GetInt("ClearStage");    // 마지막 스테이지 클리어
+        
+        if(ClearStage > 2)
+        {
+            Start.SetActive(false);
+            continueButton.SetActive(true);
+        }
+
 
         if (ClearStage == 26)   // 클리어했을 경우 Ending Btn 활성화
         {
@@ -31,17 +47,20 @@ public class MainUI : MonoBehaviour
 
     public void OnClickEnding()
     {
-        // Ending
+        SceneManager.LoadScene(27);
     }
 
     public void OnClickStart()
     {
-        SceneManager.LoadScene(2);
+        
+        //프롤로그 먼저 보여줘
+        SceneManager.LoadScene(28);
     }
 
     public void OnClickContinue()
     {
         // current stage
+         CurrentStage = PlayerPrefs.GetInt("CurrentStage");
         SceneManager.LoadScene(CurrentStage);
     }
 

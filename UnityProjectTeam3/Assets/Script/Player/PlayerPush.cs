@@ -59,7 +59,7 @@ public class PlayerPush : MonoBehaviour
             if (ISButtonDown)
             {
                 collision.transform.parent = this.transform;
-
+                IsPush = true;
             }
             /*
             mPlayerCtrl.IsInteracObj = true;   //interactObj가 검출. => true
@@ -76,6 +76,7 @@ public class PlayerPush : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("InteractObj"))
         {
+            IsPush = false;
             /*
             collision.transform.parent = null;
             collision.gameObject.GetComponent<BoxPull>().beingPushed = false;

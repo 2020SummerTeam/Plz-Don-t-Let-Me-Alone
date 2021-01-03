@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class BGMManager : MonoBehaviour
 {
     [SerializeField] AudioClip[] bgmClip; // 브금 목록 배열   // mp3 파일
-    [SerializeField] AudioSource bgmPlayer; // 브금 플레이어
+    public AudioSource bgmPlayer; // 브금 플레이어
 
     public static BGMManager instance = null;
     void Awake()

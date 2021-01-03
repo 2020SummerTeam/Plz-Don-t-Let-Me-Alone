@@ -8,6 +8,7 @@ public class Forest6 : MonoBehaviour
     GameObject mBox;
     [SerializeField]
     Vector3 mPosition; //Player를 반대편으로 이동시킬 위치
+    public Vector3 origidPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +25,10 @@ public class Forest6 : MonoBehaviour
         {
             mPlayer.transform.position = mPosition;
         }
+        if (mPlayer.transform.position.x > 9.3f)
+        {
+            mPlayer.transform.position = origidPosition;
+        }
+
     }
 }

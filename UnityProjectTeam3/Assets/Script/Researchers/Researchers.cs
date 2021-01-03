@@ -14,12 +14,13 @@ public class Researchers : MonoBehaviour
     public bool isFind; // player를 발견했을 경우 (stageManager에서 넘어옴)
     public Transform playerTr; // target
     public GameObject player;   // 인게임에서 해주면 됩니다
+    public PlayerCtrl playerCtrl;
 
     public float distance = 4.0f;
     public bool GoOn = false;  // 연구원들이 필요한 곳까지 계속 이동하게 하기 위한 코드
 
     public bool Spin = true;
-    private int LorR;
+    public int LorR;
     public int EachNum; // 각각 스테이지에서 설정해주세요.
                         /* 
                          * researchers가 왼쪽을 바라볼 때 player를 발견해야 한다면 -1,
@@ -29,17 +30,20 @@ public class Researchers : MonoBehaviour
     private float timer;     /* City1 에서 연구원이 플레이어를 발견하고 나서 좀 지나고 움직이도록 만들기 위해서*
                               * GoOn이 참일때만 적용가능하다.*/
 
+    public float dieDistance = 0.2f;
+
     void Start()
     {
         //GetComponent로 초기화.
         mAnim = GetComponent<Animator>();
         mTr = GetComponent<Transform>();
-
+        dieDistance = 0.2f;
         coolTime = 4.0f;
         isFind = false;
         findSign.SetActive(false);
         playerTr = player.GetComponent<Transform>();
         timer = 0.0f;
+        LorR = 1;
     }
 
     void Update()
@@ -70,7 +74,7 @@ public class Researchers : MonoBehaviour
             }
         }
 
-        if ((LorR == EachNum) && (isFind == true)) // player가 박스 콜라이더에 있을 때
+        if ((LorR == EachNum || EachNum == 0) && (isFind == true)) // player가 박스 콜라이더에 있을 때
         {
             Spin = false;
             findSign.SetActive(true);
@@ -87,6 +91,11 @@ public class Researchers : MonoBehaviour
                 {
                     mTr.rotation = Quaternion.Euler(0, 0, 0);   // 우
                 }
+                if (Vector3.Magnitude(transform.position - newPos)<dieDistance)
+                {
+                    
+                    playerCtrl.OnStageFail();   //거리가 가까우면 죽여
+                }
             }
             if(GoOn)
             {
@@ -95,17 +104,28 @@ public class Researchers : MonoBehaviour
                 {
                     Vector3 newPos = new Vector3(mTr.position.x + distance, mTr.position.y, mTr.position.z);
                     transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime);
+                    Debug.Log(Vector3.Magnitude(transform.position - playerTr.position));
+                    if (Vector3.Magnitude(transform.position - playerTr.position) < 1.5f)
+                    {
+
+                        playerCtrl.OnStageFail();   //거리가 가까우면 죽여
+                    }
                 }
             }
 
         }
     }
 
+    public void RunAnimation()
+    {
+        mAnim.SetBool("Run", true);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            player.GetComponent<PlayerCtrl>().enabled = false;
+            //player.GetComponent<PlayerCtrl>().enabled = false;
             mAnim.SetBool("Run", false);
             Debug.Log("Game Over");
         }

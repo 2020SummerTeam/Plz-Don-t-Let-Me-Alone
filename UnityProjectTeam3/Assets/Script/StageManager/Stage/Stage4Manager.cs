@@ -7,6 +7,7 @@ public class Stage4Manager : MonoBehaviour
 {
     public GameObject player;
     public ButtonEvent button;
+    public ButtonEvent anotherButton;
     int buttonCounter;
     //get player's position, button, and button triggeredCounter
     //when player pushes button 1, buttonCounter++. and button gones
@@ -23,6 +24,11 @@ public class Stage4Manager : MonoBehaviour
 
     bool pauseClicked;
     //is pasueButton clicked? on right above;
+    public GameObject originMenuButton;
+    public GameObject changedMenuButton;
+    public GameObject cameraObject;
+    bool isCameraChanged;
+    public GameObject pauseButton;
 
 
 
@@ -34,6 +40,7 @@ public class Stage4Manager : MonoBehaviour
         pauseClicked = false;
         arrowObj.SetActive(false);
         talkBallon.SetActive(false);
+        isCameraChanged = false;
     }
 
     // Update is called once per frame
@@ -42,25 +49,36 @@ public class Stage4Manager : MonoBehaviour
         //on pushing button
         if (button.buttonTriggerd)
         {
-            if(buttonCounter <= 2)
+            if (!isCameraChanged)
             {
-                if(buttonCounter == 0)
+                if (buttonCounter <= 2)
                 {
-                    //set gravity scale
-                    obstacle.GetComponent<Rigidbody2D>().gravityScale = 100;
+                    if (buttonCounter == 0)
+                    {
+                        //set gravity scale
+                        obstacle.GetComponent<Rigidbody2D>().gravityScale = 100;
+                    }
+                    //on first to third time pushing button
+                    buttonCounter++;
+                    button.buttonTriggerd = false;
+                    StartCoroutine(SpawnButton());
                 }
-                //on first to third time pushing button
-                buttonCounter++;
-                button.buttonTriggerd = false;
-                StartCoroutine(SpawnButton());
+                else
+                {
+                    //we dont spawn anymore
+                    buttonCounter++;
+                    button.buttonTriggerd = false;
+                    //메뉴버튼 바꿔치기
+                    originMenuButton.SetActive(false);
+                    changedMenuButton.SetActive(true);
+                    StartCoroutine(ArrowMove());
+                }
             }
             else
             {
-                //we dont spawn anymore
-                buttonCounter++;
-                button.buttonTriggerd = false;
-                StartCoroutine(ArrowMove());
+                pauseClicked = true;
             }
+            
         }
 
     }
@@ -133,5 +151,22 @@ public class Stage4Manager : MonoBehaviour
     {
         Debug.Log("ok");
         pauseClicked = true;
+    }
+
+    public void ChangeCamera()
+    {
+        isCameraChanged = true;
+        cameraObject.transform.position = new Vector3(30, -7,-10);
+        player.transform.position = new Vector3(35, -9,0);
+        button = anotherButton;
+        pauseButton.SetActive(false);
+        arrowObj.SetActive(false);
+    }
+
+    public void ResumeCamera()
+    {
+        cameraObject.transform.position = new Vector3(0, 0,-10);
+        player.transform.position = new Vector3(-7, -3.24f,0);
+        pauseButton.SetActive(true);
     }
 }

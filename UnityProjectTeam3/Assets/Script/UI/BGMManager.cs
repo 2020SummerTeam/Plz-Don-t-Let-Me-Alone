@@ -30,7 +30,7 @@ public class BGMManager : MonoBehaviour
         int sceneNum = SceneManager.GetActiveScene().buildIndex;
 
         // scene 별로 배경음악 바꿈
-        if (sceneNum == 0 || sceneNum == 1) // BGM
+        if (sceneNum == 0 || sceneNum == 1 || sceneNum == 27) // BGM
         {
             bgmPlayer.clip = bgmClip[0];
         }

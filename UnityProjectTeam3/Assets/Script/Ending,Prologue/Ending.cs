@@ -11,9 +11,11 @@ public class Ending : MonoBehaviour
     public GameObject cam;
     public GameObject[] animations;
     public GameObject backGround;
+    public BGMManager bgmManager;
     // Start is called before the first frame update
     void Start()
     {
+        bgmManager = BGMManager.instance;
         StartCoroutine(EndingCorouitne());
     }
 
@@ -24,6 +26,7 @@ public class Ending : MonoBehaviour
     }
     IEnumerator EndingCorouitne()
     {
+        //bgmManager.bgmPlayer.volume = 0;
         float timer = 0;
         while (timer < 3f)
         {
@@ -81,6 +84,7 @@ public class Ending : MonoBehaviour
             fadeImage.color = new Color(0, 0, 0, timer / 3f);
             yield return null;
         }
+        //bgmManager.bgmPlayer.volume = 1;
         SceneManager.LoadScene(0);
 
 

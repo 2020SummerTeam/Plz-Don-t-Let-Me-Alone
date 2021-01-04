@@ -17,6 +17,11 @@ public class MainUI : MonoBehaviour
     // 데이터 불러오기
     public void GameLoad()
     {
+        /*
+        PlayerPrefs.SetInt("CurrentStage", 2);
+        PlayerPrefs.SetInt("ClearStage", 1);
+        PlayerPrefs.SetInt("Prologue", 0);
+        */
         if (!PlayerPrefs.HasKey("CurrentStage"))
         {
             PlayerPrefs.SetInt("CurrentStage", 2);
@@ -46,6 +51,11 @@ public class MainUI : MonoBehaviour
 
     }
 
+    public void Quit()
+    {
+        Debug.Log("as");
+        Application.Quit();
+    }
 
     // button click event
 

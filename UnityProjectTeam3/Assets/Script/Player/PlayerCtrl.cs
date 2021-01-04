@@ -169,12 +169,12 @@ public class PlayerCtrl : MonoBehaviour
                         }
 
                         //아래로 드래그 했을 때 IsSit을 true -> oncollision에서 체크
-                        if (vertical < -1 && IsInteracObj)
+                        if (vertical < -50 && IsInteracObj)
                         {
                             Sit(true);
                             horizontal = 0;
                         }
-                        else if (vertical > 1)
+                        else if (vertical > 50)
                         {
                             Sit(false);
                         }
@@ -501,11 +501,16 @@ public class PlayerCtrl : MonoBehaviour
     {
         audioSource.clip = fallClip;
         audioSource.Play();
-        mAnim.SetBool(AnimHash.DEAD,true);
+        mAnim.SetBool(AnimHash.DEAD, true);
         mAnim.SetBool(AnimHash.RUN, false);
         mAnim.SetBool(AnimHash.GRAB, false);
         mAnim.SetFloat(AnimHash.JUMP, 0);
         mAnim.SetBool(AnimHash.SIT, false);
+        /*
+        if (SceneManager.GetActiveScene().buildIndex == 26)
+        {
+            PlayerPrefs.SetInt("ClearStage", 26);
+        }*/
     }
 
     //20200808 상훈
@@ -519,16 +524,51 @@ public class PlayerCtrl : MonoBehaviour
         SceneManager.LoadScene(scene.name);
     }
 
+    float pos = 0;
+    void OnDrawGizmos()
+    {
+        if (jumpable)
+        {
+            Gizmos.color = new Color(1, 0, 0, 0.5f);
+            Gizmos.DrawCube(new Vector3(transform.position.x, pos, transform.position.z), new Vector3(0.5f, 0.5f, 0.5f));
+        }
+        else
+        {
+            Gizmos.color = new Color(0, 1, 0, 0.5f);
+            Gizmos.DrawCube(new Vector3(transform.position.x, pos, transform.position.z), new Vector3(0.5f, 0.5f, 0.5f));
+
+        }
+    }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.transform.position.y < transform.position.y)
+        float yScale = collision.transform.localScale.y;
+        BoxCollider2D box = collision.gameObject.GetComponent<BoxCollider2D>();
+        if(box != null)
+        {
+            pos = collision.transform.position.y + collision.collider.offset.y * yScale + box.size.y * yScale / 2f + 0.4f;
+        }
+        
+        //벽타기
+        if (pos < transform.position.y)
+        {
+           
+
+            jumpable = true;
+        }
+        else
+        {
+                        jumpable = false;
+        }
+
+        /*
+        if (collision.transform.position.y < transform.position.y)
         {
             jumpable = true;
         }
         else
         {
             jumpable = false;
-        }
+        }*/
         if (collision.gameObject.CompareTag("InteractObj"))
         {
             IsInteracObj = true;

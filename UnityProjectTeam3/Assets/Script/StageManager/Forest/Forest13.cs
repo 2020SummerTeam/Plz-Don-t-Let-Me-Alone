@@ -46,6 +46,7 @@ public class Forest13 : MonoBehaviour
     public AudioSource beeAudio;
 
     public ButtonEvent buttonEvent;
+    public GameObject transparentWall;
 
     void Start()
     {
@@ -94,6 +95,7 @@ public class Forest13 : MonoBehaviour
                     swipeAudio.Play();
                     startPos = Input.mousePosition;
                     isCameraMove = true; // 영역 내에서 터치 시작했을 때에 
+                    transparentWall.SetActive(false);
                 }
                 if (touchedObject == parents)
                 {

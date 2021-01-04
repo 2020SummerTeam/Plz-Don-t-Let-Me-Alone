@@ -166,6 +166,7 @@ public class Forest4 : MonoBehaviour
         }
         //벌에 부딪히면 열루 내려와요
         bearScript.DieAnimation();
+        explanationObject.SetActive(false);
         isBearDead = true;
         bearScript.attackPlayer = false;
     }

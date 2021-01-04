@@ -1137,6 +1137,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 393350149247698604, guid: 78caa7749853aa14fbaadca68d189581,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2085339784722137829, guid: 78caa7749853aa14fbaadca68d189581,
         type: 3}
       propertyPath: m_Size.y
@@ -1207,6 +1212,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: BearObject
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 393350149247698604, guid: 78caa7749853aa14fbaadca68d189581, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78caa7749853aa14fbaadca68d189581, type: 3}

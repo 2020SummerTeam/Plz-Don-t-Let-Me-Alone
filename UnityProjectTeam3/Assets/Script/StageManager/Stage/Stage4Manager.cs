@@ -91,7 +91,7 @@ public class Stage4Manager : MonoBehaviour
     IEnumerator SpawnButton()
     {
         //spawn button after waiting for 2 secodns
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         while(button.transform.position.x - player.transform.position.x < 1.5f)
         {
             //wait for distance

@@ -12,6 +12,7 @@ public class Forest12 : MonoBehaviour
     public BoxCollider2D[] platformTouchArea = new BoxCollider2D[5]; // 주변(터치하면 모습이 보이는 영역) // 2개의 박스콜라이더가 존재할 때 위에 있는 걸로 할당함
     public GameObject player;
     public PlayerCtrl playerCtrl;
+    public ButtonEvent buttonEvent;
 
     void Start()
     {
@@ -28,13 +29,20 @@ public class Forest12 : MonoBehaviour
         {
             playerCtrl.OnStageFail();
         }
+        if (buttonEvent.buttonTriggerd)
+        {
+            buttonEvent.buttonTriggerd = false;
+            for (int i = 0; i <= 3; i++)
+            {
+                platformRend[i].enabled = false;    // 투명해짐
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))  // 플레이어가 버튼 눌렀을 때, 바닥 플랫폼 제외하고 투명해짐
         {
-            Debug.Log("1");
             for (int i = 0; i <= 3; i++)
             {
                 platformRend[i].enabled = false;    // 투명해짐

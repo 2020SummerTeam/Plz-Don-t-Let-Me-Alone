@@ -151,9 +151,10 @@ public class PlayerCtrl : MonoBehaviour
                         }
 
                         //아래로 드래그 했을 때 IsSit을 true -> oncollision에서 체크
-                        if (vertical < -1)
+                        if (vertical < -1 && IsInteracObj)
                         {
                             Sit(true);
+                            horizontal = 0;
                         }
                         else if (vertical > 1)
                         {
@@ -372,7 +373,6 @@ public class PlayerCtrl : MonoBehaviour
     {
         int StageLevel = SceneManager.GetActiveScene().buildIndex;
         PlayerPrefs.SetInt("ClearStage", StageLevel);   // main-stages 저장
-        GameSave();
         if (StageLevel != 27)    // City 5 = 26, Ending = 27
         {
             StageLevel++;

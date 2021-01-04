@@ -21,6 +21,7 @@ public class Stages : MonoBehaviour
     public GameObject camera;
     private float cameraSize;    // 카메라 가로 절반 사이즈
     public GameObject bound; // 카메라 이동 가능 범위 구하기 위해
+    public GameObject target;
     private float boundX;
     private float boundsize;
 
@@ -112,8 +113,55 @@ public class Stages : MonoBehaviour
             }
         }
     }
-    
-    
+
+
+    void OnGUI()
+    {
+
+        Event e = Event.current;
+        if (e.clickCount == 1)
+        {
+            CastRay();
+            if (target == null)
+            {
+                return;
+            }
+            for(int i = 0;i<25;i++)
+            {
+                GameObject obj = ParentsStep[i];
+                if (target.gameObject == obj)
+                {
+                    Debug.Log("로딩됐어");
+                    SceneManager.LoadScene(i+2);
+
+                }
+            }
+
+
+        }
+    }
+
+    void CastRay() // 유닛 히트처리 부분.  레이를 쏴서 처리합니다. 
+    {
+
+        target = null;
+
+        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f);
+
+
+
+        if (hit.collider != null)   //히트되었다면 여기서 실행
+        {
+
+            target = hit.collider.gameObject;  //히트 된 게임 오브젝트를 타겟으로 지정
+
+        }
+
+    }
+
+
     // 데이터 불러오기
     public void GameLoad()
     {

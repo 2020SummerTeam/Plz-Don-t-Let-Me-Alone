@@ -23,12 +23,16 @@ public class MainUI : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey("ClearStage"))
         {
-            PlayerPrefs.SetInt("ClearStage", 2);
+            PlayerPrefs.SetInt("ClearStage", 1);
+        }
+        if (!PlayerPrefs.HasKey("Prologue"))
+        {
+            PlayerPrefs.SetInt("Prologue", 0);
         }
         CurrentStage = PlayerPrefs.GetInt("CurrentStage");    // 제일 높은 스테이지 번호
         int ClearStage = PlayerPrefs.GetInt("ClearStage");    // 마지막 스테이지 클리어
         
-        if(ClearStage > 2)
+        if (PlayerPrefs.GetInt("Prologue") == 1)
         {
             Start.SetActive(false);
             continueButton.SetActive(true);
@@ -52,8 +56,9 @@ public class MainUI : MonoBehaviour
 
     public void OnClickStart()
     {
-        
+
         //프롤로그 먼저 보여줘
+        PlayerPrefs.SetInt("Prologue", 1);
         SceneManager.LoadScene(28);
     }
 

@@ -29,6 +29,8 @@ public class Stage4Manager : MonoBehaviour
     public GameObject cameraObject;
     bool isCameraChanged;
     public GameObject pauseButton;
+    public GameObject rope;
+    public AudioSource[] audioSources;
 
 
 
@@ -56,6 +58,9 @@ public class Stage4Manager : MonoBehaviour
                     if (buttonCounter == 0)
                     {
                         //set gravity scale
+                        rope.SetActive(false);
+                        audioSources[0].Play();
+                        audioSources[1].Play();
                         obstacle.GetComponent<Rigidbody2D>().gravityScale = 100;
                     }
                     //on first to third time pushing button

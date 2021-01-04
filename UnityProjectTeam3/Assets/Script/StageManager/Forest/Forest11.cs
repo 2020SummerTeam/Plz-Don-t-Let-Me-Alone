@@ -14,18 +14,22 @@ public class Forest11 : MonoBehaviour
     public int cnt = 0; // 곰이 박스와 부딪힐 때, smallBox일 경우 cnt = 1, bigBox일 경우 cnt = 2가 됨
     public GameObject bee;
     public float attacktime = 0f;
-
+    bool beeSound = false;
+    public AudioSource beeAudio;
+    public AudioSource hiveAudio;
+    bool hiveSound = false;
     // bug
     public GameObject player;
     public GameObject tree;
     public GameObject bug;
+    bool bugActive = false;
 
     // Researchers
     public findEvent findEvent;    // player가 findEvent 박스 콜라이더 안에 있는지
     public Researchers Researchers;
     public GameObject ResearcherDoor;
     public bool isOpenDoor;
-
+    float beeTimer = 0;
     // ballon ctrl
     public GameObject textBallon;
 
@@ -44,35 +48,57 @@ public class Forest11 : MonoBehaviour
 
     void Update()
     {
+        if (bugActive)
+        {
+            beeTimer += Time.deltaTime;
+            if (beeTimer > 2f)
+            {
+                playerCtrl.OnStageFail();
+            }
+        }
+
+        if (bee.activeSelf == false && player.transform.position.x >= tree.transform.position.x - 3f)
+        {
+            bugActive = true;
+
+            playerCtrl.isEnabled = false;
+            bug.SetActive(true);
+            if (!beeSound)
+            {
+                beeAudio.Play();
+                beeSound = true;
+            }
+            // bug의 player 추적
+            if (bug.transform.position.x < player.transform.position.x - 0.01)   // bug가 player의 왼쪽에 있을 경우
+            {
+                bug.transform.rotation = Quaternion.Euler(0, 180, 0);    // 회전
+                bug.transform.position += new Vector3(Time.deltaTime, 0, 0);
+            }
+            else if (bug.transform.position.x > player.transform.position.x + 0.01)   //  bug가 player의 오른쪽에 있을 경우
+            {
+                bug.transform.rotation = Quaternion.Euler(0, 0, 0);
+                bug.transform.position -= new Vector3(Time.deltaTime, 0, 0);
+            }
+        }
+
         // Bear Control
         if (bearCooltime > 0)   // 곰이 움직이기 전 (5초)
         {
             bearCooltime -= Time.deltaTime;
 
             // 벌통을 떨어뜨리지 않고, 나무 지나갈 경우 bug 나타남 (game over)
-            if (bee.activeSelf == false && player.transform.position.x >= tree.transform.position.x - 1.2f)
-            {
-                Debug.Log("Game Over");
-                playerCtrl.OnStageFail();
-                player.GetComponent<PlayerCtrl>().enabled = false;
-                bug.SetActive(true);
+           
 
-                // bug의 player 추적
-                if (bug.transform.position.x < player.transform.position.x - 0.01)   // bug가 player의 왼쪽에 있을 경우
-                {
-                    bug.transform.rotation = Quaternion.Euler(0, 180, 0);    // 회전
-                    bug.transform.position += new Vector3(Time.deltaTime, 0, 0);
-                }
-                else if (bug.transform.position.x > player.transform.position.x + 0.01)   //  bug가 player의 오른쪽에 있을 경우
-                {
-                    bug.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    bug.transform.position -= new Vector3(Time.deltaTime, 0, 0);
-                }
-            }
 
         }
         else
         {
+            if (hiveSound)
+            {
+                hiveAudio.Play();
+                hiveSound = true;
+
+            }
             if (bearScript.isBeeCol)    // 곰이 벌과 부딪혔을 때
             {
                 bear.transform.position += new Vector3(0, 0, 0); // 이동 멈춤

@@ -42,7 +42,15 @@ public class City5 : MonoBehaviour
     bool isEnd;
 
     public Image endSprite;
+    float shakeTimer = 0;
 
+    public AudioSource teddySource;
+    public AudioSource leverSource;
+    public AudioSource escalatorSource;
+    public AudioSource glassSource;
+    public AudioSource carBreakSource;
+    public AudioSource sandyBumpSource;
+    public AudioSource sandyFallSource;
 
 
     // Start is called before the first frame update
@@ -52,7 +60,7 @@ public class City5 : MonoBehaviour
         shakeDetectionThreshold *= shakeDetectionThreshold;
         lowPassValue = Input.acceleration;//다 쉐이크를 위한거/
         isEnd = false;
-
+        shakeTimer = 0;
         shakeNumber = 0;
         isNightMode = false;    //처음에 끄고 시작함.
         isActioned = false;
@@ -75,26 +83,30 @@ public class City5 : MonoBehaviour
                 StartCoroutine(EndCoroutine());
             }
             isEnd = true;
-            playerCtrl.Die();
-            if (mCar.transform.position.x > 42.5f){
-                mCar.transform.Translate(-2f, 0f, 0f);
-            }
+
+
         }
 
         Vector3 acceleration = Input.acceleration;
         lowPassValue = Vector3.Lerp(lowPassValue, acceleration, lowPassFilterFactor);
         Vector3 deltaAcceleration = acceleration - lowPassValue;
 
-        if (deltaAcceleration.sqrMagnitude >= shakeDetectionThreshold)
+        shakeTimer += Time.deltaTime;
+        if (shakeTimer > 1) 
         {
-            // Perform your "shaking actions" here. If necessary, add suitable
-            // guards in the if check above to avoid redundant handling during
-            // the same shake (e.g. a minimum refractory period).
-            Debug.Log("Shake event detected at time " + Time.time);
-            OnShake();
+            if (deltaAcceleration.sqrMagnitude >= shakeDetectionThreshold)
+            {
+                // Perform your "shaking actions" here. If necessary, add suitable
+                // guards in the if check above to avoid redundant handling during
+                // the same shake (e.g. a minimum refractory period).
+                Debug.Log("Shake event detected at time " + Time.time);
+                OnShake();
+                shakeTimer = 0;
+            }
+
         }
 
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             OnShake();
         }
@@ -122,6 +134,10 @@ public class City5 : MonoBehaviour
         {
             return;
         }
+        if(shakeNumber != 4)
+        {
+            teddySource.Play();
+        }
         shakingObject[shakeNumber].transform.localPosition = shakingObject[shakeNumber].transform.localPosition - new Vector3(0, 2, 0);
         shakeNumber++;
        
@@ -137,7 +153,8 @@ public class City5 : MonoBehaviour
             {
                 if (isActioned)
                 {
-
+                    escalatorSource.Stop();
+                    leverSource.Play();
                     escalatorCollider.SetActive(true);
                     unActionedLever.SetActive(true);
                     actionedLever.SetActive(false);
@@ -145,6 +162,8 @@ public class City5 : MonoBehaviour
                 }
                 else
                 {
+                    escalatorSource.Play();
+                    leverSource.Play();
                     escalatorCollider.SetActive(false);
                     unActionedLever.SetActive(false);
                     actionedLever.SetActive(true);
@@ -182,7 +201,17 @@ public class City5 : MonoBehaviour
 
     IEnumerator EndCoroutine()
     {
+        carBreakSource.Play();
+        sandyBumpSource.Play();
+        sandyFallSource.Play();
+        playerCtrl.Die();
         float timer = 0;
+        while (mCar.transform.position.x > 47.5f)
+        {
+            mCar.transform.Translate(-2f, 0f, 0f);
+            yield return null;
+        }
+
         endSprite.gameObject.SetActive(true);
         while (timer < 5)
         {
@@ -220,6 +249,7 @@ public class City5 : MonoBehaviour
                 {
                     shopArray[1].SetActive(false);
                     shopArray[2].SetActive(true);
+                    glassSource.Play();
                     isGlassCrashed = true;
                 }
             }

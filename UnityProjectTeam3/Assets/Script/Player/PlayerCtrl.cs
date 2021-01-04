@@ -38,11 +38,23 @@ public class PlayerCtrl : MonoBehaviour
 
     public bool watchingRight;  //상자이동방향 맞추기위해서
     public bool isButtonDown;   //2020 0809 푸시 여기서 해결할래요
-    bool isPushingBox;          //상자를 미는중인지 알아야 호출을 하빈다
+    public bool isPushingBox;          //상자를 미는중인지 알아야 호출을 하빈다
     GameObject pushingBoxObj;     //내가 밀고있는 상자
     bool jumpable;
+
+    public AudioSource audioSource;
+    public AudioClip stepClip;
+    public AudioClip boxClip;
+    public AudioClip jumpClip;
+    public AudioClip landClip;
+    public AudioClip sitClip;
+    public AudioClip fallClip;
+
+    public bool isEnabled = true;
+    Rigidbody2D teddyRigidbody;
     void Start()
     {
+        teddyRigidbody = null;
         GameSave(); // 스테이지 데이터 저장
         stageEnd = false;
         //GetComponent로 초기화.
@@ -56,6 +68,7 @@ public class PlayerCtrl : MonoBehaviour
         isPushingBox = false;
         pushingBoxObj = null;
         jumpable = true;
+        isEnabled = true;
         //find center x on scren
 
         // stage clear
@@ -73,7 +86,12 @@ public class PlayerCtrl : MonoBehaviour
 
     void Update()
     {
- 
+
+        if (!isEnabled)
+        {
+            //스테이지매니저에서 멈출 떄 쓰는거
+            return;
+        }
         if (parents.stageClear == false)    // stage 진행중
         {
 
@@ -220,6 +238,13 @@ public class PlayerCtrl : MonoBehaviour
                             //이거를 else로 놓아주는 이유는 보는방향이 바뀌면 안되니까
                             watchingRight = true;
                             transform.rotation = Quaternion.Euler(0, 0, 0);
+                            if (!audioSource.isPlaying)
+                            {
+                                audioSource.clip = stepClip;
+
+                                audioSource.Play();
+                            }
+                                
                             mAnim.SetBool(AnimHash.RUN, true);
                             mAnim.SetBool(AnimHash.GRAB, false);
                         }
@@ -241,6 +266,13 @@ public class PlayerCtrl : MonoBehaviour
                         //박스와 상호작용 하고있는 상태라면
                         if (isPushingBox)
                         {
+                            if (!audioSource.isPlaying)
+                            {
+                                audioSource.clip = stepClip;
+
+                                audioSource.Play();
+                            }
+
                             if (watchingRight)
                             {
                                 mAnim.SetBool(AnimHash.RUN, true);
@@ -252,6 +284,13 @@ public class PlayerCtrl : MonoBehaviour
                         }
                         else
                         {
+                            if (!audioSource.isPlaying)
+                            {
+                                audioSource.clip = stepClip;
+
+                                audioSource.Play();
+                            }
+
                             watchingRight = false;
                             transform.rotation = Quaternion.Euler(0, 180, 0);
                             mAnim.SetBool(AnimHash.RUN, true);
@@ -261,6 +300,13 @@ public class PlayerCtrl : MonoBehaviour
                     {
                         if (isPushingBox)
                         {
+                            if (!audioSource.isPlaying)
+                            {
+                                audioSource.clip = stepClip;
+
+                                audioSource.Play();
+                            }
+
                             if (watchingRight)
                             {
                                 mAnim.SetBool(AnimHash.RUN, true);
@@ -272,6 +318,13 @@ public class PlayerCtrl : MonoBehaviour
                         }
                         else
                         {
+                            if (!audioSource.isPlaying)
+                            {
+                                audioSource.clip = stepClip;
+
+                                audioSource.Play();
+                            }
+
                             //이거를 else로 놓아주는 이유는 보는방향이 바뀌면 안되니까
                             watchingRight = true;
                             transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -311,6 +364,7 @@ public class PlayerCtrl : MonoBehaviour
             mAnim.SetFloat(AnimHash.JUMP, mRB.velocity.y);
             if (mRB.velocity.y <= 1f && mRB.velocity.y >= -1f)
             {
+                
                 mAnim.SetBool(AnimHash.IDLE, true);
             }
             else
@@ -322,14 +376,13 @@ public class PlayerCtrl : MonoBehaviour
             //점프모션 및 점프 입력받기.
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("doing jumo");
                 Jump();
             }
 
             //added because i cant use spacebar
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                Debug.Log("doing jumo");
+
                 Jump();
             }
 
@@ -354,11 +407,19 @@ public class PlayerCtrl : MonoBehaviour
             {
                 // 도망가는 방향과 똑같이 바라본 후 이동
                 transform.rotation = Quaternion.Euler(0, 0, 0);
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.clip = stepClip;
+
+                    audioSource.Play();
+                }
+
                 mAnim.SetBool(AnimHash.RUN, true);
                 mRB.velocity = new Vector2(mSpeed, mRB.velocity.y);
 
                 if (parents.lefttime <= 0)  // 부모 쫓아간 후
                 {
+                    audioSource.Stop();
                     mRB.constraints = RigidbodyConstraints2D.FreezePosition;
                     mAnim.SetBool(AnimHash.RUN, false); // 이동 멈춤
 
@@ -385,6 +446,10 @@ public class PlayerCtrl : MonoBehaviour
     {
         //점프가 아닐 때만 위로 힘을 준다!
         //2020 08 08 changed ==0 to <=1 >=-1
+        if (!isEnabled)
+        {
+            return;
+        }
         if (isPushingBox)
         {
             return;
@@ -396,8 +461,16 @@ public class PlayerCtrl : MonoBehaviour
         if (mAnim.GetFloat(AnimHash.JUMP) >= -1
             && mAnim.GetFloat(AnimHash.JUMP) <=1)
         {
+            audioSource.clip = jumpClip;
+                audioSource.Play();
             mRB.AddForce(mJumpVector, ForceMode2D.Impulse);
         }
+    }
+
+    public void LandSound()
+    {
+        audioSource.clip = landClip;
+            audioSource.Play();
     }
 
     // 데이터 저장
@@ -416,12 +489,23 @@ public class PlayerCtrl : MonoBehaviour
     //forset1에서 흔들었을 때 콜을 해줘야돼서 그렇다.
     public void Sit(bool isSitting)
     {
+        if (isSitting)
+        {
+            audioSource.clip = sitClip;
+                audioSource.Play();
+        }
         IsSit = isSitting;
         mAnim.SetBool(AnimHash.SIT, isSitting);
     }
     public void Die()
     {
+        audioSource.clip = fallClip;
+        audioSource.Play();
         mAnim.SetBool(AnimHash.DEAD,true);
+        mAnim.SetBool(AnimHash.RUN, false);
+        mAnim.SetBool(AnimHash.GRAB, false);
+        mAnim.SetFloat(AnimHash.JUMP, 0);
+        mAnim.SetBool(AnimHash.SIT, false);
     }
 
     //20200808 상훈
@@ -430,6 +514,7 @@ public class PlayerCtrl : MonoBehaviour
     //현재는 액티브된 씬만 리로드하도록 설정하였습니다.
     public void OnStageFail()
     {
+        Debug.Log("머때매");
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
@@ -453,9 +538,18 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     return;
                 }
+                audioSource.clip = boxClip;
+                audioSource.Play();
+
                 isPushingBox = true;
                 pushingBoxObj = collision.gameObject;   //save first, to use it in update()
                 pushingBoxObj.transform.SetParent(transform);   //set parent to player
+                teddyRigidbody = pushingBoxObj.GetComponent<Rigidbody2D>();
+                if (teddyRigidbody !=null)
+                {
+                    teddyRigidbody.bodyType = RigidbodyType2D.Kinematic;
+                }
+
             }
             
         }
@@ -470,6 +564,10 @@ public class PlayerCtrl : MonoBehaviour
         if (collision.gameObject.CompareTag("InteractObj"))
         {
             IsInteracObj = false;
+            if (teddyRigidbody != null)
+            {
+                teddyRigidbody.bodyType = RigidbodyType2D.Dynamic;
+            }
         }
     }
 }

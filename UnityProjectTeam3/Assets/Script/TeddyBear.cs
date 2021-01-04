@@ -5,6 +5,7 @@ using UnityEngine;
 public class TeddyBear : MonoBehaviour
 {
     public GameObject player;//draw character
+    public AudioSource audioSource;
     IEnumerator OnMouseDown() // 단어 드래그 드랍
     {
         Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position);
@@ -31,5 +32,10 @@ public class TeddyBear : MonoBehaviour
             yield return null;
         }
         player.GetComponent<PlayerCtrl>().enabled = true; //단어를 터치하지 않을때는 스크립트 활성화
+    }
+    IEnumerator OnMouseUp()
+    {
+        audioSource.Play();
+        yield return null;
     }
 }

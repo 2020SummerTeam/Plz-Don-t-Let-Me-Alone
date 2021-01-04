@@ -15,6 +15,7 @@ public class reflectPlayer : MonoBehaviour
     public int count;
     public float time;
     public bool isJump;
+    public AudioSource audio;
     void Start()
     {
         pRB = player.GetComponent<Rigidbody2D>();
@@ -25,6 +26,7 @@ public class reflectPlayer : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && !parents.stageClear)
         {
+            audio.Play();
             pRB.velocity = Vector2.zero;
             pRB.AddForce(pJumpVector, ForceMode2D.Impulse); // 점프
             isJump = false;

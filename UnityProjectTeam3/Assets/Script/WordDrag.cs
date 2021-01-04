@@ -7,11 +7,13 @@ using UnityEngine;
 public class WordDrag : MonoBehaviour
 {
     public GameObject player;//draw character
+    public AudioSource audioSource;
     IEnumerator OnMouseDown() // 단어 드래그 드랍
     {
         Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, scrSpace.z));
 
+      
 
         while (Input.GetMouseButton(0))
         {
@@ -34,4 +36,11 @@ public class WordDrag : MonoBehaviour
         }
         player.GetComponent<PlayerCtrl>().enabled = true; //단어를 터치하지 않을때는 스크립트 활성화
     }
+
+    IEnumerator OnMouseUp() // 단어 드래그 드랍
+    {
+        audioSource.Play();
+        yield return null;
+    }
+
 }

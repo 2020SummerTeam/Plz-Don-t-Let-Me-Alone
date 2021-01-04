@@ -27,6 +27,11 @@ public class Forest15 : MonoBehaviour
     private BoxCollider2D ReCol;
     private Rigidbody2D ReRB;
 
+    public AudioSource audioSource;
+    public PlayerCtrl playerCtrl;
+    public Rigidbody2D boxRigidbody;
+
+
     void Start()
     {
         // parents init
@@ -48,7 +53,15 @@ public class Forest15 : MonoBehaviour
 
     void Update()
     {
-
+        if (playerCtrl.isPushingBox)
+        {
+            boxRigidbody.bodyType = RigidbodyType2D.Dynamic;
+            boxRigidbody.mass = 10;
+        }
+        else
+        {
+            boxRigidbody.mass = 100;
+        }
         // Researchers
         if (findEvent.CanFind == true)  // player가 findEvent 박스 콜라이더 안에 있을 때
         {
@@ -160,14 +173,17 @@ public class Forest15 : MonoBehaviour
     {
         if (collision.gameObject == box)
         {
+            audioSource.Play();
             expandBox = true;
         }
         if (collision.gameObject == parents)
         {
+            audioSource.Play();
             expandPa = true;
         }
         if (collision.gameObject == researchers)
         {
+            audioSource.Play();
             expandRe = true;
         }
     }

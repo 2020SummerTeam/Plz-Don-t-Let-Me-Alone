@@ -10,12 +10,14 @@ using UnityEngine.UI;
 public class ButtonEvent : MonoBehaviour
 {
     public bool buttonTriggerd = false; // 플레이어가 버튼 누를때
+    public AudioSource audioSource;
     //is button is pressed
 
     // Start is called before the first frame update
     void Awake()
     {
         Debug.Log("Button enable");
+        audioSource.transform.SetParent(null);
        
     }
 
@@ -26,6 +28,7 @@ public class ButtonEvent : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("hit player");
+            audioSource.Play();
             this.gameObject.SetActive(false);
             buttonTriggerd = true;
         }

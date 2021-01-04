@@ -25,6 +25,10 @@ public class Stone : MonoBehaviour
 
     private Animator KidsAnim;
     public bool stageFail;  //돌에 맞아도 스테이지페일이 안될 수도 있게.
+    public AudioClip hitClip;
+    public AudioClip explanationClip;
+    public AudioClip throwingClip;
+    public AudioSource audioSource;
 
     void Start()
     {
@@ -49,9 +53,12 @@ public class Stone : MonoBehaviour
 
     IEnumerator SimulateProjectile()
     {
+        audioSource.clip = explanationClip;
+        audioSource.Play();
         yield return new WaitForSeconds(1f);  // 1초 (player가 점프 중일 경우 떨어진 이후의 위치로 계산)
-
-        mTr.transform.position += new Vector3(0, 0, 20);    // 숨겨놨다가 앞으로 당겨옴, 위치 정확히 조정
+        audioSource.clip = throwingClip;
+        audioSource.Play();
+        mTr.transform.position += new Vector3(0, 0, -3);    // 숨겨놨다가 앞으로 당겨옴, 위치 정확히 조정
 
         float target_Distance = Vector3.Distance(Projectile.position, pTr.position); // taget(player)와의 거리 계산
         float projectile_Velocity = target_Distance / (Mathf.Sin(2 * firingAngle * Mathf.Deg2Rad) / gravity);   // 각도(45도)에서 물체를 던지는데 필요한 속도 계산
@@ -74,12 +81,21 @@ public class Stone : MonoBehaviour
 
             yield return null;
         }
+
+        if (stageFail)
+        {
+            playerCtrl.Die();
+            audioSource.clip = hitClip;
+            audioSource.Play();
+        }
+        mTr.transform.position = InitPos - new Vector3(0, 0, 20);     // 뒤로 사라지게 함
+        yield return new WaitForSeconds(1f);
         if(stageFail)
             playerCtrl.OnStageFail();
 
         cnt = 0;
         isThrow = false;
-        mTr.transform.position = InitPos - new Vector3(0, 0, 20);    // 뒤로 사라지게 함
+   
     }
 
 

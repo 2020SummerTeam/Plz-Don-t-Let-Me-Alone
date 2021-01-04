@@ -7,7 +7,7 @@ public class RotateLight : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private bool isButtonDown;
     public GameObject mlight;
-
+    public AudioSource audioSource;
     private int num;
 
     void Start()
@@ -32,7 +32,8 @@ public class RotateLight : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
     public void rotate()
-    {   
+    {
+        audioSource.Play();
         mlight.transform.Rotate(new Vector3(0, 0, -13));
     }
 

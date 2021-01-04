@@ -11,13 +11,16 @@ public class Forest2 : MonoBehaviour
     public PlayerCtrl playerScript;
     public GameObject bearTextBallon;   //곰이 자고있으면 zzz가 뜨니까 그거 지워주는 역할
     bool isMuted;
-    public SettingMenu settings;
+    public AudioSource audioSource;
+    public AudioClip explanationClip;
+
     //스테이지 2의 주 재료들
 
     void Start()
     {
         isMuted = BGMManager.instance.bgmPlayer.mute;
         bearScript.SleepAnimation();
+        audioSource.Play();
     }
 
     private void Update()
@@ -42,6 +45,10 @@ public class Forest2 : MonoBehaviour
         if (!isMuted)
         {
             //음소거가 안됐을때
+            audioSource.Stop();
+            audioSource.clip = explanationClip;
+            audioSource.loop = false;
+            audioSource.Play();
             StartCoroutine(BearMoveCoroutine());
         }
     }

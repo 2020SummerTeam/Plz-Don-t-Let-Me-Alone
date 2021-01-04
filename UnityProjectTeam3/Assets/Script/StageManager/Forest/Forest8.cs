@@ -16,6 +16,10 @@ public class Forest8 : MonoBehaviour
     bool coroutineRunning;
     public Forest8Tree tree;
     public GameObject buttonObject;
+    public AudioSource buttonAudio;
+    public AudioSource hiveAudio;
+    public AudioSource doorAudio;
+    bool hiveSound = false;
 
 
     // open door
@@ -78,8 +82,13 @@ public class Forest8 : MonoBehaviour
 
         if(tree.HitTree == true)
         {
+            if (!hiveSound)
+            {
+                hiveSound = true;
+                hiveAudio.Play();
+            }
             bearScript.attackPlayer = false;
-            bearScript.MoveAnimation();
+            bearScript.AttackAnimation();
         }
 
         // open door
@@ -132,8 +141,20 @@ public class Forest8 : MonoBehaviour
             isPlayerOnButton = true;
             isOpen = true;
             buttonObject.SetActive(false);
+
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            doorAudio.Play();
+            buttonAudio.Play();
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (isOpen == true && collision.gameObject.CompareTag("Player"))

@@ -42,6 +42,11 @@ public class Forest13 : MonoBehaviour
 
     public PlayerCtrl playerCtrl;
 
+    public AudioSource swipeAudio;
+    public AudioSource beeAudio;
+
+    public ButtonEvent buttonEvent;
+
     void Start()
     {
         // camera moving init
@@ -67,6 +72,14 @@ public class Forest13 : MonoBehaviour
 
     void Update()
     {
+        if (buttonEvent.buttonTriggerd)
+        {
+            buttonEvent.buttonTriggerd = false;
+            beeAudio.Play();
+            bug.SetActive(true);
+            BugActive = true;
+        }
+
 
         if (Input.GetMouseButtonDown(0))     // 터치 이벤트
         {
@@ -78,11 +91,13 @@ public class Forest13 : MonoBehaviour
 
                 if ((touchedObject == swipeArea) && (swipeArea != null))    // swipeArea가 비어있지 않고, 터치한 오브젝트가 swipeArea 일 때
                 {
+                    swipeAudio.Play();
                     startPos = Input.mousePosition;
                     isCameraMove = true; // 영역 내에서 터치 시작했을 때에 
                 }
                 if (touchedObject == parents)
                 {
+                    swipeAudio.Play();
                     pos = pTr.position;
                     isParentsMove = true;
                 }
@@ -166,11 +181,7 @@ public class Forest13 : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == player)
-        {
-            bug.SetActive(true);
-            BugActive = true;
-        }
+        
     }
 
 }

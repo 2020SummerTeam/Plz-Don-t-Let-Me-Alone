@@ -37,7 +37,6 @@ public class Researchers : MonoBehaviour
         //GetComponent로 초기화.
         mAnim = GetComponent<Animator>();
         mTr = GetComponent<Transform>();
-        dieDistance = 0.2f;
         coolTime = 4.0f;
         isFind = false;
         findSign.SetActive(false);

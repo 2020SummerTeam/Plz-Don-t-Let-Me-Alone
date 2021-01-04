@@ -29,7 +29,6 @@ ScriptsOnlyBuild:
     - Forest8
     - Forest8Tree
     - Forest9
-    - HitPlayer
     - InteractButton
     - KidsCtrl
     - MainUI
@@ -105,10 +104,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -338,6 +335,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -378,6 +379,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -465,6 +470,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -555,6 +564,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -625,6 +638,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -715,6 +732,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -800,6 +821,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -872,6 +897,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -955,6 +984,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -1041,6 +1074,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -1122,6 +1159,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -1148,6 +1189,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13686}
     - Class: 114
       Script: {instanceID: 13802}
+    - Class: 114
+      Script: {instanceID: 14224}
     - Class: 114
       Script: {instanceID: 14922}
     - Class: 114
@@ -1196,6 +1239,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -1274,6 +1321,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -1351,6 +1402,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -1379,6 +1434,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13802}
     - Class: 114
       Script: {instanceID: 14224}
+    - Class: 114
+      Script: {instanceID: 14778}
     - Class: 114
       Script: {instanceID: 14922}
     - Class: 114
@@ -1431,6 +1488,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -1508,6 +1569,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -1588,6 +1653,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -1662,6 +1731,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -1739,6 +1812,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -1820,6 +1897,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -1910,6 +1991,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -1926,8 +2011,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13802}
     - Class: 114
       Script: {instanceID: 15416}
-    - Class: 114
-      Script: {instanceID: 41028}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -1960,6 +2043,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -2031,6 +2118,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -2111,6 +2202,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -2129,8 +2224,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12400}
     - Class: 114
       Script: {instanceID: 12614}
-    - Class: 114
-      Script: {instanceID: 12942}
     - Class: 114
       Script: {instanceID: 13004}
     - Class: 114
@@ -2193,6 +2286,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -2270,6 +2367,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -2429,7 +2530,7 @@ ScriptsOnlyBuild:
     className: PostProcessLayer
   - hash:
       serializedVersion: 2
-      Hash: 83e769eee07fc231384c812eedbb8224
+      Hash: d4b261820a3b954b29143d499423495e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: WordDrag
@@ -2459,7 +2560,7 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
-      Hash: 6b4e196f1ff5e3bc4b03e090471b72a7
+      Hash: 8633d1c0f76c0e53d5c8aa5ee85262ba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Forest15
@@ -2537,13 +2638,13 @@ ScriptsOnlyBuild:
     className: Bloom
   - hash:
       serializedVersion: 2
-      Hash: 41e5d8481a141d8a9bc10604c36ec49c
+      Hash: 71de5258e876e1f08c866c0128537348
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Stage2Manager
   - hash:
       serializedVersion: 2
-      Hash: a5765e51e92e61bddeccfda4f22a802e
+      Hash: 49b9494f46c6f8d05c0c3d4b03acf43d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: City5Scale
@@ -2651,7 +2752,7 @@ ScriptsOnlyBuild:
     className: CameraCity5
   - hash:
       serializedVersion: 2
-      Hash: 91966c2925a9124020da4725df76d3c5
+      Hash: 16d861742fe7e522ead07ccbd72912f9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: City4
@@ -2771,7 +2872,7 @@ ScriptsOnlyBuild:
     className: MovingPlatform_V
   - hash:
       serializedVersion: 2
-      Hash: 59b2a7e2acc20ade0abcdc7710a82ad8
+      Hash: 0cbbd5a2eb23da27702023c484f7940d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Stage3Manager
@@ -2783,7 +2884,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 37f112907e00ba300f22e6e63bfabbed
+      Hash: 4279bef7f2e93b40f9eceeea3d5c0550
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Forest11
@@ -2927,7 +3028,7 @@ ScriptsOnlyBuild:
     className: UniversalRenderPipelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 52bc2250243bbc6970d81751604ef333
+      Hash: d3cfbda3db661103bafaab72dcba2ef0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Forest1
@@ -2939,19 +3040,19 @@ ScriptsOnlyBuild:
     className: Stages
   - hash:
       serializedVersion: 2
-      Hash: f15aba20b0a57878b4a4439a7ed2069d
+      Hash: bb6d4da57d557b96511f87add538d598
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Forest7
   - hash:
       serializedVersion: 2
-      Hash: 83e769eee07fc231384c812eedbb8224
+      Hash: 8951f32d10cee5da915df7dd17f6c96e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PillarDrag
   - hash:
       serializedVersion: 2
-      Hash: 217cef38dd7853176860722ce18606fd
+      Hash: 6d91348d7350f35d8e3ccf7bb73b8dd3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Stone
@@ -2999,13 +3100,13 @@ ScriptsOnlyBuild:
     className: BearScript
   - hash:
       serializedVersion: 2
-      Hash: 07b365ab401ea6f4762892d08628f3ee
+      Hash: 5aa73ccd1270242e03246d837b93de28
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerCtrl
   - hash:
       serializedVersion: 2
-      Hash: 1ff2815b3e59c5ccebb88076d155dca2
+      Hash: 5d4f105ad450545ebeb603e20d028f96
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: doubleClick
@@ -3035,7 +3136,7 @@ ScriptsOnlyBuild:
     className: ParentsCtrl
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 6d791eda12e5c7a929a00e84dfbbd6bd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Prolog
@@ -3047,7 +3148,7 @@ ScriptsOnlyBuild:
     className: PostProcessResources
   - hash:
       serializedVersion: 2
-      Hash: 868170885ba2fece963a54b3a6b2842b
+      Hash: 3ed87386ce5b2f6e8d4acbc8cde97279
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Forest8
@@ -3059,7 +3160,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: af5326cd869cf0e2ad3063e210502555
+      Hash: ca23d2ac1426cd8026243d8f98e570c0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RotateLight
@@ -3119,7 +3220,7 @@ ScriptsOnlyBuild:
     className: ColorLookup
   - hash:
       serializedVersion: 2
-      Hash: 01d8060a1a0db7d4477eafc32fbe3fc7
+      Hash: 6b76a0377d976064eeefcf3d4e3f24f6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ButtonEvent
@@ -3131,7 +3232,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerWidget
   - hash:
       serializedVersion: 2
-      Hash: 83e769eee07fc231384c812eedbb8224
+      Hash: d4b261820a3b954b29143d499423495e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TeddyBear
@@ -3221,7 +3322,7 @@ ScriptsOnlyBuild:
     className: findEvent
   - hash:
       serializedVersion: 2
-      Hash: 4716e3bf82963f3d8581a6726f14e91f
+      Hash: 92f33a809168a75df9ed93839e1bd7df
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: City5
@@ -3323,7 +3424,7 @@ ScriptsOnlyBuild:
     className: ColorAdjustments
   - hash:
       serializedVersion: 2
-      Hash: 2ecbd9bf7353fd7f3cde2856f6b96b07
+      Hash: e0f46d136383e97583c68bea04c78474
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Forest13
@@ -3341,7 +3442,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerVector2
   - hash:
       serializedVersion: 2
-      Hash: 27c75e639e913cd816aa61446d0fe8e0
+      Hash: b2fb37d96c6dabd737a45b6236db0388
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Forest2
@@ -3365,7 +3466,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerValue
   - hash:
       serializedVersion: 2
-      Hash: 492c96e7cd859684aba3d54e3a83168b
+      Hash: 3e3f881b1f4406df6ea35aa89cfc759f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: reflectPlayer
@@ -3389,7 +3490,7 @@ ScriptsOnlyBuild:
     className: MovingPlatform_CIty1
   - hash:
       serializedVersion: 2
-      Hash: 473df38af817bd3a6ec0755440e1d7c3
+      Hash: 2bb4009c9074a7c506ff3fa5f4ec871d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Forest5
@@ -3431,7 +3532,7 @@ ScriptsOnlyBuild:
     className: DepthOfField
   - hash:
       serializedVersion: 2
-      Hash: 458576ddfe6558569af7d9d4bc55a6fb
+      Hash: 8cd18526bb0188e10ca624e169c20edd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: City2
@@ -3443,7 +3544,7 @@ ScriptsOnlyBuild:
     className: ShadowCaster2D
   - hash:
       serializedVersion: 2
-      Hash: 359750dd5d30a5957a1f3e3211a2a443
+      Hash: 96f2d2eeec50a8421adb62d374a52d19
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: City1
@@ -3467,7 +3568,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerCanvas
   - hash:
       serializedVersion: 2
-      Hash: 9d7493a622b5889e5cc781453e462f44
+      Hash: 7101296b35d388e584ac94534730a26f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TreeScript
@@ -3545,7 +3646,7 @@ ScriptsOnlyBuild:
     className: EventTrigger
   - hash:
       serializedVersion: 2
-      Hash: ee27ec19d88e687755bb8ea3e0baddca
+      Hash: e34bda1606b9918be0483e9e8bff776d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Forest4
@@ -3557,7 +3658,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: f98bba412a29175fcf94b2edb54ddfdb
+      Hash: d5c82d6aac4720a5f1e2a76622b1ab6a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Stage4Manager
@@ -3724,4 +3825,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/StageScene/City/City5.unity
   - Assets/Scenes/Ending.unity
   - Assets/Scenes/Prolog.unity
-  playerPath: C:/Users/CafeAlle/Documents/GitHub/Plz-Don-t-Let-Me-Alone/Apps/210104-2.apk
+  playerPath: C:/GithubDesktop/Plz-Don-t-Let-Me-Alone/app/210104-3.apk

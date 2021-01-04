@@ -14,7 +14,13 @@ public class Forest4 : MonoBehaviour
     public Text bearTextBallon;
     public GameObject platformObject;
     public GameObject smallBox;         //작은박스 위치도 알아야된다
+    public GameObject explanationObject;
 
+    public AudioSource beeAudio;
+    public AudioSource bearAudio;
+    public AudioSource explanationAudio;
+
+    public Rigidbody2D box;
 
     bool isPlayerGoRight;       //플레이어가 충분히 오른쪽으로 진행하였는지
     bool isBoxDunked;           //박스가 바닥에 빠졌는지
@@ -62,11 +68,21 @@ public class Forest4 : MonoBehaviour
         }
         else
         {
-            if (playerScript.transform.position.y < -3)
+            if (playerScript.transform.position.y < -4)
             {
                 //플레이어 떨어지면 바로 탈락~
                 playerScript.OnStageFail();
             }
+        }
+
+        if (playerScript.isPushingBox)
+        {
+            box.bodyType = RigidbodyType2D.Dynamic;
+            box.mass = 10;
+        }
+        else
+        {
+            box.mass = 100;
         }
         
     }
@@ -117,8 +133,11 @@ public class Forest4 : MonoBehaviour
         Vector2 pos = bearScript.transform.position;
         //bearTextBallon.SetActive(false);
         isBearMoved = true;
-        bearTextBallon.text = "!!!!";
+        bearAudio.Stop();
+        explanationAudio.Play();
+        explanationObject.SetActive(true);
         bearScript.MoveAnimation();
+
         while (true)    //벌의 공격을 받지않을때만 움직여요
         {
             //곰이 움직움직여요
@@ -133,7 +152,7 @@ public class Forest4 : MonoBehaviour
                 }
             }
             bearScript.transform.position = pos;
-            if (bearScript.isPlayerCol)
+            if (bearScript.isPlayerCol && !isBeeSpawned)
             {
                 //곰이 부딪히면 끝~
                 playerScript.OnStageFail();
@@ -146,9 +165,9 @@ public class Forest4 : MonoBehaviour
             }
         }
         //벌에 부딪히면 열루 내려와요
-        bearTextBallon.text = "죽은곰";
         bearScript.DieAnimation();
         isBearDead = true;
+        bearScript.attackPlayer = false;
     }
 
     //벌을 낳아요
@@ -156,6 +175,7 @@ public class Forest4 : MonoBehaviour
     {
         int beeCount = 0;
         float beeTimer = 0;
+        beeAudio.Play();
         while (!isBearDead) //곰죽으면 끗
         {
             //어디를 타겟으로 할지 

@@ -6,12 +6,15 @@ public class PillarDrag : MonoBehaviour
 {
     public GameObject player;//draw character
     Vector3 originalPosition;
+    public AudioSource pillarSource;
+
     IEnumerator OnMouseDown() // 단어 드래그 드랍
     {
         Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, scrSpace.z));
         originalPosition = transform.position;
-
+        float delta = 0;
+        Vector3 lastPos = Vector3.zero;
 
         while (Input.GetMouseButton(0))
         {
@@ -19,6 +22,15 @@ public class PillarDrag : MonoBehaviour
             Vector3 curScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, scrSpace.z);
             Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenSpace) + offset;
             Vector3 worldpos = curPosition;
+            delta = curPosition.y - lastPos.y;
+            if (delta > 0)
+            {
+                if (!pillarSource.isPlaying)
+                {
+                    pillarSource.Play();
+                }
+            }
+            lastPos = curPosition;
 
             if (worldpos.x < originalPosition.x)  // 플랫폼 이동 범위 제한
                 worldpos.x = originalPosition.x;

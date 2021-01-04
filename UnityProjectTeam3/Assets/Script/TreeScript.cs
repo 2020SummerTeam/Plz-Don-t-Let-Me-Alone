@@ -12,6 +12,7 @@ public class TreeScript : MonoBehaviour
 
     //to make it fall. change gravity scale 0 to 1
     public Rigidbody2D rigidBody;
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class TreeScript : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
         }
+        audioSource.Play();
         rigidBody.gravityScale = 1;
     }
 }

@@ -9,11 +9,13 @@ public class Forest5 : MonoBehaviour
     public GameObject bearObject;
     public PlayerCtrl player;
     public GameObject smallBox;
+    bool isSounded = false;
 
     Rigidbody2D playerRigid;
     Rigidbody2D bearRigid;
     Rigidbody2D boxRigid;
 
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,7 @@ public class Forest5 : MonoBehaviour
         bearRigid = bearObject.GetComponent<Rigidbody2D>();
         boxRigid = smallBox.GetComponent<Rigidbody2D>();
         playerRigid = player.gameObject.GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -35,10 +38,17 @@ public class Forest5 : MonoBehaviour
         }
         if (bearScript.isSmallBoxCol)
         {
+            if (!isSounded)
+            {
+                audioSource.Play();
+                isSounded = true;
+                bearScript.AttackAnimation();
+            }
+            
             smallBox.SetActive(false);
         }
         isRotate();
-        if (IsRotate || Input.GetKey(KeyCode.T))
+        if (IsRotate || Input.GetKey(KeyCode.LeftShift))
         {
             if (player.transform.childCount ==0)
             {
@@ -48,7 +58,14 @@ public class Forest5 : MonoBehaviour
             {
                 Transform child = player.transform.GetChild(0);
                 if(child.name == "SmallBox")
+                {
                     playerRigid.gravityScale = -1;
+                }
+                else 
+                {
+                    playerRigid.gravityScale = 1;
+                }
+                    
             }
             
             bearRigid.gravityScale = -1;
@@ -59,7 +76,7 @@ public class Forest5 : MonoBehaviour
         {
             bearRigid.gravityScale = 0;
             boxRigid.gravityScale = 0;
-            playerRigid.gravityScale = 0;
+            playerRigid.gravityScale = 1;
         }
 
         if (player.transform.position.y > 4)

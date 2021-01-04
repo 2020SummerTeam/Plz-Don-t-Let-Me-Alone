@@ -22,6 +22,8 @@ public class City4 : MonoBehaviour
     public GameObject platform;
     public GameObject parents;
 
+    public AudioSource explanationSource;
+
     void Start()
     {
         findsign.SetActive(false);
@@ -62,6 +64,10 @@ public class City4 : MonoBehaviour
         
         if (isShadow)
         {
+            if (timer == 0)
+            {
+                explanationSource.Play();
+            }
             timer += Time.deltaTime;
             if(timer >= 0.5)
             {

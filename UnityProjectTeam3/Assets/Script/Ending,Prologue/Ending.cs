@@ -48,7 +48,7 @@ public class Ending : MonoBehaviour
             fadeImage.color = new Color(0, 0, 0, 1 - timer / 3f);
             yield return null;
         }
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 6; i++)
         {
             timer = 0;
 
@@ -56,14 +56,14 @@ public class Ending : MonoBehaviour
             {
                 timer += Time.deltaTime;
                 animations[i].transform.position = animations[i].transform.position - new Vector3(Time.deltaTime * 13, 0, 0);
-                backGround.transform.position = backGround.transform.position - new Vector3(Time.deltaTime * 3, 0, 0);
+                backGround.transform.position = backGround.transform.position + new Vector3(Time.deltaTime * 1, 0, 0);
                 yield return null;
             }
             timer = 0;
-            while(timer<2f)
+            while(timer<6f)
             {
                 timer += Time.deltaTime;
-                backGround.transform.position = backGround.transform.position - new Vector3(Time.deltaTime * 3, 0, 0);
+                backGround.transform.position = backGround.transform.position + new Vector3(Time.deltaTime * 1, 0, 0);
                 yield return null;
             }
             timer = 0;
@@ -71,7 +71,7 @@ public class Ending : MonoBehaviour
             {
                 timer += Time.deltaTime;
                 animations[i].transform.position = animations[i].transform.position - new Vector3(Time.deltaTime * 13, 0, 0);
-                backGround.transform.position = backGround.transform.position - new Vector3(Time.deltaTime * 3, 0, 0);
+                backGround.transform.position = backGround.transform.position + new Vector3(Time.deltaTime * 1, 0, 0);
                 yield return null;
             }
         }

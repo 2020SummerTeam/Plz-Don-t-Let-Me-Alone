@@ -6,7 +6,7 @@ public class doubleClick : MonoBehaviour
 {
     public GameObject target;
     public GameObject bee;
-
+    public AudioSource audio;
     Event e = null;
 
     void OnGUI()
@@ -22,11 +22,12 @@ public class doubleClick : MonoBehaviour
             }
             if (target.name == "BigBox" || target.name == "parents_door")
             {
-
+                audio.Play();
                 target.SetActive(false);
             }
             else if (target.name == "tree")
             {
+                audio.Play();
                 bee.SetActive(true);
             }
         }

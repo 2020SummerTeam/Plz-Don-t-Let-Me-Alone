@@ -26,6 +26,8 @@ public class Stage3Manager : MonoBehaviour
     public bool isCapOpen; // 차고 문이 완전히 열렸는지
     public GameObject roof; // 차고 지붕
 
+    public AudioSource audioSource;     //문열리는소리.
+
     void Start()
     {
         // 초기화
@@ -46,19 +48,18 @@ public class Stage3Manager : MonoBehaviour
         {
             if (kidsCtrl.watchingLeft)    // kids가 Player를 쳐다볼 때
             {
-                Debug.Log("바라볼때");
                 if (isCapOpen == true)    // 차고 뚜껑이 다 열렸을 때
                 {
                     if (Player.transform.position.x > Rock.transform.position.x) // player가 rock보다 앞에 있거나
                     {
-                        playerCtrl.enabled = false;
+                        playerCtrl.isEnabled = false;
                         stone.isThrow = true; // Stonezone 스크립트의 변수 수정
                     }
                     else
                     {
                         if (Player.GetComponent<PlayerCtrl>().IsSit == false)   // rock 뒤에서 숨기 X 일때
                         {
-                            playerCtrl.enabled = false;
+                            playerCtrl.isEnabled = false;
                             stone.isThrow = true;
                         }
                     }
@@ -75,6 +76,7 @@ public class Stage3Manager : MonoBehaviour
 
         if (buttonEvent.buttonTriggerd) // 버튼이 활성화되면
         {
+            audioSource.Play();
             if (Cap.transform.position.y < roof.transform.position.y)  // Cap(차고 뚜껑)이 지붕의 y좌표까지
             {
                 Cap.transform.position += new Vector3(0, Time.deltaTime, 0) / 2;    // Cap이 느리게 올라감

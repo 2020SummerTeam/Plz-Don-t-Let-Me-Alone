@@ -11,6 +11,7 @@ public class Forest1 : MonoBehaviour
     public GameObject smallBox;     //set false if bear colliisons
     Vector2 movePos;                //bear's moving position
     bool isShaked;                  //폰을 흔들었는지 아닌지
+    bool isSounded;
 
     float accelerometerUpdateInterval = 1.0f / 60.0f;
     // The greater the value of LowPassKernelWidthInSeconds, the slower the
@@ -23,6 +24,10 @@ public class Forest1 : MonoBehaviour
     float lowPassFilterFactor;
     Vector3 lowPassValue;
 
+    public AudioSource audioSource;
+    public AudioSource bearSource;
+
+    bool onAction = false;  //액션하는지
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +38,7 @@ public class Forest1 : MonoBehaviour
         isShaked = false;
         movePos = bearObject.transform.position;
         bearScript = bearObject.GetComponent<BearScript>();
+        isSounded = false;
     }
 
     // Update is called once per frame
@@ -42,6 +48,13 @@ public class Forest1 : MonoBehaviour
         //check bear
         if (bearScript.isSmallBoxCol)
         {
+            if (!isSounded)
+            {
+                audioSource.Play();
+                isSounded = true;
+                bearScript.AttackAnimation();
+            }
+                
             smallBox.SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -62,23 +75,37 @@ public class Forest1 : MonoBehaviour
             Debug.Log("Shake event detected at time " + Time.time);
             OnShake();
         }
+        
+        if(playerScript.IsSit || playerScript.isPushingBox)
+        {
+            onAction = true;
+        }
 
         //bear move
         if (!playerScript.stageEnd)
         {
-            //스테이지가 끝나지 않았따면.
-            movePos.x -= Time.deltaTime;
-             bearObject.transform.position = movePos;
-            bearScript.MoveAnimation();
-            if (bearScript.isPlayerCol)
+            if (onAction)
             {
-                //부딪혔을 때 흔들지 않았따면 끝
-                if (!isShaked)
+                //스테이지가 끝나지 않았따면.
+                movePos.x -= Time.deltaTime;
+                bearObject.transform.position = movePos;
+                bearScript.MoveAnimation();
+                bearSource.Stop();
+                if (bearScript.isPlayerCol)
                 {
-                    Debug.Log("end");
-                    playerScript.OnStageFail();
+                    //부딪혔을 때 흔들지 않았따면 끝
+                    if (!isShaked)
+                    {
+                        Debug.Log("end");
+                        playerScript.OnStageFail();
+                    }
                 }
             }
+            else
+            {
+                bearScript.SleepAnimation();
+            }
+          
         }
     }
 

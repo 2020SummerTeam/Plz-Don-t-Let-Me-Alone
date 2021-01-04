@@ -9,6 +9,10 @@ public class Forest7 : MonoBehaviour
     private Vector3 scaleChange;
     public GameObject playerObject;
     public PlayerCtrl player;
+    public AudioSource audioSource;
+    public Sprite[] sprites;
+    public SpriteRenderer spriteRenderer;
+    public BoxCollider2D boxCollider;
 
     private void Awake()
     {
@@ -26,10 +30,14 @@ public class Forest7 : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Wall"))
             {
                 fingerCount++;
-                if (fingerCount < 6)
+                if (fingerCount < 5)
                 {
-                    hit.collider.transform.localScale += scaleChange;
+                    spriteRenderer.sprite = sprites[fingerCount];
+                    audioSource.Play();
+                    boxCollider.offset = boxCollider.offset - new Vector2(0, 0.85f);
+                    //hit.collider.transform.localScale += scaleChange;
                 }
+
             }
         }
         if (playerObject.transform.position.x < -9)

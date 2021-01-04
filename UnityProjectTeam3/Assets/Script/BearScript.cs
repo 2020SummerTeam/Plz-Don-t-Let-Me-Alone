@@ -16,6 +16,8 @@ public class BearScript : MonoBehaviour
     public bool isSmallBoxCol; //collidingBox -> true 
     public bool isBeeCol;      //on forest4 there are bees // hey bee~~
     public bool attackPlayer;
+    bool isSleeping;
+
 
     public Animator mAnim;
 
@@ -28,6 +30,7 @@ public class BearScript : MonoBehaviour
         isBeeCol = false;
         mAnim = GetComponent<Animator>();
         attackPlayer = false;
+        isSleeping = false;
     }
 
     public void MoveAnimation()
@@ -37,12 +40,19 @@ public class BearScript : MonoBehaviour
     }
     public void DieAnimation()
     {
+        mAnim.ResetTrigger("Sleep");
         mAnim.SetTrigger("Die");
     }
 
     public void SleepAnimation()
     {
         mAnim.SetTrigger("Sleep");
+        isSleeping = true;
+    }
+    public void AttackAnimation()
+    {
+        mAnim.ResetTrigger("Sleep");
+        mAnim.SetTrigger("Attack");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,9 +63,13 @@ public class BearScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerCol = true;
-            mAnim.ResetTrigger("Sleep");
-            if (attackPlayer)
+
+            if (attackPlayer && !isSleeping)
+            {
+                mAnim.ResetTrigger("Sleep");
                 mAnim.SetTrigger("Attack");
+            }
+                
         }
         if (collision.gameObject.CompareTag("InteractObj"))
         {

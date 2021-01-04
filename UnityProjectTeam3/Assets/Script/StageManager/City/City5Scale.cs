@@ -10,6 +10,10 @@ public class City5Scale : MonoBehaviour
     public GameObject nextCollider;
     float timer = 0;
 
+    public AudioSource scaleSource;
+    public AudioSource doorSource;
+    bool doorSound = false;
+
     private void Start()
     {
         changeScale = false;
@@ -28,10 +32,16 @@ public class City5Scale : MonoBehaviour
         }
         if(teddyNumber == 4)
         {
+            if (!doorSound)
+            {
+                doorSource.Play();
+                doorSound = true;
+            }
             nextCollider.SetActive(false);
         }
         else
         {
+            doorSound = false;
             nextCollider.SetActive(true);
         }
        
@@ -39,8 +49,9 @@ public class City5Scale : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("TeddyBear"))
+        if (collision.CompareTag("InteractObj"))
         {
+            scaleSource.Play();
             teddyNumber++;
             changeScale = true;
             timer = 0;
@@ -49,8 +60,9 @@ public class City5Scale : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("TeddyBear"))
+        if (collision.CompareTag("InteractObj"))
         {
+            scaleSource.Play();
             teddyNumber--;
             changeScale = true;
             timer = 0;

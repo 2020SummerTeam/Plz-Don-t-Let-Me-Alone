@@ -103,10 +103,13 @@ MonoBehaviour:
   isFind: 0
   playerTr: {fileID: 0}
   player: {fileID: 0}
+  playerCtrl: {fileID: 0}
   distance: 4
   GoOn: 0
   Spin: 1
+  LorR: 0
   EachNum: 0
+  dieDistance: 1
 --- !u!95 &6287900178331130260
 Animator:
   serializedVersion: 3

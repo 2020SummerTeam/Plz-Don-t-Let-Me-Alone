@@ -41,7 +41,11 @@ public class City2 : MonoBehaviour
 
     public bool[] buttonIndex;
     public bool[] boxIndex;
-   
+
+    public AudioSource buttonAudio;
+    public AudioSource spellAudio;
+    public AudioSource doorAudio;
+    bool doorSound = false;
     
     [SerializeField]
     float speed = 1.0f;
@@ -79,7 +83,12 @@ public class City2 : MonoBehaviour
         }
         if (trueable)
         {
+            buttonAudio.Play();
             mBox.SetActive(true);
+            for (int i = 0; i < 3; i++)
+            {
+                boxIndex[i] = false;
+            }
         }
         trueable = true;
         for (int i = 0; i < 6; i++)
@@ -91,7 +100,12 @@ public class City2 : MonoBehaviour
         }
         if (trueable)
         {
+            buttonAudio.Play();
             mButton.SetActive(true);
+            for (int i = 0; i < 6; i++)
+            {
+                buttonIndex[i] = false;
+            }
 
         }
 
@@ -101,6 +115,11 @@ public class City2 : MonoBehaviour
             mButton.SetActive(false);
             mBlind.SetActive(false);
             mPlatform.SetActive(true);
+            if (!doorSound)
+            {
+                doorSound = true;
+                doorAudio.Play();
+            }
         }
 
         if (mStone.isStoneEvent)
@@ -109,6 +128,7 @@ public class City2 : MonoBehaviour
             {
                 if (!mPlayerCtrl.IsSit)
                 {
+                    mPlayerCtrl.isEnabled = false;
                     stone.isThrow = true;
                     kidsCtrl.coolTime = 10;
                 }
@@ -129,13 +149,14 @@ public class City2 : MonoBehaviour
 
     public void ClickB()
     {
-
+        spellAudio.Play();
         boxIndex[0] = true;
         buttonIndex[0] = true;
     }
 
     public void ClickN()
     {
+        spellAudio.Play();
         if (buttonIndex[4])
         {
             buttonIndex[5] = true;
@@ -148,6 +169,7 @@ public class City2 : MonoBehaviour
 
     public void ClickO()
     {
+        spellAudio.Play();
         if (boxIndex[1])
         {
             BoxIndexReset();
@@ -186,6 +208,7 @@ public class City2 : MonoBehaviour
 
     public void ClickX()
     {
+        spellAudio.Play();
         if (boxIndex[1] == true)
         {
             boxIndex[2] = true;
@@ -199,6 +222,7 @@ public class City2 : MonoBehaviour
 
     public void ClickU()
     {
+        spellAudio.Play();
         if (buttonIndex[1])
         {
             ButtonIndexReset();
@@ -221,6 +245,7 @@ public class City2 : MonoBehaviour
 
     public void ClickT()
     {
+        spellAudio.Play();
         if (buttonIndex[3])
         {
             ButtonIndexReset();

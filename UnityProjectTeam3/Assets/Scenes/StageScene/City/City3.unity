@@ -198,6 +198,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &15724885 stripped
@@ -704,6 +709,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &464444430 stripped
@@ -913,6 +923,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &495820448 stripped
@@ -1023,6 +1038,11 @@ PrefabInstance:
       propertyPath: isForestTen
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9183587149255623941, guid: f981dacf98c5cf147a217bc3bcc1bc86,
+        type: 3}
+      propertyPath: stepClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 24c3efb549296ab4ab0fa44125b4e2ec, type: 3}
     - target: {fileID: 9184602487217036272, guid: f981dacf98c5cf147a217bc3bcc1bc86,
         type: 3}
       propertyPath: m_Name
@@ -1118,6 +1138,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DumyPlatform (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
@@ -1333,6 +1358,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &1024343890 stripped
@@ -1509,6 +1539,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &1160364719 stripped
@@ -1594,6 +1629,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &1182478359 stripped
@@ -1678,6 +1718,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DumyPlatform (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
@@ -1774,6 +1819,11 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 1.0000503
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &1227826575 stripped
@@ -1865,6 +1915,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &1350738162 stripped
@@ -1949,6 +2004,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DumyPlatform (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
@@ -2038,6 +2098,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 1.1185919
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
@@ -2176,6 +2241,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &1534562685 stripped
@@ -2261,6 +2331,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &1601500852 stripped
@@ -2345,6 +2420,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DumyPlatform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
@@ -2522,6 +2602,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &1889457648 stripped
@@ -2606,6 +2691,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DumyPlatform (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
@@ -2692,6 +2782,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &2061213069 stripped
@@ -2776,6 +2871,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DumyPlatform (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
@@ -2862,6 +2962,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DumyPlatform (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}
 --- !u!4 &2094769913 stripped
@@ -2946,6 +3051,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DumyPlatform (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051248573411758895, guid: eb0da15b7f71a994eb0ac72c66ca9395,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0da15b7f71a994eb0ac72c66ca9395, type: 3}

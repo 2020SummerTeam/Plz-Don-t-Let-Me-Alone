@@ -21,10 +21,16 @@ public class City1 : MonoBehaviour
     public GameObject door;
     private float timer = 0.0f;
     public float max_y = 3f;   // 문이 닿을 수 있는 최대 y좌표
-    
+    public AudioSource doorAudio;
+    bool[] doorBool;
+    public AudioSource explanationAudio;
+    bool expBool = false;
 
     void Start()
     {
+        doorBool = new bool[2];
+        doorBool[0] = false;
+        doorBool[1] = false;
         Researchers = GameObject.Find("Researchers").GetComponent<Researchers>(); // 연구원이 플레이어 발견
         findEvent = GameObject.Find("findEvent").GetComponent<findEvent>();
 
@@ -40,10 +46,20 @@ public class City1 : MonoBehaviour
         // Researchers
         if (findEvent.CanFind == true)  // player가 findEvent 박스 콜라이더 안에 있을 때
         {
+            if (!expBool)
+            {
+                expBool = true;
+                explanationAudio.Play();
+            }
             Researchers.isFind = true; // player를 발견했을때 // Researchers 스크립트의 변수 수정
         }
         if (rTr.position.x >= -2)
         {
+            if (!doorBool[0])
+            {
+                doorBool[0] = true;
+                doorAudio.Play();
+            }
             movingPlatform.GetComponent<MovingPlatform_CIty1>().enabled = true; //player를 발견하면 플랫폼 올라감
         }
 
@@ -55,6 +71,11 @@ public class City1 : MonoBehaviour
             timer += Time.deltaTime; // 버튼이 사라지고 나서 문이 올라갈 수 있도록 딜레이 줌
             if (timer >= 0.25)
             {
+                if (!doorBool[1])
+                {
+                    doorBool[1] = true;
+                    doorAudio.Play();
+                }
                 door.transform.position += new Vector3(0, Time.deltaTime, 0);
                 if (door.transform.position.y >= max_y)
                 {

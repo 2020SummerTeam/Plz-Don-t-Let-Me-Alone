@@ -18,13 +18,16 @@ public class SettingMenu : MonoBehaviour
     GameObject nightmodeOn;
 
     public GameObject nightModeObject;
+    AudioListener audioListener;
 
     //public SettingsData Data;   // scene 바뀌어도 data 저장 // asset-creat-settingsdata와 연결
     //이거하니까 씬사이 건너갈때 오류생겨서 playerPrefs로 바꿈ㅠㅠ
 
     void Awake()
     {
+
         // init
+        audioListener = GameObject.Find("Main Camera").GetComponent<AudioListener>();
         soundBtn = menu.GetChild(3).GetComponent<RectTransform>();
         soundOn = menu.GetChild(2).gameObject;
 
@@ -117,10 +120,13 @@ public class SettingMenu : MonoBehaviour
         if (bgmPlayer.mute)
         {
             bgmPlayer.mute = false;  // 음소거 해제
+            AudioListener.volume = 1;
         }
         else
         {
             bgmPlayer.mute = true; // 음소거
+            AudioListener.volume = 0;
         }
+        
     }
 }

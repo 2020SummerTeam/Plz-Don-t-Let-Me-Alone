@@ -30,8 +30,8 @@ public class dragPlatform : MonoBehaviour
            
             if (worldpos.y < -0.5f)  // 플랫폼 이동 범위 제한
                 worldpos.y = -0.5f;
-            if (worldpos.y > 1.5f)
-                worldpos.y = 1.5f;
+            if (worldpos.y > 2.5f)
+                worldpos.y = 2.5f;
             
             transform.position = worldpos;
             yield return null;

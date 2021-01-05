@@ -3470,7 +3470,7 @@ ScriptsOnlyBuild:
     className: Tonemapping
   - hash:
       serializedVersion: 2
-      Hash: d7685188e1917a5ee4f885bd3d957bc2
+      Hash: 2070252b4378ca20a0db21f5cfc136cc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainUI
@@ -3907,4 +3907,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/StageScene/City/City5.unity
   - Assets/Scenes/Ending.unity
   - Assets/Scenes/Prolog.unity
-  playerPath: C:/Users/CafeAlle/Documents/GitHub/Plz-Don-t-Let-Me-Alone/app/20210105.apk
+  playerPath: C:/Users/CafeAlle/Documents/GitHub/Plz-Don-t-Let-Me-Alone/app/20210105-2.apk

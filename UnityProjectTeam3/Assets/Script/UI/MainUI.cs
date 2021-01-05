@@ -9,6 +9,7 @@ public class MainUI : MonoBehaviour
     public GameObject Start;
     public GameObject continueButton;
     int CurrentStage;
+    public GameObject blackObject;
     void Awake()
     {
             GameLoad();
@@ -62,11 +63,12 @@ public class MainUI : MonoBehaviour
     public void OnClickEnding()
     {
         SceneManager.LoadScene(27);
+        blackObject.SetActive(true);
     }
 
     public void OnClickStart()
     {
-
+        blackObject.SetActive(true);
         //프롤로그 먼저 보여줘
         PlayerPrefs.SetInt("Prologue", 1);
         SceneManager.LoadScene(28);
@@ -75,12 +77,14 @@ public class MainUI : MonoBehaviour
     public void OnClickContinue()
     {
         // current stage
-         CurrentStage = PlayerPrefs.GetInt("CurrentStage");
+        blackObject.SetActive(true);
+        CurrentStage = PlayerPrefs.GetInt("CurrentStage");
         SceneManager.LoadScene(CurrentStage);
     }
 
     public void OnClickStages()
     {
+        blackObject.SetActive(true);
         SceneManager.LoadScene(1);  // go to scene "stages"
     }
 

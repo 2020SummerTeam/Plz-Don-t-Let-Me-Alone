@@ -28,8 +28,8 @@ public class dragPlatform : MonoBehaviour
             Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenSpace) + offset;
             Vector3 worldpos = curPosition;
            
-            if (worldpos.y < -0.5f)  // 플랫폼 이동 범위 제한
-                worldpos.y = -0.5f;
+            if (worldpos.y < -1.5f)  // 플랫폼 이동 범위 제한
+                worldpos.y = -1.5f;
             if (worldpos.y > 2.5f)
                 worldpos.y = 2.5f;
             

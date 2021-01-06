@@ -51,6 +51,8 @@ public class City5 : MonoBehaviour
     public AudioSource carBreakSource;
     public AudioSource sandyBumpSource;
     public AudioSource sandyFallSource;
+    public AudioSource explanationSource;
+    bool explanationSound = false;
 
 
     // Start is called before the first frame update
@@ -113,6 +115,11 @@ public class City5 : MonoBehaviour
 
         if(mPlayer.transform.position.x > 16 && shakeNumber>=5 && !researchers.isFind && researchers.LorR == -1)
         {
+            if (!explanationSound)
+            {
+                explanationSound = true;
+                explanationSource.Play();
+            }
             researchers.isFind = true;
             researchers.dieDistance = 1.5f;
             for(int i = 0; i < 4; i++)
@@ -240,6 +247,10 @@ public class City5 : MonoBehaviour
             {
                 Debug.Log(glassCount);
                 glassCount++;
+                if(glassCount == 1)
+                {
+                    glassSource.Play();
+                }
                 if(glassCount == 8)
                 {
                     shopArray[0].SetActive(false);

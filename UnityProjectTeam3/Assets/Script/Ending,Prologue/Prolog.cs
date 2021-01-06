@@ -13,6 +13,7 @@ public class Prolog : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
         timer = 0;
         bgmManager = BGMManager.instance;
         bgmManager.bgmPlayer.volume = 0;

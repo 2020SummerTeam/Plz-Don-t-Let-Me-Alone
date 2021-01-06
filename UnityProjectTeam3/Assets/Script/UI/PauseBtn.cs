@@ -23,9 +23,9 @@ public class PauseBtn : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void OnClickQuit()
+    public void OnClickStage()
     {
-        Application.Quit();
+        SceneManager.LoadScene(1);
     }
 
 }

@@ -17,6 +17,7 @@ public class Forest11 : MonoBehaviour
     bool beeSound = false;
     public AudioSource beeAudio;
     public AudioSource hiveAudio;
+    public AudioSource bearAudio;
     bool hiveSound = false;
     // bug
     public GameObject player;
@@ -34,6 +35,8 @@ public class Forest11 : MonoBehaviour
     public GameObject textBallon;
 
     public PlayerCtrl playerCtrl;
+
+    public GameObject bigBox;
 
     void Start()
     {
@@ -124,10 +127,15 @@ public class Forest11 : MonoBehaviour
                 {
                     attacktime = 1f;
                     bearScript.isSmallBoxCol = false;
+
                 }
                 else if (cnt == 2)  // 큰 박스와 부딪힐 경우
                 {
-                    bearAnim.SetBool("Die", true);  // 기절
+                    if (bigBox.activeSelf)
+                    {
+                        bearScript.DieAnimation();
+                    }
+                    
                 }
             }
             else // 곰과 부딪힌 물체가 없을 경우 (default)
@@ -149,6 +157,7 @@ public class Forest11 : MonoBehaviour
                         else
                         {
                             smallBox.SetActive(false);  //작은 박스 비활성화
+                            bearAudio.Play();
                             bearAnim.SetBool("Run", true);
                         }
                     }

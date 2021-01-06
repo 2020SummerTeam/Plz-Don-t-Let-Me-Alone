@@ -52,6 +52,11 @@ public class PlayerCtrl : MonoBehaviour
 
     public bool isEnabled = true;
     Rigidbody2D teddyRigidbody;
+
+    private void Awake()
+    {
+        Screen.SetResolution(1920, 1080, true);
+    }
     void Start()
     {
         teddyRigidbody = null;
@@ -145,28 +150,19 @@ public class PlayerCtrl : MonoBehaviour
                         vertical = deltaTouchPos.y;
 
                         //검은숲 10단계가 아니면 제대로 동작
-                        if (!isForestTen)
-                        {
-                            if (horizontal < -1)
+                            if (horizontal < -50)
                             {
                                 horizontal = -1;
                             }
-                            else if (horizontal > 1)
+                            else if (horizontal > 50)
                             {
                                 horizontal = 1;
                             }
-                        }
-                        else  //검은숲 10단계라면 방향을 거꾸로
-                        {
-                            if (horizontal < -1)
+                            else
                             {
-                                horizontal = 1;
+                                horizontal = 0;
                             }
-                            else if (horizontal > 1)
-                            {
-                                horizontal = -1;
-                            }
-                        }
+
 
                         //아래로 드래그 했을 때 IsSit을 true -> oncollision에서 체크
                         if (vertical < -50 && IsInteracObj)

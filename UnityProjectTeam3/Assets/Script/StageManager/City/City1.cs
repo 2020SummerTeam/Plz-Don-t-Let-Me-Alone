@@ -25,6 +25,8 @@ public class City1 : MonoBehaviour
     bool[] doorBool;
     public AudioSource explanationAudio;
     bool expBool = false;
+    public AudioSource buttonAudio;
+    bool buttonTriggered = false;
 
     void Start()
     {
@@ -37,7 +39,7 @@ public class City1 : MonoBehaviour
         rTr = researchers.GetComponent<Transform>();
         sTr = smallBox.GetComponent<Transform>();
         bTr = button.GetComponent<Transform>();
-        Researchers.EachNum = 1;
+        Researchers.EachNum = 0;
     }
 
 
@@ -51,6 +53,7 @@ public class City1 : MonoBehaviour
                 expBool = true;
                 explanationAudio.Play();
             }
+            Researchers.EachNum = 0;
             Researchers.isFind = true; // player를 발견했을때 // Researchers 스크립트의 변수 수정
         }
         if (rTr.position.x >= -2)
@@ -63,9 +66,10 @@ public class City1 : MonoBehaviour
             movingPlatform.GetComponent<MovingPlatform_CIty1>().enabled = true; //player를 발견하면 플랫폼 올라감
         }
 
-        if (sTr.position.x >= (bTr.position.x-1))
+        if ((sTr.position.x >= (bTr.position.x-1)) || buttonTriggered)
         {
-            researchers.GetComponent<Researchers>().enabled = false;
+            buttonTriggered = true;
+            //researchers.GetComponent<Researchers>().enabled = false;
             button.SetActive(false);
 
             timer += Time.deltaTime; // 버튼이 사라지고 나서 문이 올라갈 수 있도록 딜레이 줌
@@ -75,6 +79,7 @@ public class City1 : MonoBehaviour
                 {
                     doorBool[1] = true;
                     doorAudio.Play();
+                    buttonAudio.Play();
                 }
                 door.transform.position += new Vector3(0, Time.deltaTime, 0);
                 if (door.transform.position.y >= max_y)

@@ -27,6 +27,7 @@ public class Stage3Manager : MonoBehaviour
     public GameObject roof; // 차고 지붕
 
     public AudioSource audioSource;     //문열리는소리.
+    bool sound = false;
 
     void Start()
     {
@@ -76,7 +77,12 @@ public class Stage3Manager : MonoBehaviour
 
         if (buttonEvent.buttonTriggerd) // 버튼이 활성화되면
         {
-            audioSource.Play();
+            if (!sound)
+            {
+                sound = true;
+                audioSource.Play();
+            }
+            
             if (Cap.transform.position.y < roof.transform.position.y)  // Cap(차고 뚜껑)이 지붕의 y좌표까지
             {
                 Cap.transform.position += new Vector3(0, Time.deltaTime, 0) / 2;    // Cap이 느리게 올라감

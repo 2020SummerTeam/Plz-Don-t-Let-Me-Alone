@@ -10,6 +10,7 @@ public class MainUI : MonoBehaviour
     public GameObject continueButton;
     int CurrentStage;
     public GameObject blackObject;
+    public AudioSource audioSource;
     void Awake()
     {
             GameLoad();
@@ -23,6 +24,7 @@ public class MainUI : MonoBehaviour
         PlayerPrefs.SetInt("ClearStage", 1);
         PlayerPrefs.SetInt("Prologue", 0);
         */
+        Screen.SetResolution(1920, 1080, true);
         if (!PlayerPrefs.HasKey("CurrentStage"))
         {
             PlayerPrefs.SetInt("CurrentStage", 2);
@@ -54,20 +56,24 @@ public class MainUI : MonoBehaviour
 
     public void Quit()
     {
-        Debug.Log("as");
+        
+        audioSource.Play();
         Application.Quit();
+        
     }
 
     // button click event
 
     public void OnClickEnding()
     {
+        audioSource.Play();
         SceneManager.LoadScene(27);
         blackObject.SetActive(true);
     }
 
     public void OnClickStart()
     {
+        audioSource.Play();
         blackObject.SetActive(true);
         //프롤로그 먼저 보여줘
         PlayerPrefs.SetInt("Prologue", 1);
@@ -76,6 +82,7 @@ public class MainUI : MonoBehaviour
 
     public void OnClickContinue()
     {
+        audioSource.Play();
         // current stage
         blackObject.SetActive(true);
         CurrentStage = PlayerPrefs.GetInt("CurrentStage");
@@ -84,8 +91,10 @@ public class MainUI : MonoBehaviour
 
     public void OnClickStages()
     {
+        audioSource.Play();
         blackObject.SetActive(true);
         SceneManager.LoadScene(1);  // go to scene "stages"
     }
+
 
 }

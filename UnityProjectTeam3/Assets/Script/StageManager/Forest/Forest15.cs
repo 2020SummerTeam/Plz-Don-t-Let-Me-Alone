@@ -31,6 +31,8 @@ public class Forest15 : MonoBehaviour
     public PlayerCtrl playerCtrl;
     public Rigidbody2D boxRigidbody;
 
+    public SettingMenu settings;
+
 
     void Start()
     {
@@ -49,6 +51,10 @@ public class Forest15 : MonoBehaviour
         Researchers.EachNum = 0;
         ReCol = researchers.GetComponent<BoxCollider2D>();
         ReRB = researchers.GetComponent<Rigidbody2D>();
+        if(PlayerPrefs.GetInt("NightMode") == 1)
+        {
+            settings.OnClickNightMode();
+        }
     }
 
     void Update()

@@ -19,6 +19,7 @@ public class Researchers : MonoBehaviour
     public float distance = 4.0f;
     public bool GoOn = false;  // 연구원들이 필요한 곳까지 계속 이동하게 하기 위한 코드
 
+
     public bool Spin = true;
     public int LorR;
     public int EachNum; // 각각 스테이지에서 설정해주세요.
@@ -72,7 +73,6 @@ public class Researchers : MonoBehaviour
                 coolTime = 4.0f;    // 4초로 초기화
             }
         }
-
         if ((LorR == EachNum || EachNum == 0) && (isFind == true)) // player가 박스 콜라이더에 있을 때
         {
             Spin = false;
@@ -98,12 +98,13 @@ public class Researchers : MonoBehaviour
             }
             if(GoOn)
             {
+                mTr.rotation = Quaternion.Euler(0, 0, 0);   // 우
                 timer += Time.deltaTime;
                 if (timer >= 0.7)
                 {
                     Vector3 newPos = new Vector3(mTr.position.x + distance, mTr.position.y, mTr.position.z);
                     transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime);
-                    Debug.Log(Vector3.Magnitude(transform.position - playerTr.position));
+                    //Debug.Log(Vector3.Magnitude(transform.position - playerTr.position));
                     if (Vector3.Magnitude(transform.position - playerTr.position) < 1.5f)
                     {
 

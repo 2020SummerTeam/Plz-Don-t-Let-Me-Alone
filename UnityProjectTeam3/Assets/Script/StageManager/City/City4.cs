@@ -23,6 +23,9 @@ public class City4 : MonoBehaviour
     public GameObject parents;
 
     public AudioSource explanationSource;
+    bool expSound = false;
+    public AudioSource buttonSource;
+    bool buttonSound = false;
 
     void Start()
     {
@@ -40,6 +43,11 @@ public class City4 : MonoBehaviour
 
         if (stoneEvent.isStoneEvent && !isShadow)
         {
+            if (!expSound)
+            {
+                explanationSource.Play();
+                expSound = true;
+            }
             res.EachNum = 0;
             res.isFind = true;
         }
@@ -62,7 +70,7 @@ public class City4 : MonoBehaviour
         }
  
         
-        if (isShadow)
+        if (isShadow && !res.isFind)
         {
             if (timer == 0)
             {
@@ -86,6 +94,11 @@ public class City4 : MonoBehaviour
         {
             button.SetActive(false);
             platform.SetActive(false);
+            if(buttonSound == false)
+            {
+                buttonSource.Play();
+                buttonSound = true;
+            }
         }
     }
 }

@@ -40,7 +40,7 @@ public class SettingMenu : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey("NightMode"))
         {
-            PlayerPrefs.SetInt("NightMode", 1);
+            PlayerPrefs.SetInt("NightMode", 0);
         }
 
         if (PlayerPrefs.GetInt("NightMode") == 1)
@@ -56,23 +56,23 @@ public class SettingMenu : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("Sound")==1) // on 상태
             {
-                soundBtn.localPosition = new Vector3(344.5f, soundBtn.localPosition.y, 0);
+                soundBtn.localPosition = new Vector3(440f, soundBtn.localPosition.y, 0);
                 soundOn.SetActive(true);
             }
             else    // off 상태
             {
-                soundBtn.localPosition = new Vector3(440f, soundBtn.localPosition.y, 0);
+                soundBtn.localPosition = new Vector3(344.5f, soundBtn.localPosition.y, 0);
                 soundOn.SetActive(false);
             }
 
             if (PlayerPrefs.GetInt("NightMode") == 1)
             {
-                nightmodeBtn.localPosition = new Vector2(344.5f, nightmodeBtn.localPosition.y);
+                nightmodeBtn.localPosition = new Vector2(440f, nightmodeBtn.localPosition.y);
                 nightmodeOn.SetActive(true);
             }
             else
             {
-                nightmodeBtn.localPosition = new Vector2(440f, nightmodeBtn.localPosition.y);
+                nightmodeBtn.localPosition = new Vector2(344.5f, nightmodeBtn.localPosition.y);
                 nightmodeOn.SetActive(false);
             }
         }

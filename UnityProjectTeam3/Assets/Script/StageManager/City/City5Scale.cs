@@ -8,11 +8,13 @@ public class City5Scale : MonoBehaviour
     public GameObject scale;
     bool changeScale;
     public GameObject nextCollider;
+    public City5 city5Script;
     float timer = 0;
 
     public AudioSource scaleSource;
     public AudioSource doorSource;
     bool doorSound = false;
+    public SettingMenu settings;
 
     private void Start()
     {
@@ -36,6 +38,11 @@ public class City5Scale : MonoBehaviour
             {
                 doorSource.Play();
                 doorSound = true;
+                if (PlayerPrefs.GetInt("NightMode") == 1)
+                {
+                    settings.OnClickNightMode();
+                    city5Script.OnNightMode();
+                }
             }
             nextCollider.SetActive(false);
         }

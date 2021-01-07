@@ -240,10 +240,10 @@ PlayerSettings:
   clonedFromGUID: 5f34be1353de5cf4398729fda238591b
   templatePackageId: com.unity.template.2d@3.3.1
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  AndroidTargetArchitectures: 2
+  AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: user.keystore'
+  AndroidKeystoreName: D:/github/Plz-Don-t-Let-Me-Alone/keystore/user.keystore
   AndroidKeyaliasName: pdlma
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

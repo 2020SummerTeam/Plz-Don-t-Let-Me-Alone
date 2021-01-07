@@ -211,6 +211,7 @@ public class City5 : MonoBehaviour
         carBreakSource.Play();
         sandyBumpSource.Play();
         sandyFallSource.Play();
+        playerCtrl.isEnabled = false;
         playerCtrl.Die();
         float timer = 0;
         while (mCar.transform.position.x > 47.5f)
@@ -245,7 +246,7 @@ public class City5 : MonoBehaviour
             }
             if (target == glass)
             {
-                Debug.Log(glassCount);
+
                 glassCount++;
                 if(glassCount == 1)
                 {

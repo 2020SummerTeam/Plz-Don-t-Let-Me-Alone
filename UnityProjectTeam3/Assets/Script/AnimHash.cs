@@ -11,4 +11,5 @@ public class AnimHash
     public static readonly int IDLE = Animator.StringToHash("IDLE");
     public static readonly int SIT = Animator.StringToHash("SIT");
     public static readonly int GRAB = Animator.StringToHash("GRAB");
+    public static readonly int LAND = Animator.StringToHash("LAND");
 }

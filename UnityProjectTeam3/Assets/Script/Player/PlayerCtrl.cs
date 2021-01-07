@@ -206,17 +206,24 @@ public class PlayerCtrl : MonoBehaviour
                         if (isPushingBox)
                         {
                             mAnim.SetBool(AnimHash.GRAB, true);
-                                                            //기존에 오른쪽을 보다가 왼쪽으로 돌아온거라면 당기는 거겟죠
-                                //당기는거는 방향을 바꿔줄 필요가 없습니다. 애니메이션이 나오면 여기에다가 추가합시다
+                            mAnim.SetBool(AnimHash.IDLE, false);
+                            //기존에 오른쪽을 보다가 왼쪽으로 돌아온거라면 당기는 거겟죠
+                            //당기는거는 방향을 바꿔줄 필요가 없습니다. 애니메이션이 나오면 여기에다가 추가합시다
 
-                                //이거는 그냥 미는거겠죠 미는애니메이션이 나오면 여기에다가 추가합시다
-                                //그리고 보는방향이 왼쪽에서 왼쪽으로 동일하니까, 방향 굳이 바꿔줄 필요 없죠?
-                                //그러니까 pushingBox일때는 우리 아무것도 건들지 맙시다
+                            //이거는 그냥 미는거겠죠 미는애니메이션이 나오면 여기에다가 추가합시다
+                            //그리고 보는방향이 왼쪽에서 왼쪽으로 동일하니까, 방향 굳이 바꿔줄 필요 없죠?
+                            //그러니까 pushingBox일때는 우리 아무것도 건들지 맙시다
                         }
                         else
                         {
                             //이거를 else로 놓아주는 이유는 보는방향이 바뀌면 안되니까
                             watchingRight = false;
+                            if (!audioSource.isPlaying)
+                            {
+                                audioSource.clip = stepClip;
+
+                                audioSource.Play();
+                            }
                             transform.rotation = Quaternion.Euler(0, 180, 0);
                             mAnim.SetBool(AnimHash.RUN, true);
                             mAnim.SetBool(AnimHash.GRAB, false);
@@ -228,6 +235,7 @@ public class PlayerCtrl : MonoBehaviour
                         if (isPushingBox)
                         {
                             mAnim.SetBool(AnimHash.GRAB, true);
+                            mAnim.SetBool(AnimHash.IDLE, false);
                         }
                         else
                         {
@@ -535,6 +543,13 @@ public class PlayerCtrl : MonoBehaviour
 
         }
     }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        mAnim.SetBool(AnimHash.LAND, true);
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         float yScale = collision.transform.localScale.y;
@@ -547,24 +562,13 @@ public class PlayerCtrl : MonoBehaviour
         //벽타기
         if (pos < transform.position.y)
         {
-           
-
-            jumpable = true;
-        }
-        else
-        {
-                        jumpable = false;
-        }
-
-        /*
-        if (collision.transform.position.y < transform.position.y)
-        {
             jumpable = true;
         }
         else
         {
             jumpable = false;
-        }*/
+        }
+
         if (collision.gameObject.CompareTag("InteractObj"))
         {
             IsInteracObj = true;
@@ -597,6 +601,7 @@ public class PlayerCtrl : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         jumpable = false;
+        mAnim.SetBool(AnimHash.LAND, false);
         if (collision.gameObject.CompareTag("InteractObj"))
         {
             IsInteracObj = false;

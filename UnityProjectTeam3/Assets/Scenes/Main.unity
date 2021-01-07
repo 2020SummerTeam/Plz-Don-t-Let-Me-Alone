@@ -1553,7 +1553,7 @@ GameObject:
   - component: {fileID: 821372403}
   - component: {fileID: 821372402}
   m_Layer: 5
-  m_Name: "\uBC84\uD2BC"
+  m_Name: button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

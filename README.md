@@ -1,6 +1,9 @@
 # 홍익대학교 ExP Make팀 2020 여름 프로젝트 Please Don't Let Me Alone
 Unity / 2D / Android / 플랫포머 / [스토어 링크](https://play.google.com/store/apps/details?id=com.ExpMake20201.PDLMA)
 
+# 플레이 영상
+[플레이 영상](https://youtu.be/cfDnKk6O2z8)
+
 # 개발기간
 2020.06 ~ 2021.01
 
